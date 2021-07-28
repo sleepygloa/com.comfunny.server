@@ -6,6 +6,7 @@ import com.nambi.book.web.dto.post.PostsSaveRequestDto;
 import com.nambi.book.web.dto.post.PostsUpdateRequestDto;
 import com.nambi.book.web.dto.serverAPI.*;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,15 +17,31 @@ public class ServerAPIController {
 
     private final ServerAPIService service;
 
+    @GetMapping("/api/getInitData")
+    public JSONObject getInitData(){
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("dictionary", service.getDictionary());
+        jsonObject.put("dropChance", service.getDropChance());
+        jsonObject.put("stageExp", service.getStageExp());
+        jsonObject.put("itemFood", service.getItemFood());
+        jsonObject.put("itemPotion", service.getItemPotion());
+        jsonObject.put("item", service.getItem());
+        jsonObject.put("initCharStat", service.getInitCharStat());
+        jsonObject.put("grade", service.getGrade());
+        jsonObject.put("exp", service.getExp());
+        jsonObject.put("equip", service.getEquip());
+
+        return jsonObject;
+    }
+
     @GetMapping("/api/getDictionary")
     public List<DictionaryListResponseDto> getDictionary(){
         return service.getDictionary();
     }
 
     @GetMapping("/api/getDropChance")
-    public List<DropChanceListResponseDto> getDropChance(){
-        return service.getDropChance();
-    }
+    public List<DictionaryListResponseDto> getDropChance(){ return service.getDictionary(); }
 
     @GetMapping("/api/getStageExp")
     public List<StageExpListResponseDto> getStageExp(){
@@ -35,9 +52,7 @@ public class ServerAPIController {
         return service.getItemFood();
     }
     @GetMapping("/api/getItemPotion")
-    public List<ItemPotionListResponseDto> getItemPotion(){
-        return service.getItemPotion();
-    }
+    public List<ItemPotionListResponseDto> getItemPotion(){ return service.getItemPotion();}
     @GetMapping("/api/getItem")
     public List<ItemListResponseDto> getItem(){
         return service.getItem();
@@ -58,31 +73,6 @@ public class ServerAPIController {
     public List<EquipListResponseDto> getEquip(){
         return service.getEquip();
     }
-
-
-
-
-//    @PostMapping("/api/v1/posts")
-//    public Long save(@RequestBody PostsSaveRequestDto requestDto){
-//        return service.save(requestDto);
-//    }
-//
-//    @PutMapping("/api/v1/posts/{id}")
-//    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto){
-//        return service.update(id, requestDto);
-//    }
-//
-//    @DeleteMapping("/api/v1/posts/{id}")
-//    public Long delete(@PathVariable Long id){
-//        service.delete(id);
-//        return id;
-//    }
-//
-//    @GetMapping("/api/v1/posts/{id}")
-//    public PostsResponseDto findById(@PathVariable Long id){
-//        return service.findById(id);
-//    }
-
 
 
 }
