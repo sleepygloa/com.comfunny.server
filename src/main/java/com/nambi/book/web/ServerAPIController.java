@@ -1,9 +1,6 @@
 package com.nambi.book.web;
 
 import com.nambi.book.service.serverAPI.ServerAPIService;
-import com.nambi.book.web.dto.post.PostsResponseDto;
-import com.nambi.book.web.dto.post.PostsSaveRequestDto;
-import com.nambi.book.web.dto.post.PostsUpdateRequestDto;
 import com.nambi.book.web.dto.serverAPI.*;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;

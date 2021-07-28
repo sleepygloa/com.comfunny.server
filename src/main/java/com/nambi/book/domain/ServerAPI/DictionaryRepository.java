@@ -1,7 +1,6 @@
 package com.nambi.book.domain.ServerAPI;
 
 
-import com.nambi.book.domain.posts.Posts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

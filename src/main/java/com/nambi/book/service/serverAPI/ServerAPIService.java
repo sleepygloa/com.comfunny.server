@@ -1,7 +1,6 @@
 package com.nambi.book.service.serverAPI;
 
 import com.nambi.book.domain.ServerAPI.*;
-import com.nambi.book.web.dto.post.PostsListResponseDto;
 import com.nambi.book.web.dto.serverAPI.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
