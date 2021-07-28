@@ -45,7 +45,7 @@ dependencies {
 
     compile 'com.fasterxml.jackson.core:jackson-databind'
     // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
-    compile 'org.springframework.boot:spring-boot-starter-quartz'
+//    compile 'org.springframework.boot:spring-boot-starter-quartz'
 
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
