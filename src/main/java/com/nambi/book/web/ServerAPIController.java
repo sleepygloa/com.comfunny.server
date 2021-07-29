@@ -36,10 +36,8 @@ public class ServerAPIController {
     public List<DictionaryListResponseDto> getDictionary(){
         return service.getDictionary();
     }
-
     @GetMapping("/api/getDropChance")
     public List<DictionaryListResponseDto> getDropChance(){ return service.getDictionary(); }
-
     @GetMapping("/api/getStageExp")
     public List<StageExpListResponseDto> getStageExp(){
         return service.getStageExp();
@@ -70,6 +68,21 @@ public class ServerAPIController {
     public List<EquipListResponseDto> getEquip(){
         return service.getEquip();
     }
-
+    @GetMapping("/api/getAnimal")
+    public List<AnimalListResponseDto> getAnimal(){
+        return service.getAnimal();
+    }
+    @GetMapping("/api/getBackground")
+    public List<BackgroundListResponseDto> getBackground(){
+        return service.getBackground();
+    }
+    @GetMapping("/api/getJob")
+    public List<JobListResponseDto> getJob(){
+        return service.getJob();
+    }
+    @GetMapping("/api/getSkill")
+    public List<SkillListResponseDto> getSkill(){
+        return service.getSkill();
+    }
 
 }

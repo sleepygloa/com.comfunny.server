@@ -23,6 +23,10 @@ public class ServerAPIService {
     private final GradeRepository gradeRepository;
     private final ExpRepository expRepository;
     private final EquipRepository equipRepository;
+    private final AnimalRepository animalRepository;
+    private final BackgroundRepository backgroundRepository;
+    private final JobRepository jobRepository;
+    private final SkillRepository skillRepository;
 
     @Transactional(readOnly = true)
     public List<DictionaryListResponseDto> getDictionary(){
@@ -82,6 +86,30 @@ public class ServerAPIService {
     public List<EquipListResponseDto> getEquip(){
         return equipRepository.findAll().stream()
                 .map(EquipListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<AnimalListResponseDto> getAnimal(){
+        return animalRepository.findAll().stream()
+                .map(AnimalListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<BackgroundListResponseDto> getBackground(){
+        return backgroundRepository.findAll().stream()
+                .map(BackgroundListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<JobListResponseDto> getJob(){
+        return jobRepository.findAll().stream()
+                .map(JobListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<SkillListResponseDto> getSkill(){
+        return skillRepository.findAll().stream()
+                .map(SkillListResponseDto::new)
                 .collect(Collectors.toList());
     }
 }
