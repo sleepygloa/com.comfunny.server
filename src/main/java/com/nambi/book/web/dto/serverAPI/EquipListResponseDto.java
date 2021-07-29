@@ -10,7 +10,6 @@ import javax.persistence.Id;
 public class EquipListResponseDto {
 
 
-    @Id
     private int idx;
     private String code;
     private String name;
@@ -21,28 +20,33 @@ public class EquipListResponseDto {
     private float atkSpd;
     private String atk;
     private String def;
+
+    private float frAtk;
+    private float toAtk;
+    private float frDef;
+    private float toDef;
     private float maxHp;
     private String cType;
     private String cAttr;
-    private float cPrice;
+    private int cPrice;
     private float cFrVal;
     private float cToVal;
 
     private String ucType;
     private String ucAttr;
-    private float ucPrice;
+    private int ucPrice;
     private float ucFrVal;
     private float ucToVal;
 
     private String mType;
     private String mAttr;
-    private float mPrice;
+    private int mPrice;
     private float mFrVal;
     private float mToVal;
 
     private String eType;
     private String eAttr;
-    private float ePrice;
+    private int ePrice;
     private float eFrVal;
     private float eToVal;
 
@@ -57,6 +61,10 @@ public class EquipListResponseDto {
         this.atkSpd = entity.getAtkSpd();
         this.atk = entity.getAtk();
         this.def = entity.getDef();
+        this.frAtk = entity.getFrAtk();
+        this.toAtk = entity.getToAtk();
+        this.frDef = entity.getFrDef();
+        this.toDef = entity.getToDef();
         this.maxHp = entity.getMaxHp();
         this.cType = entity.getCType();
         this.cAttr = entity.getCAttr();

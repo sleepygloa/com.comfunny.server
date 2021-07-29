@@ -35,13 +35,22 @@ public class Equip {
     @Column
     private String def;
     @Column
+    private float frAtk;
+    @Column
+    private float toAtk;
+
+    @Column
+    private float frDef;
+    @Column
+    private float toDef;
+    @Column
     private float maxHp;
     @Column
     private String cType;
     @Column
     private String cAttr;
     @Column
-    private float cPrice;
+    private int cPrice;
     @Column
     private float cFrVal;
     @Column
@@ -52,7 +61,7 @@ public class Equip {
     @Column
     private String ucAttr;
     @Column
-    private float ucPrice;
+    private int ucPrice;
     @Column
     private float ucFrVal;
     @Column
@@ -64,7 +73,7 @@ public class Equip {
     @Column
     private String mAttr;
     @Column
-    private float mPrice;
+    private int mPrice;
     @Column
     private float mFrVal;
     @Column
@@ -76,14 +85,15 @@ public class Equip {
     @Column
     private String eAttr;
     @Column
-    private float ePrice;
+    private int ePrice;
     @Column
     private float eFrVal;
     @Column
     private float eToVal;
 
     @Builder
-    public Equip(int idx, String code, String name, String path, String desc, String category4, float atkRange, float atkSpd, String atk, String def, float maxHp, String cType, String cAttr, float cPrice, float cFrVal, float cToVal, String ucType, String ucAttr, float ucPrice, float ucFrVal, float ucToVal, String mType, String mAttr, float mPrice, float mFrVal, float mToVal, String eType, String eAttr, float ePrice, float eFrVal, float eToVal) {
+
+    public Equip(int idx, String code, String name, String path, String desc, String category4, float atkRange, float atkSpd, String atk, String def, float frAtk, float toAtk, float frDef, float toDef, float maxHp, String cType, String cAttr, int cPrice, float cFrVal, float cToVal, String ucType, String ucAttr, int ucPrice, float ucFrVal, float ucToVal, String mType, String mAttr, int mPrice, float mFrVal, float mToVal, String eType, String eAttr, int ePrice, float eFrVal, float eToVal) {
         this.idx = idx;
         this.code = code;
         this.name = name;
@@ -94,6 +104,10 @@ public class Equip {
         this.atkSpd = atkSpd;
         this.atk = atk;
         this.def = def;
+        this.frAtk = frAtk;
+        this.toAtk = toAtk;
+        this.frDef = frDef;
+        this.toDef = toDef;
         this.maxHp = maxHp;
         this.cType = cType;
         this.cAttr = cAttr;
