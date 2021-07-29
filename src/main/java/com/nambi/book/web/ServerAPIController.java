@@ -28,7 +28,10 @@ public class ServerAPIController {
         jsonObject.put("grade", service.getGrade());
         jsonObject.put("exp", service.getExp());
         jsonObject.put("equip", service.getEquip());
-
+        jsonObject.put("animal", service.getAnimal());
+        jsonObject.put("background", service.getBackground());
+        jsonObject.put("job", service.getJob());
+        jsonObject.put("skill", service.getSkill());
         return jsonObject;
     }
 

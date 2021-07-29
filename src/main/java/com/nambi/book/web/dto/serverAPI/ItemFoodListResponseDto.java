@@ -8,19 +8,20 @@ import lombok.Getter;
 @Getter
 public class ItemFoodListResponseDto {
 
+
     private int idx;
     private String code;
     private String name;
     private String commonName;
     private String requireJob;
-    private String position;
-    private String desc;
-    private String grade;
-    private float price;
     private String category1;
     private String category2;
     private String category3;
     private String category4;
+    private String position;
+    private String desc;
+    private String grade;
+    private float price;
     private String path;
     private String atk;
     private String def;
@@ -44,37 +45,37 @@ public class ItemFoodListResponseDto {
 
     public ItemFoodListResponseDto(ItemFood entity) {
         this.idx = entity.getIdx();
-        this.code = getCode();
-        this.name = getName();
-        this.commonName = getCommonName();
-        this.requireJob = getRequireJob();
-        this.position = getPosition();
-        this.desc = getDesc();
-        this.grade = getGrade();
-        this.price = getPrice();
-        this.category1 = getCategory1();
-        this.category2 = getCategory2();
-        this.category3 = getCategory3();
-        this.category4 = getCategory4();
-        this.path = getPath();
-        this.atk = getAtk();
-        this.def = getDef();
-        this.str = getStr();
-        this.dex = getDex();
-        this.intt = getIntt();
-        this.fth = getFth();
-        this.vit = getVit();
-        this.hp = getHp();
-        this.maxHp = getMaxHp();
-        this.regen = getRegen();
-        this.duration = getDuration();
-        this.skillCool = getSkillCool();
-        this.atkSpd = getAtkSpd();
-        this.atkRange = getAtkRange();
-        this.critDamPer = getCritDamPer();
-        this.critDamVal = getCritDamVal();
-        this.skillDamVal = getSkillDamVal();
-        this.count = getCount();
-        this.order = getOrder();
+        this.code = entity.getCode();
+        this.name = entity.getName();
+        this.commonName = entity.getCommonName();
+        this.requireJob = entity.getRequireJob();
+        this.category1 = entity.getCategory1();
+        this.category2 = entity.getCategory2();
+        this.category3 = entity.getCategory3();
+        this.category4 = entity.getCategory4();
+        this.position = entity.getPosition();
+        this.desc = entity.getDesc();
+        this.grade = entity.getGrade();
+        this.path = entity.getPath();
+        this.price = entity.getPrice();
+        this.atk = entity.getAtk();
+        this.def = entity.getDef();
+        this.str = entity.getStr();
+        this.dex = entity.getDex();
+        this.intt = entity.getIntt();
+        this.fth = entity.getFth();
+        this.vit = entity.getVit();
+        this.hp = entity.getHp();
+        this.maxHp = entity.getMaxHp();
+        this.regen = entity.getRegen();
+        this.duration = entity.getDuration();
+        this.skillCool = entity.getSkillCool();
+        this.atkSpd = entity.getAtkSpd();
+        this.atkRange = entity.getAtkRange();
+        this.critDamPer = entity.getCritDamPer();
+        this.critDamVal = entity.getCritDamVal();
+        this.skillDamVal = entity.getSkillDamVal();
+        this.count = entity.getCount();
+        this.order = entity.getOrder();
     }
 }

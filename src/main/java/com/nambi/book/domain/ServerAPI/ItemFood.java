@@ -10,7 +10,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 public class ItemFood {
-
     @Id
     private int idx;
 
@@ -27,18 +26,6 @@ public class ItemFood {
     private String requireJob;
 
     @Column(length = 100)
-    private String position;
-
-    @Column(length = 100)
-    private String desc;
-
-    @Column(length = 100)
-    private String grade;
-
-    @Column(nullable = false)
-    private float price;
-
-    @Column(length = 100)
     private String category1;
 
     @Column(length = 100)
@@ -49,6 +36,18 @@ public class ItemFood {
 
     @Column(length = 100)
     private String category4;
+
+    @Column(length = 100)
+    private String position;
+
+    @Column(length = 100)
+    private String desc;
+
+    @Column(length = 100)
+    private String grade;
+
+    @Column(nullable = false)
+    private float price;
 
     @Column(length = 100)
     private String path;
@@ -111,20 +110,20 @@ public class ItemFood {
     private float order;
 
     @Builder
-    public ItemFood(int idx, String code, String name, String commonName, String requireJob, String position, String desc, String grade, float price, String category1, String category2, String category3, String category4, String path, String atk, String def, float str, float dex, float intt, float fth, float vit, float hp, float maxHp, float regen, float duration, float skillCool, float atkSpd, float atkRange, float critDamPer, float critDamVal, float skillDamVal, float count, float order) {
+    public ItemFood(int idx, String code, String name, String commonName, String requireJob, String category1, String category2, String category3, String category4, String position, String desc, String grade, float price, String path, String atk, String def, float str, float dex, float intt, float fth, float vit, float hp, float maxHp, float regen, float duration, float skillCool, float atkSpd, float atkRange, float critDamPer, float critDamVal, float skillDamVal, float count, float order) {
         this.idx = idx;
         this.code = code;
         this.name = name;
         this.commonName = commonName;
         this.requireJob = requireJob;
-        this.position = position;
-        this.desc = desc;
-        this.grade = grade;
-        this.price = price;
         this.category1 = category1;
         this.category2 = category2;
         this.category3 = category3;
         this.category4 = category4;
+        this.position = position;
+        this.desc = desc;
+        this.grade = grade;
+        this.price = price;
         this.path = path;
         this.atk = atk;
         this.def = def;
