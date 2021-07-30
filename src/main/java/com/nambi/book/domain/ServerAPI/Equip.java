@@ -45,11 +45,11 @@ public class Equip {
     private float toDef;
     @Column
     private float maxHp;
-    @Column
+    @Column(name = "C_TYPE")
     private String cType;
-    @Column
+    @Column(name = "C_ATTR")
     private String cAttr;
-    @Column
+    @Column(name = "C_PRICE")
     private int cPrice;
     @Column
     private float cFrVal;
@@ -68,11 +68,11 @@ public class Equip {
     private float ucToVal;
 
 
-    @Column
+    @Column(name = "M_TYPE")
     private String mType;
-    @Column
+    @Column(name = "M_ATTR")
     private String mAttr;
-    @Column
+    @Column(name = "M_PRICE")
     private int mPrice;
     @Column
     private float mFrVal;
@@ -80,11 +80,11 @@ public class Equip {
     private float mToVal;
 
 
-    @Column
+    @Column(name = "E_TYPE")
     private String eType;
-    @Column
+    @Column(name = "E_ATTR")
     private String eAttr;
-    @Column
+    @Column(name = "E_PRICE")
     private int ePrice;
     @Column
     private float eFrVal;
