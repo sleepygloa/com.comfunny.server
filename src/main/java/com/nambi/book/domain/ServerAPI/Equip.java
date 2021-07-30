@@ -51,9 +51,9 @@ public class Equip {
     private String ccAttr;
     @Column(name = "C_PRICE")
     private int ccPrice;
-    @Column
+    @Column(name = "C_FR_VAL")
     private float ccFrVal;
-    @Column
+    @Column(name = "C_TO_VAL")
     private float ccToVal;
 
     @Column
@@ -74,9 +74,9 @@ public class Equip {
     private String mmAttr;
     @Column(name = "M_PRICE")
     private int mmPrice;
-    @Column
+    @Column(name = "M_FR_VAL")
     private float mmFrVal;
-    @Column
+    @Column(name = "M_TO_VAL")
     private float mmToVal;
 
 
@@ -86,9 +86,9 @@ public class Equip {
     private String eeAttr;
     @Column(name = "E_PRICE")
     private int eePrice;
-    @Column
+    @Column(name = "E_FR_VAL")
     private float eeFrVal;
-    @Column
+    @Column(name = "E_TO_VAL")
     private float eeToVal;
 
     @Builder
