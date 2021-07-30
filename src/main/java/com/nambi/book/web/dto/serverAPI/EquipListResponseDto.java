@@ -26,11 +26,11 @@ public class EquipListResponseDto {
     private float frDef;
     private float toDef;
     private float maxHp;
-    private String cType;
-    private String cAttr;
-    private int cPrice;
-    private float cFrVal;
-    private float cToVal;
+    private String ccType;
+    private String ccAttr;
+    private int ccPrice;
+    private float ccFrVal;
+    private float ccToVal;
 
     private String ucType;
     private String ucAttr;
@@ -38,17 +38,17 @@ public class EquipListResponseDto {
     private float ucFrVal;
     private float ucToVal;
 
-    private String mType;
-    private String mAttr;
-    private int mPrice;
-    private float mFrVal;
-    private float mToVal;
+    private String mmType;
+    private String mmAttr;
+    private int mmPrice;
+    private float mmFrVal;
+    private float mmToVal;
 
-    private String eType;
-    private String eAttr;
-    private int ePrice;
-    private float eFrVal;
-    private float eToVal;
+    private String eeType;
+    private String eeAttr;
+    private int eePrice;
+    private float eeFrVal;
+    private float eeToVal;
 
     public EquipListResponseDto(Equip entity) {
         this.idx = entity.getIdx();
@@ -66,25 +66,25 @@ public class EquipListResponseDto {
         this.frDef = entity.getFrDef();
         this.toDef = entity.getToDef();
         this.maxHp = entity.getMaxHp();
-        this.cType = entity.getCType();
-        this.cAttr = entity.getCAttr();
-        this.cPrice = entity.getCPrice();
-        this.cFrVal = entity.getCFrVal();
-        this.cToVal = entity.getCToVal();
+        this.ccType = entity.getCcType();
+        this.ccAttr = entity.getCcAttr();
+        this.ccPrice = entity.getCcPrice();
+        this.ccFrVal = entity.getCcFrVal();
+        this.ccToVal = entity.getCcToVal();
         this.ucType = entity.getUcType();
         this.ucAttr = entity.getUcAttr();
         this.ucPrice = entity.getUcPrice();
         this.ucFrVal = entity.getUcFrVal();
         this.ucToVal = entity.getUcToVal();
-        this.mType = entity.getMType();
-        this.mAttr = entity.getMAttr();
-        this.mPrice = entity.getMPrice();
-        this.mFrVal = entity.getMFrVal();
-        this.mToVal = entity.getMToVal();
-        this.eType = entity.getEType();
-        this.eAttr = entity.getEAttr();
-        this.ePrice = entity.getEPrice();
-        this.eFrVal = entity.getEFrVal();
-        this.eToVal = entity.getEToVal();
+        this.mmType = entity.getMmType();
+        this.mmAttr = entity.getMmAttr();
+        this.mmPrice = entity.getMmPrice();
+        this.mmFrVal = entity.getMmFrVal();
+        this.mmToVal = entity.getMmToVal();
+        this.eeType = entity.getEeType();
+        this.eeAttr = entity.getEeAttr();
+        this.eePrice = entity.getEePrice();
+        this.eeFrVal = entity.getEeFrVal();
+        this.eeToVal = entity.getEeToVal();
     }
 }

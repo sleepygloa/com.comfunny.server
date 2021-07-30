@@ -46,15 +46,15 @@ public class Equip {
     @Column
     private float maxHp;
     @Column(name = "C_TYPE")
-    private String cType;
+    private String ccType;
     @Column(name = "C_ATTR")
-    private String cAttr;
+    private String ccAttr;
     @Column(name = "C_PRICE")
-    private int cPrice;
+    private int ccPrice;
     @Column
-    private float cFrVal;
+    private float ccFrVal;
     @Column
-    private float cToVal;
+    private float ccToVal;
 
     @Column
     private String ucType;
@@ -69,31 +69,30 @@ public class Equip {
 
 
     @Column(name = "M_TYPE")
-    private String mType;
+    private String mmType;
     @Column(name = "M_ATTR")
-    private String mAttr;
+    private String mmAttr;
     @Column(name = "M_PRICE")
-    private int mPrice;
+    private int mmPrice;
     @Column
-    private float mFrVal;
+    private float mmFrVal;
     @Column
-    private float mToVal;
+    private float mmToVal;
 
 
     @Column(name = "E_TYPE")
-    private String eType;
+    private String eeType;
     @Column(name = "E_ATTR")
-    private String eAttr;
+    private String eeAttr;
     @Column(name = "E_PRICE")
-    private int ePrice;
+    private int eePrice;
     @Column
-    private float eFrVal;
+    private float eeFrVal;
     @Column
-    private float eToVal;
+    private float eeToVal;
 
     @Builder
-
-    public Equip(int idx, String code, String name, String path, String desc, String category4, float atkRange, float atkSpd, String atk, String def, float frAtk, float toAtk, float frDef, float toDef, float maxHp, String cType, String cAttr, int cPrice, float cFrVal, float cToVal, String ucType, String ucAttr, int ucPrice, float ucFrVal, float ucToVal, String mType, String mAttr, int mPrice, float mFrVal, float mToVal, String eType, String eAttr, int ePrice, float eFrVal, float eToVal) {
+    public Equip(int idx, String code, String name, String path, String desc, String category4, float atkRange, float atkSpd, String atk, String def, float frAtk, float toAtk, float frDef, float toDef, float maxHp, String ccType, String ccAttr, int ccPrice, float ccFrVal, float ccToVal, String ucType, String ucAttr, int ucPrice, float ucFrVal, float ucToVal, String mmType, String mmAttr, int mmPrice, float mmFrVal, float mmToVal, String eeType, String eeAttr, int eePrice, float eeFrVal, float eeToVal) {
         this.idx = idx;
         this.code = code;
         this.name = name;
@@ -109,25 +108,25 @@ public class Equip {
         this.frDef = frDef;
         this.toDef = toDef;
         this.maxHp = maxHp;
-        this.cType = cType;
-        this.cAttr = cAttr;
-        this.cPrice = cPrice;
-        this.cFrVal = cFrVal;
-        this.cToVal = cToVal;
+        this.ccType = ccType;
+        this.ccAttr = ccAttr;
+        this.ccPrice = ccPrice;
+        this.ccFrVal = ccFrVal;
+        this.ccToVal = ccToVal;
         this.ucType = ucType;
         this.ucAttr = ucAttr;
         this.ucPrice = ucPrice;
         this.ucFrVal = ucFrVal;
         this.ucToVal = ucToVal;
-        this.mType = mType;
-        this.mAttr = mAttr;
-        this.mPrice = mPrice;
-        this.mFrVal = mFrVal;
-        this.mToVal = mToVal;
-        this.eType = eType;
-        this.eAttr = eAttr;
-        this.ePrice = ePrice;
-        this.eFrVal = eFrVal;
-        this.eToVal = eToVal;
+        this.mmType = mmType;
+        this.mmAttr = mmAttr;
+        this.mmPrice = mmPrice;
+        this.mmFrVal = mmFrVal;
+        this.mmToVal = mmToVal;
+        this.eeType = eeType;
+        this.eeAttr = eeAttr;
+        this.eePrice = eePrice;
+        this.eeFrVal = eeFrVal;
+        this.eeToVal = eeToVal;
     }
 }
