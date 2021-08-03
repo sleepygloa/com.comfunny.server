@@ -32,6 +32,7 @@ public class ServerAPIController {
         jsonObject.put("background", service.getBackground());
         jsonObject.put("job", service.getJob());
         jsonObject.put("skill", service.getSkill());
+        jsonObject.put("message", service.getMessage());
         return jsonObject;
     }
 
@@ -86,6 +87,10 @@ public class ServerAPIController {
     @GetMapping("/api/getSkill")
     public List<SkillListResponseDto> getSkill(){
         return service.getSkill();
+    }
+    @GetMapping("/api/getMessage")
+    public List<MessageListResponseDto> getMessage(){
+        return service.getMessage();
     }
 
 }

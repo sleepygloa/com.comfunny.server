@@ -27,6 +27,7 @@ public class ServerAPIService {
     private final BackgroundRepository backgroundRepository;
     private final JobRepository jobRepository;
     private final SkillRepository skillRepository;
+    private final MessageRepository messageRepository;
 
     @Transactional(readOnly = true)
     public List<DictionaryListResponseDto> getDictionary(){
@@ -112,4 +113,12 @@ public class ServerAPIService {
                 .map(SkillListResponseDto::new)
                 .collect(Collectors.toList());
     }
+    @Transactional(readOnly = true)
+    public List<MessageListResponseDto> getMessage(){
+        return messageRepository.findAll().stream()
+                .map(MessageListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+
 }
