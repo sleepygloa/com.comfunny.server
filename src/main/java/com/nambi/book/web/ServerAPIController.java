@@ -20,7 +20,7 @@ public class ServerAPIController {
 
         jsonObject.put("dictionary", service.getDictionary());
         jsonObject.put("dropChance", service.getDropChance());
-        jsonObject.put("stageExp", service.getStageExp());
+//        jsonObject.put("stageExp", service.getStageExp());
         jsonObject.put("itemFood", service.getItemFood());
         jsonObject.put("itemPotion", service.getItemPotion());
         jsonObject.put("item", service.getItem());
@@ -33,6 +33,8 @@ public class ServerAPIController {
         jsonObject.put("job", service.getJob());
         jsonObject.put("skill", service.getSkill());
         jsonObject.put("message", service.getMessage());
+        jsonObject.put("stage", service.getStage());
+        jsonObject.put("monster", service.getMonster());
         return jsonObject;
     }
 
@@ -92,5 +94,12 @@ public class ServerAPIController {
     public List<MessageListResponseDto> getMessage(){
         return service.getMessage();
     }
-
+    @GetMapping("/api/getStage")
+    public List<StageListResponseDto> getStage(){
+        return service.getStage();
+    }
+    @GetMapping("/api/getMonster")
+    public List<MonsterListResponseDto> getMonster(){
+        return service.getMonster();
+    }
 }

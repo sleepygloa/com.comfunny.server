@@ -28,6 +28,8 @@ public class ServerAPIService {
     private final JobRepository jobRepository;
     private final SkillRepository skillRepository;
     private final MessageRepository messageRepository;
+    private final StageRepository stageRepository;
+    private final MonsterRepository monsterRepository;
 
     @Transactional(readOnly = true)
     public List<DictionaryListResponseDto> getDictionary(){
@@ -119,6 +121,16 @@ public class ServerAPIService {
                 .map(MessageListResponseDto::new)
                 .collect(Collectors.toList());
     }
-
-
+    @Transactional(readOnly = true)
+    public List<StageListResponseDto> getStage(){
+        return stageRepository.findAll().stream()
+                .map(StageListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<MonsterListResponseDto> getMonster(){
+        return monsterRepository.findAll().stream()
+                .map(MonsterListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }
