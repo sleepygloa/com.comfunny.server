@@ -3,6 +3,7 @@ package com.nambi.book.service.serverAPI;
 import com.nambi.book.domain.ServerAPI.*;
 import com.nambi.book.web.dto.serverAPI.*;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class ServerAPIService {
 
+    private final UserDataRepository userRepository;
     private final DictionaryRepository dictionaryRepository;
     private final DropChanceRepository dropChanceRepository;
     private final StageExpRepository stageExpRepository;
@@ -30,6 +32,35 @@ public class ServerAPIService {
     private final MessageRepository messageRepository;
     private final StageRepository stageRepository;
     private final MonsterRepository monsterRepository;
+
+    @Transactional(readOnly = true)
+    public void saveUser(JSONObject jsonObject){
+
+        String userType = "0";
+        String id = (jsonObject.get("id") != null ? (String)jsonObject.get("id") : null);
+        String email = (jsonObject.get("email") != null ? (String)jsonObject.get("email") : null);
+        String pw = (jsonObject.get("pw") != null ? (String)jsonObject.get("pw") : null);
+        String path = (jsonObject.get("path") != null ? (String)jsonObject.get("path") : null);
+        String type = (jsonObject.get("type") != null ? (String)jsonObject.get("type") : null);
+
+        UserData user = userRepository.findByIdOrEmail(id, email);
+
+        //신규
+        if(user == null){
+            userRepository.save(id,pw,email,path,type);
+        }else{
+            userType = "1";
+        }
+
+
+
+//        System.out.println(user.toString());
+
+
+//        return monsterRepository.findAll().stream()
+//                .map(MonsterListResponseDto::new)
+//                .collect(Collectors.toList());
+    }
 
     @Transactional(readOnly = true)
     public List<DictionaryListResponseDto> getDictionary(){

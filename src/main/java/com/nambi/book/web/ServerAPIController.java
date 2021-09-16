@@ -38,6 +38,15 @@ public class ServerAPIController {
         return jsonObject;
     }
 
+    @PutMapping("/api/saveUser")
+    public JSONObject saveUser(){
+        JSONObject jsonObject = new JSONObject();
+
+        service.saveUser(jsonObject);
+
+        return jsonObject;
+    }
+
     @GetMapping("/api/getDictionary")
     public List<DictionaryListResponseDto> getDictionary(){
         return service.getDictionary();
