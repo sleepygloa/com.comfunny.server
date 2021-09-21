@@ -89,20 +89,29 @@ public class ServerAPIService {
             userDataRepository.insert(id, pw, email, name, path, type);
 
             dto.setReturnType(0);
+            dto.setId(id);
+            dto.setEmail(email);
+            dto.setName(name);
+            dto.setPw(pw);
+            dto.setPath(path);
+            dto.setType(type);
         }else{
             dto.setReturnType(1);
+            dto.setId(user.getId());
+            dto.setEmail(user.getEmail());
+            dto.setName(user.getName());
+            dto.setPw(user.getPw());
+            dto.setPath(user.getPath());
+            dto.setType(user.getType());
         }
 
-        dto.setId(id);
-        dto.setEmail(email);
-        dto.setName(name);
-        dto.setPw(pw);
-        dto.setPath(path);
+
 
         //접속로그
         connectLogRepository.insert(id);
 
         List<UserDataDto> list = new ArrayList<UserDataDto>();
+        list.add(dto);
         return list;
     }
 
