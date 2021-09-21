@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class ServerAPIService {
     private final ConnectLogRepository connectLogRepository;
 
     @Transactional(readOnly = true)
-    public UserDataDto saveUser(Map map){
+    public List<UserDataDto> saveUser(Map map){
 
         String userType = "0";
         String id = (map.get("id") != null ? (String)map.get("id") : null);
@@ -101,7 +102,8 @@ public class ServerAPIService {
         //접속로그
         connectLogRepository.insert(id);
 
-        return dto;
+        List<UserDataDto> list = new ArrayList<UserDataDto>();
+        return list;
     }
 
     @Transactional(readOnly = true)
