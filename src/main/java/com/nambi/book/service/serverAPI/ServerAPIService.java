@@ -3,28 +3,27 @@ package com.nambi.book.service.serverAPI;
 import com.nambi.book.domain.ServerAPI.*;
 import com.nambi.book.web.dto.serverAPI.*;
 import lombok.RequiredArgsConstructor;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class ServerAPIService {
 
-    private final UserDataRepository userRepository;
+    private final UserDataRepository userDataRepository;
     private final DictionaryRepository dictionaryRepository;
     private final DropChanceRepository dropChanceRepository;
     private final StageExpRepository stageExpRepository;
     private final ItemRepository itemRepository;
-    private final ItemFoodRepository itemFoodRepository;
-    private final ItemPotionRepository itemPotionRepository;
     private final InitCharStatRepository initCharStatRepository;
     private final GradeRepository gradeRepository;
     private final ExpRepository expRepository;
-    private final EquipRepository equipRepository;
     private final AnimalRepository animalRepository;
     private final BackgroundRepository backgroundRepository;
     private final JobRepository jobRepository;
@@ -32,34 +31,77 @@ public class ServerAPIService {
     private final MessageRepository messageRepository;
     private final StageRepository stageRepository;
     private final MonsterRepository monsterRepository;
+    private final ItemGradeRepository itemGradeRepository;
+    private final SeqRepository seqRepository;
+    private final ConnectLogRepository connectLogRepository;
 
     @Transactional(readOnly = true)
-    public void saveUser(JSONObject jsonObject){
+    public UserDataDto saveUser(Map map){
 
         String userType = "0";
-        String id = (jsonObject.get("id") != null ? (String)jsonObject.get("id") : null);
-        String email = (jsonObject.get("email") != null ? (String)jsonObject.get("email") : null);
-        String pw = (jsonObject.get("pw") != null ? (String)jsonObject.get("pw") : null);
-        String path = (jsonObject.get("path") != null ? (String)jsonObject.get("path") : null);
-        String type = (jsonObject.get("type") != null ? (String)jsonObject.get("type") : null);
+        String id = (map.get("id") != null ? (String)map.get("id") : null);
+        String email = (map.get("email") != null ? (String)map.get("email") : "");
+        String name = (map.get("name") != null ? (String)map.get("name") : "무명 용병단장");
+        String pw = (map.get("pw") != null ? (String)map.get("pw") : "1234");
+        String path = (map.get("path") != null ? (String)map.get("path") : "");
+        String type = (map.get("type") != null ? (String)map.get("type") : "email");
 
-        UserData user = userRepository.findByIdOrEmail(id, email);
+        UserData user = userDataRepository.findByIdOrEmail(id, email);
+        UserDataDto dto = new UserDataDto();
+
+        //이메일 가입 id : X, email : O
+        //카카오톡 가입  id : O, email : X/O
+        //구글 가입 id : O, email : X/O
+
+        //소셜 구분 id, 소셜내 구분 type
 
         //신규
         if(user == null){
-            userRepository.save(id,pw,email,path,type);
+
+            //아이디 채번 12자리//날짜+202101010001
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            Date date = new Date();
+            String strDate = sdf.format(date);
+
+            String yyyymmdd = strDate;
+            String code = "USER";
+
+            Seq getSysSeq = seqRepository.findByCodeAndYyyymmdd(code, yyyymmdd);
+            Long count = 1l;
+            Long newCount = count+1;
+
+            if(getSysSeq == null){
+                System.out.println("null");
+                int cnt = seqRepository.insertCount(code, yyyymmdd, newCount);
+
+            }else{
+                System.out.println("not null");
+
+                count = getSysSeq.getCount();
+                newCount = count+1;
+                int cnt = seqRepository.updateCount(code, yyyymmdd, newCount);
+            }
+
+            id = yyyymmdd+String.format("%04d", count);
+
+            //아이디 생성
+            userDataRepository.insert(id, pw, email, name, path, type);
+
+            dto.setReturnType(0);
         }else{
-            userType = "1";
+            dto.setReturnType(1);
         }
 
+        dto.setId(id);
+        dto.setEmail(email);
+        dto.setName(name);
+        dto.setPw(pw);
+        dto.setPath(path);
 
+        //접속로그
+        connectLogRepository.insert(id);
 
-//        System.out.println(user.toString());
-
-
-//        return monsterRepository.findAll().stream()
-//                .map(MonsterListResponseDto::new)
-//                .collect(Collectors.toList());
+        return dto;
     }
 
     @Transactional(readOnly = true)
@@ -80,18 +122,7 @@ public class ServerAPIService {
                 .map(StageExpListResponseDto::new)
                 .collect(Collectors.toList());
     }
-    @Transactional(readOnly = true)
-    public List<ItemFoodListResponseDto> getItemFood(){
-        return itemFoodRepository.findAll().stream()
-                .map(ItemFoodListResponseDto::new)
-                .collect(Collectors.toList());
-    }
-    @Transactional(readOnly = true)
-    public List<ItemPotionListResponseDto> getItemPotion(){
-        return itemPotionRepository.findAll().stream()
-                .map(ItemPotionListResponseDto::new)
-                .collect(Collectors.toList());
-    }
+
     @Transactional(readOnly = true)
     public List<ItemListResponseDto> getItem(){
         return itemRepository.findAll().stream()
@@ -116,12 +147,7 @@ public class ServerAPIService {
                 .map(ExpListResponseDto::new)
                 .collect(Collectors.toList());
     }
-    @Transactional(readOnly = true)
-    public List<EquipListResponseDto> getEquip(){
-        return equipRepository.findAll().stream()
-                .map(EquipListResponseDto::new)
-                .collect(Collectors.toList());
-    }
+
     @Transactional(readOnly = true)
     public List<AnimalListResponseDto> getAnimal(){
         return animalRepository.findAll().stream()
@@ -162,6 +188,12 @@ public class ServerAPIService {
     public List<MonsterListResponseDto> getMonster(){
         return monsterRepository.findAll().stream()
                 .map(MonsterListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<ItemGradeListResponseDto> getItemGrade(){
+        return itemGradeRepository.findAll().stream()
+                .map(ItemGradeListResponseDto::new)
                 .collect(Collectors.toList());
     }
 }

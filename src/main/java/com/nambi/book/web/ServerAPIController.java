@@ -4,9 +4,13 @@ import com.nambi.book.service.serverAPI.ServerAPIService;
 import com.nambi.book.web.dto.serverAPI.*;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,13 +25,10 @@ public class ServerAPIController {
         jsonObject.put("dictionary", service.getDictionary());
         jsonObject.put("dropChance", service.getDropChance());
 //        jsonObject.put("stageExp", service.getStageExp());
-        jsonObject.put("itemFood", service.getItemFood());
-        jsonObject.put("itemPotion", service.getItemPotion());
         jsonObject.put("item", service.getItem());
         jsonObject.put("initCharStat", service.getInitCharStat());
         jsonObject.put("grade", service.getGrade());
         jsonObject.put("exp", service.getExp());
-        jsonObject.put("equip", service.getEquip());
         jsonObject.put("animal", service.getAnimal());
         jsonObject.put("background", service.getBackground());
         jsonObject.put("job", service.getJob());
@@ -35,14 +36,15 @@ public class ServerAPIController {
         jsonObject.put("message", service.getMessage());
         jsonObject.put("stage", service.getStage());
         jsonObject.put("monster", service.getMonster());
+        jsonObject.put("itemGrade", service.getItemGrade());
         return jsonObject;
     }
 
     @PutMapping("/api/saveUser")
-    public JSONObject saveUser(){
-        JSONObject jsonObject = new JSONObject();
 
-        service.saveUser(jsonObject);
+    public JSONObject saveUser(@RequestBody Map map){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("user", service.saveUser(map));
 
         return jsonObject;
     }
@@ -57,12 +59,6 @@ public class ServerAPIController {
     public List<StageExpListResponseDto> getStageExp(){
         return service.getStageExp();
     }
-    @GetMapping("/api/getItemFood")
-    public List<ItemFoodListResponseDto> getItemFood(){
-        return service.getItemFood();
-    }
-    @GetMapping("/api/getItemPotion")
-    public List<ItemPotionListResponseDto> getItemPotion(){ return service.getItemPotion();}
     @GetMapping("/api/getItem")
     public List<ItemListResponseDto> getItem(){
         return service.getItem();
@@ -78,10 +74,6 @@ public class ServerAPIController {
     @GetMapping("/api/getExp")
     public List<ExpListResponseDto> getExp(){
         return service.getExp();
-    }
-    @GetMapping("/api/getEquip")
-    public List<EquipListResponseDto> getEquip(){
-        return service.getEquip();
     }
     @GetMapping("/api/getAnimal")
     public List<AnimalListResponseDto> getAnimal(){
@@ -110,5 +102,9 @@ public class ServerAPIController {
     @GetMapping("/api/getMonster")
     public List<MonsterListResponseDto> getMonster(){
         return service.getMonster();
+    }
+    @GetMapping("/api/getItemGrade")
+    public List<ItemGradeListResponseDto> getItemGrade(){
+        return service.getItemGrade();
     }
 }

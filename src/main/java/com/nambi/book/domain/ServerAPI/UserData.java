@@ -4,10 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
@@ -36,11 +33,8 @@ public class UserData {
     @Column(length = 100, nullable = false)
     private String pw;
 
-
-
     @Builder
-    public UserData(int idx, String id, String name, String email, String type, String path, String pw) {
-        this.idx = idx;
+    public UserData(String id, String name, String email, String type, String path, String pw) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -48,4 +42,5 @@ public class UserData {
         this.path = path;
         this.pw = pw;
     }
+
 }
