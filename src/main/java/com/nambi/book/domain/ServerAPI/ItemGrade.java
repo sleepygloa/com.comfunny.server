@@ -123,27 +123,27 @@ public class ItemGrade {
     //일반
     @Column(nullable = true)
     @ColumnDefault("")
-    private String cAttr;
+    private String ccAttr;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private String cAttr2;
+    private String ccAttr2;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private float cFrVal;
+    private float ccFrVal;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private float cToVal;
+    private float ccToVal;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private float cFrVal2;
+    private float ccFrVal2;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private float cToVal2;
+    private float ccToVal2;
 
     //
     @Column(nullable = true)
@@ -173,50 +173,50 @@ public class ItemGrade {
     //매직
     @Column(nullable = true)
     @ColumnDefault("")
-    private String mAttr;
+    private String mmAttr;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private String mAttr2;
+    private String mmAttr2;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private float mFrVal;
+    private float mmFrVal;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private float mToVal;
+    private float mmToVal;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private float mFrVal2;
+    private float mmFrVal2;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private float mToVal2;
+    private float mmToVal2;
 
     //에픽
     @Column(nullable = true)
     @ColumnDefault("")
-    private String eAttr;
+    private String eeAttr;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private String eAttr2;
+    private String eeAttr2;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private float eFrVal;
+    private float eeFrVal;
 
     @Column(nullable = true)
     @ColumnDefault("")
-    private float eToVal;
+    private float eeToVal;
 
     @Column(nullable = true)
     @ColumnDefault("0")
-    private float eFrVal2;
+    private float eeFrVal2;
 
     @Column(nullable = true)
     @ColumnDefault("0")
-    private float eToVal2;
+    private float eeToVal2;
 }

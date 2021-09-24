@@ -35,30 +35,30 @@ public class ItemGradeListResponseDto {
     private float critDamVal;
     private float skillDamVal;
     private float count;
-    private String cAttr;
-    private String cAttr2;
-    private float cFrVal;
-    private float cToVal;
-    private float cFrVal2;
-    private float cToVal2;
+    private String ccAttr;
+    private String ccAttr2;
+    private float ccFrVal;
+    private float ccToVal;
+    private float ccFrVal2;
+    private float ccToVal2;
     private String ucAttr;
     private String ucAttr2;
     private float ucFrVal;
     private float ucToVal;
     private float ucFrVal2;
     private float ucToVal2;
-    private String mAttr;
-    private String mAttr2;
-    private float mFrVal;
-    private float mToVal;
-    private float mFrVal2;
-    private float mToVal2;
-    private String eAttr;
-    private String eAttr2;
-    private float eFrVal;
-    private float eToVal;
-    private float eFrVal2;
-    private float eToVal2;
+    private String mmAttr;
+    private String mmAttr2;
+    private float mmFrVal;
+    private float mmToVal;
+    private float mmFrVal2;
+    private float mmToVal2;
+    private String eeAttr;
+    private String eeAttr2;
+    private float eeFrVal;
+    private float eeToVal;
+    private float eeFrVal2;
+    private float eeToVal2;
 
     public ItemGradeListResponseDto(ItemGrade entity) {
         this.idx = entity.getIdx();
@@ -92,12 +92,12 @@ public class ItemGradeListResponseDto {
         this.skillDamVal = entity.getSkillDamVal();
         this.count = entity.getCount();
 
-        this.cAttr = entity.getCAttr();
-        this.cAttr2 = entity.getCAttr2();
-        this.cFrVal = entity.getCFrVal();
-        this.cToVal = entity.getCFrVal2();
-        this.cFrVal2 = entity.getCFrVal2();
-        this.cToVal2 = entity.getCToVal2();
+        this.ccAttr = entity.getCcAttr();
+        this.ccAttr2 = entity.getCcAttr2();
+        this.ccFrVal = entity.getCcFrVal();
+        this.ccToVal = entity.getCcFrVal2();
+        this.ccFrVal2 = entity.getCcFrVal2();
+        this.ccToVal2 = entity.getCcToVal2();
 
         this.ucAttr = entity.getUcAttr();
         this.ucAttr = entity.getUcAttr2();
@@ -106,19 +106,19 @@ public class ItemGradeListResponseDto {
         this.ucFrVal2 = entity.getUcFrVal2();
         this.ucToVal2 = entity.getUcToVal2();
 
-        this.mAttr = entity.getMAttr();
-        this.mAttr2 = entity.getMAttr2();
-        this.mFrVal = entity.getMFrVal();
-        this.mToVal = entity.getMToVal();
-        this.mFrVal2 = entity.getMFrVal2();
-        this.mToVal2 = entity.getMToVal2();
+        this.mmAttr = entity.getMmAttr();
+        this.mmAttr2 = entity.getMmAttr2();
+        this.mmFrVal = entity.getMmFrVal();
+        this.mmToVal = entity.getMmToVal();
+        this.mmFrVal2 = entity.getMmFrVal2();
+        this.mmToVal2 = entity.getMmToVal2();
 
-        this.eAttr = entity.getEAttr();
-        this.eAttr2 = entity.getEAttr2();
-        this.eFrVal = entity.getEFrVal();
-        this.eToVal = entity.getEToVal();
-        this.eFrVal2 = entity.getEFrVal2();
-        this.eToVal2 = entity.getEToVal2();
+        this.eeAttr = entity.getEeAttr();
+        this.eeAttr2 = entity.getEeAttr2();
+        this.eeFrVal = entity.getEeFrVal();
+        this.eeToVal = entity.getEeToVal();
+        this.eeFrVal2 = entity.getEeFrVal2();
+        this.eeToVal2 = entity.getEeToVal2();
 
     }
 }
