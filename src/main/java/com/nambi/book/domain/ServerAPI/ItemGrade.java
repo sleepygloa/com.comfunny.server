@@ -30,6 +30,9 @@ public class ItemGrade {
     @ColumnDefault("C")
     private String grade;
 
+    @Column(length = 100, nullable = false)
+    private String category4;
+
     @Column(nullable = true)
     @ColumnDefault("0")
     private float price;

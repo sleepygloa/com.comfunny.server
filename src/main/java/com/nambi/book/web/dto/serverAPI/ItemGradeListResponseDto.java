@@ -12,6 +12,7 @@ public class ItemGradeListResponseDto {
     private String name;
     private String path;
     private String grade;
+    private String category4;
     private float price;
     private String desc;
     private float frAtk;
@@ -67,6 +68,7 @@ public class ItemGradeListResponseDto {
         this.grade = entity.getGrade();
         this.price = entity.getPrice();
         this.desc = entity.getDesc();
+        this.category4 = entity.getCategory4();
 
         this.frAtk = entity.getFrAtk();
         this.toAtk = entity.getToAtk();
