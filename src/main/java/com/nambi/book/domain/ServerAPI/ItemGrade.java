@@ -6,7 +6,6 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Getter
@@ -14,10 +13,10 @@ import javax.persistence.Id;
 @Entity
 public class ItemGrade {
 
-    @Id
-    @GeneratedValue
+    @Column
     private int idx;
 
+    @Id
     @Column(length = 100, nullable = false)
     private String code;
 
