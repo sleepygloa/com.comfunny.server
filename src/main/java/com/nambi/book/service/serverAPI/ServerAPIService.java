@@ -35,6 +35,7 @@ public class ServerAPIService {
     private final ItemGradeRepository itemGradeRepository;
     private final SeqRepository seqRepository;
     private final ConnectLogRepository connectLogRepository;
+    private final ItemReinforceRepository itemReinforceRepository;
 
     @Transactional(readOnly = true)
     public List<UserDataDto> saveUser(Map map){
@@ -205,6 +206,12 @@ public class ServerAPIService {
     public List<ItemGradeListResponseDto> getItemGrade(){
         return itemGradeRepository.findAll().stream()
                 .map(ItemGradeListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<ItemReinforceListResponseDto> getItemReinforce(){
+        return itemReinforceRepository.findAll().stream()
+                .map(ItemReinforceListResponseDto::new)
                 .collect(Collectors.toList());
     }
 }

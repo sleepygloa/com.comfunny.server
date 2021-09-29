@@ -37,6 +37,7 @@ public class ServerAPIController {
         jsonObject.put("stage", service.getStage());
         jsonObject.put("monster", service.getMonster());
         jsonObject.put("itemGrade", service.getItemGrade());
+        jsonObject.put("itemReinforce", service.getItemReinforce());
         return jsonObject;
     }
 
@@ -106,5 +107,9 @@ public class ServerAPIController {
     @GetMapping("/api/getItemGrade")
     public List<ItemGradeListResponseDto> getItemGrade(){
         return service.getItemGrade();
+    }
+    @GetMapping("/api/getItemReinforce")
+    public List<ItemReinforceListResponseDto> getItemReinforce(){
+        return service.getItemReinforce();
     }
 }
