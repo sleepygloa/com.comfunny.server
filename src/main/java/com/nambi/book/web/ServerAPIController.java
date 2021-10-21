@@ -39,6 +39,7 @@ public class ServerAPIController {
         jsonObject.put("itemGrade", service.getItemGrade());
         jsonObject.put("itemReinforce", service.getItemReinforce());
         jsonObject.put("heroGroupSkill", service.getHeroGroupSkill());
+        jsonObject.put("achievement", service.getAchievement());
         return jsonObject;
     }
 
@@ -117,5 +118,8 @@ public class ServerAPIController {
     public List<HeroGroupSkillListResponseDto> getHeroGroupSkill(){
         return service.getHeroGroupSkill();
     }
-
+    @GetMapping("/api/getAchievement")
+    public List<AchievementListResponseDto> getAchievement(){
+        return service.getAchievement();
+    }
 }

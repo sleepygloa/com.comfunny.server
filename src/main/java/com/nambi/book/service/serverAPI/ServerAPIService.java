@@ -37,6 +37,7 @@ public class ServerAPIService {
     private final ConnectLogRepository connectLogRepository;
     private final ItemReinforceRepository itemReinforceRepository;
     private final HeroGroupSkillRepository heroGroupSkillRepository;
+    private final AchievementRepository achievementRepository;
 
     @Transactional(readOnly = true)
     public List<UserDataDto> saveUser(Map map){
@@ -219,6 +220,12 @@ public class ServerAPIService {
     public List<HeroGroupSkillListResponseDto> getHeroGroupSkill(){
         return heroGroupSkillRepository.findAll().stream()
                 .map(HeroGroupSkillListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<AchievementListResponseDto> getAchievement(){
+        return achievementRepository.findAll().stream()
+                .map(AchievementListResponseDto::new)
                 .collect(Collectors.toList());
     }
 }
