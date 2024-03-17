@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sd.repository.DcDao">
+    <select id="selectDcList"
+            resultType="HMap"
+            parameterType="HMap">
+        SELECT /*[DcDao.xml][selectDcList] 물류센터 데이터들을 조회 */
+               BIZ_CD
+             , DC_CD
+             , DC_NM
+             , BIZ_NO
+             , BIZ_NM
+             , CEO_NM
+             , POST_NO
+             , BASIC_ADDR
+             , DETAIL_ADDR
+             , BIZ_TP
+             , BIZ_KND
+             , TEL_NO
+             , FAX_NO
+             , CONTACT_NM
+             , CONTACT_TEL_NO
+             , CONTACT_EMAIL
+             , COUNTRY_CD
+             , CITY_CD
+             , USER_COL1
+             , USER_COL2
+             , USER_COL3
+             , USER_COL4
+             , USER_COL5
+             , REMARK
+             , IN_DT
+             , IN_USER_ID
+             , UP_DT
+             , UP_USER_ID
+          FROM tb_ms_dc
+         WHERE 1=1
+          <if test="dcNm != null and dcNm != ''">
+           AND (
+                DC_CD LIKE '%'#{dcNm}'%'
+             OR DC_NM LIKE '%'#{dcNm}'%'
+              )
+          </if>
+    </select>
+
+</mapper>

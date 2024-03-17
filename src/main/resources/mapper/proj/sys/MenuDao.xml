@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sys.repository.MenuDao">
+    <select id="selectLeftMenu" resultType="java.util.Map" >
+        SELECT /* [MenuDao][selectLeftMenu][LEFT 메뉴조회 조회][KimSeonHo][2022-12-18] */
+               tsm.MENU_SEQ                      AS MENU_SEQ
+             , NVL(tsm.MENU_PARENT_SEQ,'0')      AS MENU_PARENT_SEQ
+             , NVL(tsd.DOMAIN_NM,tsm.MENU_NM)    AS MENU_NM
+             , NVL(tsm.MENU_ICO,' ')             AS MENU_ICON
+             , tsm.CALL_URL                      AS CALL_URL
+             , tsm.PRO_CD                        AS PRO_CD
+             , tsm.PDA_USE_YN                    AS PDA_USE_YN
+             , tsm.MENU_ORDER                    AS MENU_ORDER
+        FROM tb_sy_menu tsm
+   LEFT JOIN tb_sy_domain tsd
+          ON tsm.BIZ_CD     = tsd.BIZ_CD
+         AND tsm.PRO_CD     = tsd.DOMAIN_ID
+         AND tsd.LANG_CD    = #{s_language}
+       WHERE 1=1
+         AND tsm.PDA_USE_YN = CASE WHEN #{loginOs} = 'mobile' THEN 'Y' ELSE 'N' END
+    ORDER BY tsm.MENU_PARENT_SEQ, (tsm.MENU_ORDER+0)
+    </select>
+
+    <select id="findAllByTree2" resultType="java.util.HashMap" >
+      SELECT  /* [MenuService.query][getLeftMenu][LEFT 메뉴조회 조회][Kim Jin Ho][2016-09-13] */
+              CASE WHEN MENU_SEQ IS NOT NULL
+                   THEN MENU_SEQ
+               ELSE ''
+              END                        AS MENU_SEQ
+            , CASE WHEN MENU_PARENT_SEQ IS NOT NULL
+                   THEN MENU_PARENT_SEQ
+                    ELSE ''
+              END                        AS MENU_PARENT_SEQ
+            , PM.PRO_CD                  AS PRO_CD
+            , MENU_NM                    AS MENU_NM
+            , DOMAIN_ID                  AS DOMAIN_ID
+            , CASE WHEN MENU_ICO IS NOT NULL
+                   THEN MENU_ICO
+                   ELSE ''
+              END                        AS MENU_ICO
+            , CALL_URL                   AS CALL_URL
+            , MENU_ORDER                 AS MENU_ORDER
+            , PM.USE_YN                  AS USE_YN
+            , PM.PDA_USE_YN              AS PDA_USE_YN
+         FROM tb_sy_menu  PM
+     ORDER BY MENU_PARENT_SEQ, (MENU_ORDER+0)
+    </select>
+
+<!--    <select id="selectLeftMenu2" resultType="HMap" >-->
+<!--        SELECT /* [MenuDao][selectLeftMenu][LEFT 메뉴조회 조회][KimSeonHo][2022-12-18] */-->
+<!--            *-->
+<!--        FROM-->
+<!--            (SELECT PM.MENU_SEQ               AS MENU_SEQ-->
+<!--                  , NVL(MENU_PARENT_SEQ,'0')  AS MENU_PARENT_SEQ-->
+<!--                  , NVL(DOMAIN_NM,MENU_NM)    AS MENU_NM-->
+<!--                  , NVL(MENU_ICO,' ')         AS MENU_ICON-->
+<!--                  , CALL_URL                  AS CALL_URL-->
+<!--                  , PM.PRO_CD                 AS PRO_CD-->
+<!--                  , PM.PDA_USE_YN             AS PDA_USE_YN-->
+<!--                  , PM.MENU_ORDER             AS MENU_ORDR-->
+<!--             FROM TB_PARAGON_MENU  PM-->
+<!--                      JOIN  (-->
+<!--                 SELECT MENU_SEQ-->
+<!--                 FROM TB_PARAGON_AUTH PA-->
+<!--                          JOIN TB_PARAGON_AUTH_USER PAU-->
+<!--                               ON PA.AUTH_GROUP_SEQ = PAU.AUTH_GROUP_SEQ-->
+<!--                                   AND USER_NO = #{s_userNo}-->
+<!--                 WHERE PA.AUTH_CD = 'AUTH_VIEW'-->
+<!--                   AND PA.AUTH_YN = 'Y'-->
+<!--             ) PSET-->
+<!--                            ON PM.MENU_SEQ = PSET.MENU_SEQ-->
+<!--                      LEFT OUTER JOIN TB_PARAGON_PRO PP-->
+<!--                                      ON PM.PRO_CD = PP.PRO_CD-->
+<!--                      LEFT OUTER JOIN TB_PARAGON_DOMAIN PD-->
+<!--                                      ON PM.DOMAIN_ID = PD.DOMAIN_ID-->
+<!--                                          AND PD.LANG_CD = #{s_language}-->
+<!--                                          AND PD.COMPANY_CD = #{s_companyCd}-->
+<!--             WHERE PM.DEL_YN = 'N'-->
+<!--               AND PM.USE_YN = 'Y'-->
+<!--            ) X WHERE X.PDA_USE_YN = NVL(#{s_pdaUseYn}, 'N')-->
+<!--        ORDER BY MENU_PARENT_SEQ, (MENU_ORDER+0)-->
+<!--    </select>-->
+
+</mapper>

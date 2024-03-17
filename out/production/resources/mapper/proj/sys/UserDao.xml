@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sys.repository.UserDao">
+    <select id="selectMainBy"
+            resultType="com.comfunny.server.proj.sys.dto.UserInfoResDto"
+            parameterType="com.comfunny.server.proj.sys.dto.UserInfoReqDto">
+        SELECT *
+          FROM user
+    </select>
+
+    <select id="selectLoginUserId"
+            resultType="com.comfunny.server.proj.sys.dto.UserInfoResDto"
+            parameterType="com.comfunny.server.proj.sys.dto.UserInfoReqDto">
+        SELECT *
+        FROM user
+       WHERE 1=1
+         AND user_id = #{userId}
+    </select>
+
+    <select id="selectLoginUserPwd"
+            resultType="com.comfunny.server.proj.sys.dto.UserInfoResDto"
+            parameterType="com.comfunny.server.proj.sys.dto.UserInfoReqDto">
+        SELECT *
+        FROM user
+       WHERE 1=1
+         AND user_id = #{userId}
+         AND password = #{password}
+    </select>
+
+
+
+    <select id="selectUserList"
+            resultType="HMap"
+            >
+       SELECT
+          USER_ID
+        , BIZ_CD
+        , ACTIVATED
+       , NICKNAME
+       , PASSWORD
+       , USERNAME
+       , USER_NO
+       , USER_PHONE
+       , USER_EMAIL
+       , USER_POSITION
+       , PWD_FAIL_CNT
+       , LATELY_TRY
+        ,LAST_LOGIN_DT
+       , PUSH_ID
+       , ADMIN_YN
+       , USER_JOIN_DT
+       , PWD_CHG_DT
+       , USER_LANG_CD
+       , USER_COUNTRY_CD
+       , PRINTER_IP
+        FROM user
+        WHERE 1=1
+         AND DEL_YN = 'N'
+    </select>
+</mapper>

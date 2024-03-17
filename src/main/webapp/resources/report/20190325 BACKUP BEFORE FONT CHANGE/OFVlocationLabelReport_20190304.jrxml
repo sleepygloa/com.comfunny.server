@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OFVlocationLabelReport" language="groovy" pageWidth="113" pageHeight="198" columnWidth="113" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="bfaf14d8-425f-4eb9-8485-fdba8c7f0bae">
+	<property name="ireport.zoom" value="2.3579476910000032"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="ARROW_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[ARROW_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="ZONE_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[ZONE_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="LIN_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[LIN_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="ROW_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[ROW_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[LEV_CD]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[LOC_CD]]></fieldDescription>
+	</field>
+	<field name="ARROW_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[ARROW_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="ZONE_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[ZONE_CD]]></fieldDescription>
+	</field>
+	<field name="LIN_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[LIN_CD]]></fieldDescription>
+	</field>
+	<field name="ROW_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[ROW_CD]]></fieldDescription>
+	</field>
+	<field name="LEV_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[LEV_CD]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="198" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="56" height="198" uuid="26865275-d9d8-46b9-b58c-19db74eac7a4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
+					<font size="30" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ARROW_LOC_CD}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="56" y="0" width="22" height="198" uuid="2136d904-26c5-4316-99b3-62c4b7482f4c"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" rotation="Right">
+					<jr:codeExpression><![CDATA[$F{LOC_CD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="66" y="0" width="22" height="198" uuid="1b8670d7-d0f8-47da-b130-429be1632cc7"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" rotation="Right">
+					<jr:codeExpression><![CDATA[$F{LOC_CD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="76" y="0" width="22" height="198" uuid="bd28e8f8-bd34-4c86-be53-11bb96fbf7cb"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" rotation="Right">
+					<jr:codeExpression><![CDATA[$F{LOC_CD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="86" y="0" width="22" height="198" uuid="87e3dbe0-dae0-44c2-bbbd-3f2f464af463"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" rotation="Right">
+					<jr:codeExpression><![CDATA[$F{LOC_CD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

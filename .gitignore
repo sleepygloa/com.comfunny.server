@@ -1,5 +1,5 @@
 
-
+src/main/frontend/node_modules
 .gradle
 .idea
 application-oauth.properties

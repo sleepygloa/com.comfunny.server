@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="locationLabel64Report" language="groovy" pageWidth="113" pageHeight="170" columnWidth="113" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="bfaf14d8-425f-4eb9-8485-fdba8c7f0bae">
+	<property name="ireport.zoom" value="2.8531167061100042"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOCCD" class="java.lang.String">
+		<parameterDescription><![CDATA[LOCCD]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT LOC_CD AS LOCCD FROM TB_MS_LOC_M WHERE LOC_CD = $P{LOCCD}]]>
+	</queryString>
+	<field name="LOCCD" class="java.lang.String">
+		<fieldDescription><![CDATA[LOCCD]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="170" splitType="Stretch">
+			<componentElement>
+				<reportElement x="32" y="11" width="15" height="150" uuid="918746ab-c4a5-46bc-a568-0a06c964cc22"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" rotation="Right">
+					<jr:codeExpression><![CDATA[$F{LOCCD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="0" y="11" width="49" height="150" uuid="b28d12ed-0c1d-46ff-b3ce-967712af1bac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Right">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LOCCD}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="42" y="11" width="15" height="150" uuid="ef908e11-08bb-4e1a-bdac-1e04a76779a9"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" rotation="Right">
+					<jr:codeExpression><![CDATA[$F{LOCCD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="52" y="11" width="15" height="150" uuid="2667d116-759f-4cae-baee-bfccf8dd3782"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" rotation="Right">
+					<jr:codeExpression><![CDATA[$F{LOCCD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="62" y="11" width="15" height="150" uuid="604e2cc2-80f8-4655-8a06-e288d376e117"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" rotation="Right">
+					<jr:codeExpression><![CDATA[$F{LOCCD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="72" y="11" width="15" height="150" uuid="2620fe22-a614-475e-8d49-b8d2bfaaa310"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" rotation="Right">
+					<jr:codeExpression><![CDATA[$F{LOCCD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="82" y="11" width="15" height="150" uuid="94144024-2f9d-4ca2-9e4e-35bf5be10259"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" rotation="Right">
+					<jr:codeExpression><![CDATA[$F{LOCCD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

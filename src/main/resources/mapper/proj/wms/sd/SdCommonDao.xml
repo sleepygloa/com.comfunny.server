@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sd.repository.SdCommonDao">
+
+
+    <select id="selectClientCmbList" resultType="HMap" >
+        SELECT /*[SdCommonDao.xml][selectClientCmbList] 고객사 공통드랍다운 데이터들을 조회 */
+            CLIENT_CD  VALUE
+             , CLIENT_NM  NAME
+        FROM tb_ms_client
+        WHERE 1=1
+          AND BIZ_CD = #{s_bizCd}
+    </select>
+
+    <select id="selectDcCmbList" resultType="HMap" >
+        SELECT /*[SdCommonDao.xml][selectDcCmbList] 물류센터 공통드랍다운 데이터들을 조회 */
+            DC_CD  VALUE
+             , DC_NM  NAME
+        FROM tb_ms_dc
+        WHERE 1=1
+          AND BIZ_CD = #{s_bizCd}
+    </select>
+    <select id="selectAreaCmbList" resultType="HMap" >
+        SELECT /*[SdCommonDao.xml][selectAreaCmbList] 물류센터의 구역 공통드랍다운 데이터들을 조회 */
+            AREA_CD  VALUE
+             , AREA_NM  NAME
+        FROM tb_ms_area
+        WHERE 1=1
+          AND BIZ_CD = #{s_bizCd}
+          AND DC_CD = #{dcCd}
+    </select>
+
+
+</mapper>

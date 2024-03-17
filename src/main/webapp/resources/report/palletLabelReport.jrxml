@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="palletLabelReport" language="groovy" pageWidth="227" pageHeight="142" orientation="Landscape" columnWidth="1" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="bfaf14d8-425f-4eb9-8485-fdba8c7f0bae">
+	<property name="ireport.zoom" value="3.4522712143931056"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pltId" class="java.lang.String">
+		<parameterDescription><![CDATA[pltId]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="pltId" class="java.lang.String">
+		<fieldDescription><![CDATA[pltId]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="142" splitType="Stretch">
+			<componentElement>
+				<reportElement x="14" y="37" width="199" height="28" uuid="918746ab-c4a5-46bc-a568-0a06c964cc22"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{pltId}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="14" y="52" width="199" height="28" uuid="73628e80-7d4b-422d-ad14-efd71752ed73"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{pltId}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<line>
+				<reportElement x="0" y="0" width="226" height="1" uuid="92ed7012-303d-40cb-b4d4-0d05bb1ad0f5"/>
+			</line>
+			<line>
+				<reportElement x="1" y="141" width="226" height="1" uuid="a1aff416-ed93-4e70-b6d8-7b670ef2896a"/>
+			</line>
+			<line>
+				<reportElement x="226" y="1" width="1" height="140" uuid="e555ecb9-0b58-4391-8109-56bc451d6ff5"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="140" uuid="8f3034af-7344-4e89-8004-0de10527df75"/>
+			</line>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="14" y="90" width="199" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="70840190-f2a5-4f53-ac70-57efdf4a6f41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pltId}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="14" y="62" width="199" height="28" uuid="be7fe22e-38d2-4ab6-a49a-7f4a26c8f489"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{pltId}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="14" y="72" width="199" height="28" uuid="c93665b2-dea0-471f-bfe9-35b8d1545b4b"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{pltId}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

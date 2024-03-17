@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="stMoveReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="74eabd2c-4279-40bd-adf3-2155dcc14e03">
+	<property name="ireport.zoom" value="1.3636363636363722"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="MOVE_NO" class="java.lang.String">
+		<parameterDescription><![CDATA[MOVE_NO]]></parameterDescription>
+	</parameter>
+	<parameter name="DC_NM" class="java.lang.String">
+		<parameterDescription><![CDATA[DC_NM]]></parameterDescription>
+	</parameter>
+	<parameter name="CLIENT_NM" class="java.lang.String">
+		<parameterDescription><![CDATA[CLIENT_NM]]></parameterDescription>
+	</parameter>
+	<parameter name="WORK_YMD" class="java.lang.String">
+		<parameterDescription><![CDATA[WORK_YMD]]></parameterDescription>
+	</parameter>
+	<parameter name="USERNM" class="java.lang.String">
+		<parameterDescription><![CDATA[USERNM]]></parameterDescription>
+	</parameter>
+	<parameter name="FR_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[FR_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="TO_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[TO_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="TO_PLT_ID" class="java.lang.String">
+		<parameterDescription><![CDATA[TO_PLT_ID]]></parameterDescription>
+	</parameter>
+	<parameter name="ITEM_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[ITEM_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="ITEM_NM" class="java.lang.String">
+		<parameterDescription><![CDATA[ITEM_NM]]></parameterDescription>
+	</parameter>
+	<parameter name="ITEM_ST_NM" class="java.lang.String">
+		<parameterDescription><![CDATA[ITEM_ST_NM]]></parameterDescription>
+	</parameter>
+	<parameter name="MAKE_YMD" class="java.lang.String">
+		<parameterDescription><![CDATA[MAKE_YMD]]></parameterDescription>
+	</parameter>
+	<parameter name="DIST_EXPIRY_YMD" class="java.lang.String">
+		<parameterDescription><![CDATA[DIST_EXPIRY_YMD]]></parameterDescription>
+	</parameter>
+	<parameter name="MAKE_LOT" class="java.lang.String">
+		<parameterDescription><![CDATA[MAKE_LOT]]></parameterDescription>
+	</parameter>
+	<parameter name="UOM" class="java.lang.String">
+		<parameterDescription><![CDATA[UOM]]></parameterDescription>
+	</parameter>
+	<parameter name="PKQTY" class="java.lang.String">
+		<parameterDescription><![CDATA[PKQTY]]></parameterDescription>
+	</parameter>
+	<parameter name="INST_TOT_QTY" class="java.lang.String">
+		<parameterDescription><![CDATA[INST_TOT_QTY]]></parameterDescription>
+	</parameter>
+	<parameter name="INST_BOX_QTY" class="java.lang.String">
+		<parameterDescription><![CDATA[INST_BOX_QTY]]></parameterDescription>
+	</parameter>
+	<parameter name="INST_EA_QTY" class="java.lang.String">
+		<parameterDescription><![CDATA[INST_EA_QTY]]></parameterDescription>
+	</parameter>
+	<parameter name="labels" class="java.lang.Object"/>
+	<parameter name="USER_NM" class="java.lang.String">
+		<parameterDescription><![CDATA[USER_NM]]></parameterDescription>
+	</parameter>
+	<field name="MOVE_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[MOVE_NO]]></fieldDescription>
+	</field>
+	<field name="DC_NM" class="java.lang.String">
+		<fieldDescription><![CDATA[DC_NM]]></fieldDescription>
+	</field>
+	<field name="CLIENT_NM" class="java.lang.String">
+		<fieldDescription><![CDATA[CLIENT_NM]]></fieldDescription>
+	</field>
+	<field name="WORK_YMD" class="java.lang.String">
+		<fieldDescription><![CDATA[WORK_YMD]]></fieldDescription>
+	</field>
+	<field name="USERNM" class="java.lang.String">
+		<fieldDescription><![CDATA[USERNM]]></fieldDescription>
+	</field>
+	<field name="FR_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[FR_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="TO_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[TO_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="TO_PLT_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[TO_PLT_ID]]></fieldDescription>
+	</field>
+	<field name="ITEM_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[ITEM_CD]]></fieldDescription>
+	</field>
+	<field name="ITEM_NM" class="java.lang.String">
+		<fieldDescription><![CDATA[ITEM_NM]]></fieldDescription>
+	</field>
+	<field name="ITEM_ST_NM" class="java.lang.String">
+		<fieldDescription><![CDATA[ITEM_ST_NM]]></fieldDescription>
+	</field>
+	<field name="MAKE_YMD" class="java.lang.String">
+		<fieldDescription><![CDATA[MAKE_YMD]]></fieldDescription>
+	</field>
+	<field name="DIST_EXPIRY_YMD" class="java.lang.String">
+		<fieldDescription><![CDATA[DIST_EXPIRY_YMD]]></fieldDescription>
+	</field>
+	<field name="MAKE_LOT" class="java.lang.String">
+		<fieldDescription><![CDATA[MAKE_LOT]]></fieldDescription>
+	</field>
+	<field name="UOM" class="java.lang.String">
+		<fieldDescription><![CDATA[UOM]]></fieldDescription>
+	</field>
+	<field name="PKQTY" class="java.lang.String">
+		<fieldDescription><![CDATA[PKQTY]]></fieldDescription>
+	</field>
+	<field name="INST_TOT_QTY" class="java.lang.String">
+		<fieldDescription><![CDATA[INST_TOT_QTY]]></fieldDescription>
+	</field>
+	<field name="INST_BOX_QTY" class="java.lang.String">
+		<fieldDescription><![CDATA[INST_BOX_QTY]]></fieldDescription>
+	</field>
+	<field name="INST_EA_QTY" class="java.lang.String">
+		<fieldDescription><![CDATA[INST_EA_QTY]]></fieldDescription>
+	</field>
+	<field name="USER_NM" class="java.lang.String">
+		<fieldDescription><![CDATA[USER_NM]]></fieldDescription>
+	</field>
+	<group name="moveNoGrp" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{MOVE_NO}]]></groupExpression>
+		<groupHeader>
+			<band height="190">
+				<elementGroup/>
+				<line>
+					<reportElement x="666" y="21" width="1" height="51" uuid="adaa67a1-80da-4773-b1b9-22d5a5a4db66"/>
+				</line>
+				<line>
+					<reportElement x="666" y="71" width="111" height="1" uuid="43c599be-ed07-48e1-9a22-504b5872ae63"/>
+				</line>
+				<line>
+					<reportElement x="721" y="21" width="1" height="50" uuid="3bfc82ff-547a-4e5b-af26-0baeaf7c70c8"/>
+				</line>
+				<line>
+					<reportElement x="666" y="20" width="111" height="1" uuid="ebf1e01c-761d-4b9a-9c61-80493dea51d0"/>
+				</line>
+				<line>
+					<reportElement x="666" y="39" width="111" height="1" uuid="05dda781-bdd9-415a-aa9f-429098260284"/>
+				</line>
+				<line>
+					<reportElement x="776" y="21" width="1" height="50" uuid="84f86d3d-cc4b-4627-bb9b-ff246fc5482c"/>
+				</line>
+				<elementGroup/>
+				<line>
+					<reportElement x="20" y="150" width="755" height="1" uuid="3afe2e85-b213-4659-882b-f3b9987a529c"/>
+				</line>
+				<line>
+					<reportElement x="205" y="150" width="1" height="40" uuid="7b14ecf8-f1ed-4b86-add2-28c425cd69bb"/>
+				</line>
+				<line>
+					<reportElement x="265" y="150" width="1" height="40" uuid="2158f3c3-5d0a-4ef3-a87a-7ec775688d5d"/>
+				</line>
+				<line>
+					<reportElement x="405" y="150" width="1" height="40" uuid="d721aff9-f2d3-45c4-a6ec-4b1f6d36d4f4"/>
+				</line>
+				<line>
+					<reportElement x="465" y="150" width="1" height="40" uuid="0214f1d6-87fd-4550-9a1a-2f660ff2a3c0"/>
+				</line>
+				<line>
+					<reportElement x="525" y="150" width="1" height="40" uuid="006c66df-5397-4482-b3be-fbc5033a67e4"/>
+				</line>
+				<line>
+					<reportElement x="585" y="150" width="1" height="40" uuid="c71dc02d-759c-48c0-a637-d18bb2f04342"/>
+				</line>
+				<line>
+					<reportElement x="625" y="150" width="1" height="40" uuid="892bb958-3d62-4177-b4a8-819d6bc460ac"/>
+				</line>
+				<line>
+					<reportElement x="655" y="150" width="1" height="40" uuid="8ce3ada9-2069-43da-bc9c-f150d9208ea6"/>
+				</line>
+				<line>
+					<reportElement x="775" y="150" width="1" height="40" uuid="8688f228-a8d2-42eb-8523-3109c6cb5a8c"/>
+				</line>
+				<line>
+					<reportElement x="655" y="170" width="120" height="1" uuid="87b229e2-025e-4c98-90b5-1e6247166188"/>
+				</line>
+				<line>
+					<reportElement x="695" y="170" width="1" height="19" uuid="e07524e8-5fe0-49fd-82af-f6cb4ad04e14"/>
+				</line>
+				<line>
+					<reportElement x="735" y="170" width="1" height="19" uuid="0b4147ee-ed54-4c20-b530-c8130fc115d9"/>
+				</line>
+				<line>
+					<reportElement x="20" y="189" width="754" height="1" uuid="62281c12-0e9a-4e5d-9a1c-ae272594351a"/>
+				</line>
+				<line>
+					<reportElement x="80" y="150" width="1" height="40" uuid="bc428599-35c8-4566-ae58-35bca0c75f1b"/>
+				</line>
+				<line>
+					<reportElement x="140" y="150" width="1" height="40" uuid="f26722af-dea0-4d05-b25c-3c95bfbfd8b7"/>
+				</line>
+				<line>
+					<reportElement x="20" y="150" width="1" height="40" uuid="f936c608-09ee-4397-82e0-61a1bfdeb289"/>
+				</line>
+				<line>
+					<reportElement x="365" y="150" width="1" height="40" uuid="30c0e0e2-1ec7-44a8-8b84-78ead63a05ee"/>
+				</line>
+				<componentElement>
+					<reportElement x="281" y="79" width="240" height="40" uuid="da8ebaf0-2d81-4ffa-96ce-2c5870b30a9e"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+						<jr:codeExpression><![CDATA[$F{MOVE_NO}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<textField isBlankWhenNull="true">
+					<reportElement x="145" y="20" width="500" height="29" uuid="6cefa87f-7bb5-4b6c-bfe4-5a11f8647a25"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="20" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("PWMST101E_R1")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="20" y="80" width="58" height="20" uuid="5e4a7869-34b9-4e0e-8850-5f7d5dbbd16e"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("DC_NM")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="83" y="100" width="172" height="20" uuid="332e4ddd-cc09-4a14-96e9-6e8657a420f4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CLIENT_NM}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="83" y="120" width="90" height="20" uuid="83e14352-77bd-47bd-a58a-54afd9866e1e"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{WORK_YMD}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="77" y="80" width="5" height="20" uuid="b181bed6-4a3a-4e26-bbb4-a17c7d3c88b0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="20" y="120" width="58" height="20" uuid="f85b8c47-fc93-45b9-b7c7-acfb6eeac718"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("WORK_YMD")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="83" y="80" width="170" height="20" uuid="9c6d49af-f7a9-46fd-8960-4ebcc5eb2013"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DC_NM}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="77" y="100" width="5" height="20" uuid="f1411e66-a146-4d47-9c7e-c08ee733d8e3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="20" y="100" width="58" height="20" uuid="e05e3f78-8cf1-4863-8772-5d96ce3e8cf8"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("CLIENT_NM")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="77" y="120" width="5" height="20" uuid="288ae7ff-b1d6-4d3c-b263-e4a41bb5263b"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement x="281" y="99" width="240" height="40" uuid="c70fba62-5d46-4726-b5d8-8e56ecced1f3"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+						<jr:codeExpression><![CDATA[$F{MOVE_NO}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<textField>
+					<reportElement x="303" y="120" width="189" height="19" uuid="276be44f-e641-4607-9820-f2bb4406b648"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{MOVE_NO}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="570" y="80" width="93" height="20" uuid="1ebbc107-ce0c-47b3-87a5-7d8a8003be70"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("WORK_DT")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="665" y="100" width="5" height="20" uuid="7a846f6a-73f2-4c39-a159-3d70ff27ec70"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="665" y="80" width="5" height="20" uuid="2de314f6-db3b-4aa7-990d-cb5a24e19d8f"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="672" y="80" width="100" height="20" uuid="78dd5dc8-5076-4e7c-94d2-c040dc40adf6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{WORK_YMD}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="571" y="100" width="92" height="20" uuid="6666369d-7b73-4120-92c2-2fd560a6d9f3"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("OUTPUT_USER")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="571" y="120" width="92" height="20" uuid="c2eec67f-f0a0-4781-a895-7c410b2b1bec"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("PAGE")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="672" y="120" width="20" height="20" uuid="a1b801a9-9366-4cd9-9708-245ced29817c"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="672" y="100" width="100" height="20" uuid="97ab5dfa-4a05-4c1e-ae19-f20b1e649143"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{USER_NM}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report" isBlankWhenNull="true">
+					<reportElement x="692" y="120" width="80" height="20" uuid="63c0956f-7fc8-4670-bba0-3e62d812c485"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" / " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="665" y="120" width="5" height="20" uuid="eaa3b4ea-3f93-4482-9589-d1ca7912b8d6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="670" y="20" width="52" height="20" uuid="e8309e10-5fae-4107-9419-5a95384abede"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("INST_USER")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="724" y="20" width="52" height="20" uuid="30b70781-6dc9-42b9-b77f-4e8fc43c60d5"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("WORK_USER")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="465" y="150" width="60" height="40" uuid="fe55ec42-2ac7-4de8-a9a2-f3c78965030a"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("DIST_EXPIRY_YMD")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="655" y="169" width="40" height="20" uuid="bd11f6a4-0820-4ce2-813a-60d6a090fe6a"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("TOT_QTY")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="405" y="150" width="60" height="40" uuid="06275057-629d-4fd5-83b3-aec8fdd73591"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("MAKE_YMD")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="205" y="150" width="60" height="40" uuid="89d8e5a5-fcc1-46e5-a5f0-d16dbb6d0bf2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("ITEM_CD")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="625" y="150" width="30" height="40" uuid="bfcfde23-0347-487d-a5eb-5488df6f446f"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("PKQTY")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="525" y="150" width="60" height="40" uuid="15408fe6-6af2-47d5-ad59-6ff9d0c83f23"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("MAKE_LOT")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="735" y="169" width="40" height="20" uuid="b1d54aee-496a-4072-9eac-1bd95f032e5c"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("EA_QTY")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="365" y="149" width="40" height="40" uuid="900bb52b-17cb-4da9-8f5c-3ecf6f9cc96a"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("ITEM_ST_NM")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="655" y="150" width="120" height="20" uuid="05dddad3-b29d-4df0-b36b-9a0a3da136eb"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("INST_QTY")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="585" y="150" width="40" height="40" uuid="f78ea51d-4050-4301-81b5-4ece06dd4464"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("UOM")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="20" y="150" width="60" height="40" uuid="5ddf58ef-2a35-4fb1-acbb-f5e929d79d02"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("FR_LOC_CD")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="265" y="150" width="100" height="40" uuid="f803dd59-2a4f-4458-9882-2a535fa00a50"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("ITEM_NM")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="695" y="169" width="40" height="20" uuid="e6a98db4-abd3-4074-b3f5-7539caf5a814"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("BOX_QTY")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="80" y="150" width="60" height="40" uuid="d3ef3f1c-b319-416b-abdb-c848d6fa7429"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("TO_LOC_CD")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="140" y="150" width="65" height="40" uuid="97064f9f-a0b7-4988-b44d-1c41d2783cd6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("TO_PLT_ID")]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<elementGroup>
+				<line>
+					<reportElement x="585" y="0" width="1" height="20" uuid="b10a470b-910e-4c88-98d4-313eebd5c9d7"/>
+				</line>
+				<line>
+					<reportElement x="695" y="0" width="1" height="20" uuid="95d7cb20-b76c-4a5c-a476-4ffd4a8d9d6c"/>
+				</line>
+				<line>
+					<reportElement x="465" y="0" width="1" height="20" uuid="d4568d61-1d29-4e09-a163-48177e399592"/>
+				</line>
+				<line>
+					<reportElement x="265" y="0" width="1" height="20" uuid="a74be05a-4195-4ddd-8819-4e20906cd03a"/>
+				</line>
+				<line>
+					<reportElement x="20" y="19" width="755" height="1" uuid="aac757c6-e80f-4e82-b6b2-c5b923a36bf5"/>
+				</line>
+				<line>
+					<reportElement x="775" y="0" width="1" height="20" uuid="7edbe1eb-ddb3-41f0-9133-9bc8ce4a340f"/>
+				</line>
+				<line>
+					<reportElement x="525" y="0" width="1" height="20" uuid="54f56127-8890-4b0d-a5bb-683c2250adcd"/>
+				</line>
+				<line>
+					<reportElement x="625" y="0" width="1" height="20" uuid="5ff4e3f2-585c-48cc-bd02-e751e3ba466b"/>
+				</line>
+				<line>
+					<reportElement x="735" y="0" width="1" height="20" uuid="ced604b3-4099-4dc4-a19e-71d18246c94a"/>
+				</line>
+				<line>
+					<reportElement x="655" y="0" width="1" height="20" uuid="76dc8896-c9ca-4159-92f4-a7194a34ed6a"/>
+				</line>
+				<line>
+					<reportElement x="405" y="0" width="1" height="20" uuid="248986c6-f855-414f-9571-152372c6a17e"/>
+				</line>
+				<line>
+					<reportElement x="205" y="0" width="1" height="20" uuid="3ec29f4d-63a6-4c58-9da4-9cb844ec1218"/>
+				</line>
+				<line>
+					<reportElement x="80" y="0" width="1" height="20" uuid="6ef6bd04-9988-47f2-a236-2f54a42f4f55"/>
+				</line>
+				<line>
+					<reportElement x="140" y="0" width="1" height="20" uuid="38c6026d-9bd2-40ce-8c42-bd831610fcbc"/>
+				</line>
+				<line>
+					<reportElement x="20" y="0" width="1" height="20" uuid="877adccc-e40a-4870-956f-d4fb6153bf12"/>
+				</line>
+				<line>
+					<reportElement x="365" y="0" width="1" height="20" uuid="c38df287-e719-4120-a710-832fed8ee181"/>
+				</line>
+			</elementGroup>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="20" y="0" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a1f60225-486c-48eb-ab32-145a00fbce1a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FR_LOC_CD}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="696" y="0" width="35" height="20" uuid="0e4198a5-828b-4491-b8ba-78b0a8eba231"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INST_BOX_QTY}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="736" y="0" width="35" height="20" uuid="3ddc55ed-ea82-4df4-8e2f-9def741b83ab"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INST_EA_QTY}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="205" y="0" width="60" height="20" uuid="97b05439-b19f-4642-830a-6aedb9c85183"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEM_CD}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="625" y="0" width="30" height="20" uuid="a3685c84-7d4e-4ef3-a164-bb5db42f4257"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PKQTY}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="465" y="0" width="60" height="20" uuid="a296d38b-3a78-498c-9063-9ec4f49276a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DIST_EXPIRY_YMD}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="655" y="0" width="35" height="20" uuid="5be4a474-20c4-45c0-b9e9-7d76189231e9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INST_TOT_QTY}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="525" y="0" width="60" height="20" uuid="df9d1b5d-dcaf-4ffd-b146-3c149334f002"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAKE_LOT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="405" y="0" width="60" height="20" uuid="355c245e-9c2c-4948-80f1-eee66fd9c308"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAKE_YMD}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="365" y="0" width="40" height="20" uuid="c0417bf3-5126-4119-8dca-ee77622a98bf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEM_ST_NM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="585" y="0" width="40" height="20" uuid="f3283871-228a-4c2e-9e4d-29f9c4cd6d3a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UOM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="0" width="95" height="20" uuid="0feaf470-f962-4aff-8d43-a1175b50a66b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEM_NM}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="80" y="0" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="3e2bb513-ab4a-4676-85c0-849b313e4ce0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TO_LOC_CD}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="140" y="0" width="65" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="f95403c1-c684-470b-8626-1abbffcc3a64"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TO_PLT_ID}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20"/>
+	</pageFooter>
+</jasperReport>

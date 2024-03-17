@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="itemLabelReport" language="groovy" pageWidth="215" pageHeight="215" columnWidth="215" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="bfaf14d8-425f-4eb9-8485-fdba8c7f0bae">
+	<property name="ireport.zoom" value="2.5937424601000036"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ITEMCD" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT ITEM.ITEM_CD        AS ITEMCD
+     , ITEM.ITEM_NM        AS ITEMNM
+     , UOM.CONV_UOM_QTY    AS PKQTY
+  FROM TB_MS_ITEM_UOM_M UOM
+     , TB_MS_ITEM_M ITEM
+ WHERE UOM.COMPANY_CD = ITEM.COMPANY_CD
+   AND UOM.CLIENT_CD  = ITEM.CLIENT_CD
+   AND UOM.ITEM_CD    = ITEM.ITEM_CD
+   AND ITEM.ITEM_CD   = $P{ITEMCD}]]>
+	</queryString>
+	<field name="ITEMCD" class="java.lang.String"/>
+	<field name="ITEMNM" class="java.lang.String"/>
+	<field name="PKQTY" class="java.math.BigDecimal"/>
+	<detail>
+		<band height="215" splitType="Stretch">
+			<componentElement>
+				<reportElement x="8" y="40" width="200" height="28" uuid="918746ab-c4a5-46bc-a568-0a06c964cc22"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{ITEMCD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="8" y="64" width="200" height="28" uuid="73628e80-7d4b-422d-ad14-efd71752ed73"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{ITEMCD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<staticText>
+				<reportElement x="8" y="146" width="60" height="20" uuid="82dea5c4-556a-4c43-ae37-2d5a153afab1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[제품명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="166" width="60" height="20" uuid="6665b598-3c66-462d-b68a-e0b1b91930f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[입수]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="8" y="105" width="200" height="22" uuid="c4f65c41-e20f-419d-859e-b58c5edbaf3c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEMCD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="146" width="140" height="20" uuid="bb11b084-5c7d-429f-92b1-3e0dbb3ff0dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEMNM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="166" width="140" height="20" uuid="cb556b8a-ce56-4a84-8d47-36e7c49c1874"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PKQTY}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="8" y="88" width="200" height="28" uuid="fe087ede-5177-4e77-aeab-de827587d459"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{ITEMCD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="8" y="50" width="200" height="28" uuid="146a4ce5-9c5a-4c03-a326-a51b98cd3a38"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{ITEMCD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<componentElement>
+				<reportElement x="8" y="74" width="200" height="28" uuid="759fbffa-4d2e-4c95-b8f5-91490ceecb64"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{ITEMCD}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

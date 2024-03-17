@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ibExamItemLabel_10_Report" language="groovy" pageWidth="283" pageHeight="283" orientation="Landscape" columnWidth="283" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="bfaf14d8-425f-4eb9-8485-fdba8c7f0bae">
+	<property name="ireport.zoom" value="1.1000000000000012"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="43"/>
+	<parameter name="imgName" class="java.lang.String">
+		<parameterDescription><![CDATA[imgName]]></parameterDescription>
+	</parameter>
+	<parameter name="bacodeCd" class="java.lang.String">
+		<parameterDescription><![CDATA[bacodeCd]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="imgName" class="java.lang.String">
+		<fieldDescription><![CDATA[imgName]]></fieldDescription>
+	</field>
+	<field name="bacodeCd" class="java.lang.String">
+		<fieldDescription><![CDATA[bacodeCd]]></fieldDescription>
+	</field>
+	<background>
+		<band height="283" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="283" height="283" uuid="33752134-4d56-4a2b-b7c4-e8ff14f76775"/>
+				<imageExpression><![CDATA[$F{imgName}]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<detail>
+		<band height="283" splitType="Stretch">
+			<componentElement>
+				<reportElement x="133" y="258" width="150" height="25" uuid="69e2aa0c-1409-48fc-868e-8f3596c6e678"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="true" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{bacodeCd}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

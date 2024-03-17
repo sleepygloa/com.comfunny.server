@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sys.repository.AuthDao">
+
+
+    <select id="selectAuthGrpList" resultType="HMap" >
+        SELECT /* [AuthDao.xml][selectAuthGrpList][권한그룹 조회][Kim Seon ho][2023-05-23] */
+               AUTH_GRP_SEQ
+             , AUTH_GRP_NM
+             , AUTH_GRP_DESC
+        FROM tb_sy_auth_grp
+        WHERE DEL_YN ='N'
+        ORDER BY AUTH_GRP_SEQ
+    </select>
+
+
+    <select id="selectNonAuthUserList" resultType="HMap" parameterType="HMap">
+        SELECT /* [AuthDao.xml][selectNonAuthUserList][권한그룹 조회][Kim Seon ho][2023-05-23] */
+               USR.USER_ID
+             , USR.USER_NM
+          FROM user  AS USR
+         WHERE USR.USER_ID NOT IN (SELECT USER_ID FROM tb_sy_auth_user)
+      ORDER BY USR.USER_ID
+    </select>
+    <select id="selectAuthUserList" resultType="HMap" parameterType="HMap">
+        SELECT /* [AuthDao.xml][selectAuthUserList][권한그룹 조회][Kim Seon ho][2023-05-23] */
+            AUTHUSR.AUTH_GRP_SEQ
+             , AUTHUSR.USER_ID
+             , USR.USER_NM
+             , AUTHUSR.DEL_YN
+        FROM tb_sy_auth_user  AS AUTHUSR
+                 JOIN user  AS USR
+                      ON AUTHUSR.USER_ID = USR.USER_ID
+        WHERE AUTHUSR.DEL_YN ='N'
+          AND AUTHUSR.AUTH_GRP_SEQ = #{authGrpSeq}
+        ORDER BY AUTHUSR.USER_ID
+    </select>
+
+    <select id="selectAuthMenuList" resultType="HMap" parameterType="HMap">
+        SELECT /* [AuthDao.xml][selectAuthMenuList][권한그룹 조회][Kim Seon ho][2023-05-23] */
+               AUTH_GRP_SEQ
+             , MENU_SEQ
+             , AUTH_CD
+             , AUTH_YN
+        FROM tb_sy_auth_menu
+        WHERE DEL_YN ='N'
+        ORDER BY MENU_SEQ, AUTH_CD
+    </select>
+</mapper>

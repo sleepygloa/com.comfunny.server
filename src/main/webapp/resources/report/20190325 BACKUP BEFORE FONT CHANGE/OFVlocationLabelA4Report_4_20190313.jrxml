@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OFVlocationLabelA4Report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="bfaf14d8-425f-4eb9-8485-fdba8c7f0bae">
+	<property name="ireport.zoom" value="0.8264462809917396"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ZONE_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[ZONE_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="LIN_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[LIN_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="ROW_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[ROW_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P00_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P00_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P00_LOC_CD_BARCODE" class="java.lang.String">
+		<parameterDescription><![CDATA[P00_LOC_CD_BARCODE]]></parameterDescription>
+	</parameter>
+	<parameter name="P00_LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P00_LEV_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P0L_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P0L_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P0L_LOC_CD_BARCODE" class="java.lang.String">
+		<parameterDescription><![CDATA[P0L_LOC_CD_BARCODE]]></parameterDescription>
+	</parameter>
+	<parameter name="P0L_LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P0L_LEV_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P0R_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P0R_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P0R_LOC_CD_BARCODE" class="java.lang.String">
+		<parameterDescription><![CDATA[P0R_LOC_CD_BARCODE]]></parameterDescription>
+	</parameter>
+	<parameter name="P0R_LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P0R_LEV_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P1L_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P1L_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P1L_LOC_CD_BARCODE" class="java.lang.String">
+		<parameterDescription><![CDATA[P1L_LOC_CD_BARCODE]]></parameterDescription>
+	</parameter>
+	<parameter name="P1L_LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P1L_LEV_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P1R_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P1R_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P1R_LOC_CD_BARCODE" class="java.lang.String">
+		<parameterDescription><![CDATA[P1R_LOC_CD_BARCODE]]></parameterDescription>
+	</parameter>
+	<parameter name="P1R_LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P1R_LEV_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P2L_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P2L_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P2L_LOC_CD_BARCODE" class="java.lang.String">
+		<parameterDescription><![CDATA[P2L_LOC_CD_BARCODE]]></parameterDescription>
+	</parameter>
+	<parameter name="P2L_LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P2L_LEV_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P2R_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P2R_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P2R_LOC_CD_BARCODE" class="java.lang.String">
+		<parameterDescription><![CDATA[P2R_LOC_CD_BARCODE]]></parameterDescription>
+	</parameter>
+	<parameter name="P2R_LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P2R_LEV_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P3L_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P3L_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P3L_LOC_CD_BARCODE" class="java.lang.String">
+		<parameterDescription><![CDATA[P3L_LOC_CD_BARCODE]]></parameterDescription>
+	</parameter>
+	<parameter name="P3L_LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P3L_LEV_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P3R_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P3R_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P3R_LOC_CD_BARCODE" class="java.lang.String">
+		<parameterDescription><![CDATA[P3R_LOC_CD_BARCODE]]></parameterDescription>
+	</parameter>
+	<parameter name="P3R_LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P3R_LEV_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P4L_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P4L_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P4L_LOC_CD_BARCODE" class="java.lang.String">
+		<parameterDescription><![CDATA[P4L_LOC_CD_BARCODE]]></parameterDescription>
+	</parameter>
+	<parameter name="P4L_LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P4L_LEV_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P4R_LOC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P4R_LOC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="P4R_LOC_CD_BARCODE" class="java.lang.String">
+		<parameterDescription><![CDATA[P4R_LOC_CD_BARCODE]]></parameterDescription>
+	</parameter>
+	<parameter name="P4R_LEV_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[P4R_LEV_CD]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="ZONE_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[ZONE_CD]]></fieldDescription>
+	</field>
+	<field name="LIN_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[LIN_CD]]></fieldDescription>
+	</field>
+	<field name="ROW_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[ROW_CD]]></fieldDescription>
+	</field>
+	<field name="P00_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P00_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="P00_LOC_CD_BARCODE" class="java.lang.String">
+		<fieldDescription><![CDATA[P00_LOC_CD_BARCODE]]></fieldDescription>
+	</field>
+	<field name="P00_LEV_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P00_LEV_CD]]></fieldDescription>
+	</field>
+	<field name="P0L_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P0L_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="P0L_LOC_CD_BARCODE" class="java.lang.String">
+		<fieldDescription><![CDATA[P0L_LOC_CD_BARCODE]]></fieldDescription>
+	</field>
+	<field name="P0L_LEV_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P0L_LEV_CD]]></fieldDescription>
+	</field>
+	<field name="P0R_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P0R_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="P0R_LOC_CD_BARCODE" class="java.lang.String">
+		<fieldDescription><![CDATA[P0R_LOC_CD_BARCODE]]></fieldDescription>
+	</field>
+	<field name="P0R_LEV_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P0R_LEV_CD]]></fieldDescription>
+	</field>
+	<field name="P1L_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P1L_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="P1L_LOC_CD_BARCODE" class="java.lang.String">
+		<fieldDescription><![CDATA[P1L_LOC_CD_BARCODE]]></fieldDescription>
+	</field>
+	<field name="P1L_LEV_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P1L_LEV_CD]]></fieldDescription>
+	</field>
+	<field name="P1R_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P1R_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="P1R_LOC_CD_BARCODE" class="java.lang.String">
+		<fieldDescription><![CDATA[P1R_LOC_CD_BARCODE]]></fieldDescription>
+	</field>
+	<field name="P1R_LEV_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P1R_LEV_CD]]></fieldDescription>
+	</field>
+	<field name="P2L_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P2L_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="P2L_LOC_CD_BARCODE" class="java.lang.String">
+		<fieldDescription><![CDATA[P2L_LOC_CD_BARCODE]]></fieldDescription>
+	</field>
+	<field name="P2L_LEV_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P2L_LEV_CD]]></fieldDescription>
+	</field>
+	<field name="P2R_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P2R_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="P2R_LOC_CD_BARCODE" class="java.lang.String">
+		<fieldDescription><![CDATA[P2R_LOC_CD_BARCODE]]></fieldDescription>
+	</field>
+	<field name="P2R_LEV_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P2R_LEV_CD]]></fieldDescription>
+	</field>
+	<field name="P3L_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P3L_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="P3L_LOC_CD_BARCODE" class="java.lang.String">
+		<fieldDescription><![CDATA[P3L_LOC_CD_BARCODE]]></fieldDescription>
+	</field>
+	<field name="P3L_LEV_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P3L_LEV_CD]]></fieldDescription>
+	</field>
+	<field name="P3R_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P3R_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="P3R_LOC_CD_BARCODE" class="java.lang.String">
+		<fieldDescription><![CDATA[P3R_LOC_CD_BARCODE]]></fieldDescription>
+	</field>
+	<field name="P3R_LEV_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P3R_LEV_CD]]></fieldDescription>
+	</field>
+	<field name="P4L_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P4L_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="P4L_LOC_CD_BARCODE" class="java.lang.String">
+		<fieldDescription><![CDATA[P4L_LOC_CD_BARCODE]]></fieldDescription>
+	</field>
+	<field name="P4L_LEV_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P4L_LEV_CD]]></fieldDescription>
+	</field>
+	<field name="P4R_LOC_CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P4R_LOC_CD]]></fieldDescription>
+	</field>
+	<field name="P4R_LOC_CD_BARCODE" class="java.lang.String">
+		<fieldDescription><![CDATA[P4R_LOC_CD_BARCODE]]></fieldDescription>
+	</field>
+	<field name="P4R_LEV _CD" class="java.lang.String">
+		<fieldDescription><![CDATA[P4R_LEV _CD]]></fieldDescription>
+	</field>
+	<group name="ZONE_CD" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{ZONE_CD}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<group name="LIN_CD" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{LIN_CD}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="ROW_CD" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{ROW_CD}]]></groupExpression>
+		<groupHeader>
+			<band height="842">
+				<componentElement>
+					<reportElement x="322" y="670" width="282" height="48" uuid="0e113eb9-76dd-47b2-9a36-6ff1dc82c339">
+						<printWhenExpression><![CDATA[($F{P0R_LOC_CD} != null ? true : ($F{P00_LOC_CD} != null ? true : false))]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[($F{P0R_LOC_CD} != null ? $F{P0R_LOC_CD_BARCODE} : ($F{P00_LOC_CD} != null ? $F{P00_LOC_CD_BARCODE} : ''))]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="35" y="28" width="282" height="48" uuid="9642b1cb-59e5-48d6-9e88-890880fad77e">
+						<printWhenExpression><![CDATA[($F{P4L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P4L_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+					<reportElement x="339" y="108" width="33" height="61" uuid="0b316827-61bb-4163-8e21-188bb2246bb5">
+						<printWhenExpression><![CDATA[($F{P4R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["/L-L-L.png"]]></imageExpression>
+				</image>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+					<reportElement x="223" y="588" width="33" height="61" uuid="2e7f2d66-f3cc-490e-85ce-9fc71aa5b905">
+						<printWhenExpression><![CDATA[($F{P1L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["/R-R-R.png"]]></imageExpression>
+				</image>
+				<componentElement>
+					<reportElement x="322" y="378" width="282" height="48" uuid="13387a5d-615c-4ecf-9ce9-5706f2ff1913">
+						<printWhenExpression><![CDATA[($F{P2R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P2R_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+					<reportElement x="339" y="588" width="33" height="61" uuid="18cec200-2635-470d-9c99-c0028eb2c736">
+						<printWhenExpression><![CDATA[($F{P1R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["/L-L-L.png"]]></imageExpression>
+				</image>
+				<componentElement>
+					<reportElement x="45" y="668" width="282" height="48" uuid="4609d408-0fb8-4f39-88df-0abbb1987951">
+						<printWhenExpression><![CDATA[($F{P0L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P0L_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<textField>
+					<reportElement x="50" y="748" width="183" height="61" uuid="e3b9e766-c102-46c8-a88f-c88a33102600">
+						<printWhenExpression><![CDATA[($F{P0L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="36" isBold="true" pdfFontName="Times-Bold" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{P0L_LOC_CD}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="371" y="108" width="183" height="61" uuid="66b48ecc-cd77-4526-aecd-b045f3500fd3">
+						<printWhenExpression><![CDATA[($F{P4R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="36" isBold="true" pdfFontName="Times-Bold" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{P4R_LOC_CD}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="40" y="428" width="183" height="61" uuid="9d02df81-d44a-44d2-a2a6-3c2940fbdcc6">
+						<printWhenExpression><![CDATA[($F{P2L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="36" isBold="true" pdfFontName="Times-Bold" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{P2L_LOC_CD}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="322" y="538" width="282" height="48" uuid="b921f0ec-f0a4-4799-846b-fb16450986d4">
+						<printWhenExpression><![CDATA[($F{P1R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P1R_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="35" y="348" width="282" height="48" uuid="0c44ad10-5113-41a4-aa32-40be4e33dbc3">
+						<printWhenExpression><![CDATA[($F{P2L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P2L_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+					<reportElement x="339" y="428" width="33" height="61" uuid="09d38551-681e-41d7-be06-5f6057a68d1b">
+						<printWhenExpression><![CDATA[($F{P2R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["/L-L-L.png"]]></imageExpression>
+				</image>
+				<componentElement>
+					<reportElement x="35" y="538" width="282" height="48" uuid="3627ba73-4e42-4c50-aa69-b3fa7f648b5b">
+						<printWhenExpression><![CDATA[($F{P1L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P1L_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="35" y="218" width="282" height="48" uuid="c12b77e3-ea47-4ccd-8e6c-c1ea4fab834c">
+						<printWhenExpression><![CDATA[($F{P3L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P3L_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+					<reportElement x="340" y="748" width="33" height="61" uuid="53451968-a02f-491a-968b-66ec5fb196e6">
+						<printWhenExpression><![CDATA[($F{P0R_LOC_CD} != null ? true : ($F{P00_LOC_CD} != null ? true : false))]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["/L-L-L.png"]]></imageExpression>
+				</image>
+				<componentElement>
+					<reportElement x="45" y="698" width="282" height="48" uuid="a88ee047-e02d-471f-8e70-ff0930710f23">
+						<printWhenExpression><![CDATA[($F{P0L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P0L_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="35" y="378" width="282" height="48" uuid="c2b1057c-5518-44c4-91c5-6e1b9b3d8f05">
+						<printWhenExpression><![CDATA[($F{P2L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P2L_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+					<reportElement x="233" y="748" width="33" height="61" uuid="15ba56cd-d991-453d-ab1c-2aef80e6c337">
+						<printWhenExpression><![CDATA[($F{P0L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["/R-R-R.png"]]></imageExpression>
+				</image>
+				<componentElement>
+					<reportElement x="35" y="188" width="282" height="48" uuid="e27191b9-340a-4b23-86c3-537049c307f9">
+						<printWhenExpression><![CDATA[($F{P3L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P3L_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<textField>
+					<reportElement x="371" y="268" width="183" height="61" uuid="27ce7c2c-ef87-45be-819c-618c1eecbbd3">
+						<printWhenExpression><![CDATA[($F{P3R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="36" isBold="true" pdfFontName="Times-Bold" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{P3R_LOC_CD}]]></textFieldExpression>
+				</textField>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+					<reportElement x="223" y="108" width="33" height="61" uuid="aa4bbfa8-2ab3-404c-9bf1-46d080c05e83">
+						<printWhenExpression><![CDATA[($F{P4L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["/R-R-R.png"]]></imageExpression>
+				</image>
+				<componentElement>
+					<reportElement x="322" y="218" width="282" height="48" uuid="5e866d57-7c98-4499-9dc1-37b61624fe83">
+						<printWhenExpression><![CDATA[($F{P3R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P3R_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<textField>
+					<reportElement x="40" y="108" width="183" height="61" uuid="9b3698ba-0d96-47b5-a71c-0bb0749be997">
+						<printWhenExpression><![CDATA[($F{P4L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="36" isBold="true" pdfFontName="Times-Bold" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{P4L_LOC_CD}]]></textFieldExpression>
+				</textField>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+					<reportElement x="223" y="428" width="33" height="61" uuid="f070b3e6-d32e-4d7e-a43e-826ad372967f">
+						<printWhenExpression><![CDATA[($F{P2L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["/R-R-R.png"]]></imageExpression>
+				</image>
+				<componentElement>
+					<reportElement x="322" y="188" width="282" height="48" uuid="5209c30e-888a-4e7f-a6e1-a647a31ee2d8">
+						<printWhenExpression><![CDATA[($F{P3R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P3R_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="35" y="508" width="282" height="48" uuid="227c6d8f-2589-48be-8920-14a8b3ded022">
+						<printWhenExpression><![CDATA[($F{P1L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P1L_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="35" y="58" width="282" height="48" uuid="1fb3f26a-e30a-4cf9-aca1-8cbdc7844f12">
+						<printWhenExpression><![CDATA[($F{P4L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P4L_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="322" y="698" width="282" height="48" uuid="69046727-0ec2-42ed-826c-c25c246c15cf">
+						<printWhenExpression><![CDATA[($F{P0R_LOC_CD} != null ? true : ($F{P00_LOC_CD} != null ? true : false))]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[($F{P0R_LOC_CD} != null ? $F{P0R_LOC_CD_BARCODE} : ($F{P00_LOC_CD} != null ? $F{P00_LOC_CD_BARCODE} : ''))]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="322" y="348" width="282" height="48" uuid="1ae523e0-d611-4c4f-8e85-7be187aa062a">
+						<printWhenExpression><![CDATA[($F{P2R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P2R_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+					<reportElement x="339" y="268" width="33" height="61" uuid="6ca577d8-32ff-485b-a33b-2ac301e479e8">
+						<printWhenExpression><![CDATA[($F{P3R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["/L-L-L.png"]]></imageExpression>
+				</image>
+				<componentElement>
+					<reportElement x="322" y="58" width="282" height="48" uuid="db7b779b-0254-4bb0-ab4a-da9e4b633714">
+						<printWhenExpression><![CDATA[($F{P4R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P4R_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<textField>
+					<reportElement x="40" y="268" width="183" height="61" uuid="575d5e5c-b7cd-4417-b163-67dd3d06dde2">
+						<printWhenExpression><![CDATA[($F{P3L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="36" isBold="true" pdfFontName="Times-Bold" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{P3L_LOC_CD}]]></textFieldExpression>
+				</textField>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+					<reportElement x="223" y="268" width="33" height="61" uuid="46c7fbf4-c22a-4158-a3ed-88ecaca713d4">
+						<printWhenExpression><![CDATA[($F{P3L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["/R-R-R.png"]]></imageExpression>
+				</image>
+				<textField>
+					<reportElement x="372" y="748" width="183" height="61" uuid="0a62f146-a3df-4d04-a982-8c7b8cb8a620">
+						<printWhenExpression><![CDATA[($F{P0R_LOC_CD} != null ? true : ($F{P00_LOC_CD} != null ? true : false))]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="36" isBold="true" pdfFontName="Times-Bold" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{P0R_LOC_CD} != null ? $F{P0R_LOC_CD} : ($F{P00_LOC_CD} != null ? $F{P00_LOC_CD} : ''))]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="371" y="588" width="183" height="61" uuid="75c51224-07f6-4753-91cb-cba817c92e6f">
+						<printWhenExpression><![CDATA[($F{P1R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="36" isBold="true" pdfFontName="Times-Bold" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{P1R_LOC_CD}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="322" y="28" width="282" height="48" uuid="1078d33c-12fe-4e0b-894a-e8bfe19e10d4">
+						<printWhenExpression><![CDATA[($F{P4R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P4R_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="322" y="508" width="282" height="48" uuid="ae397bda-b423-451a-aa0e-a985469240f3">
+						<printWhenExpression><![CDATA[($F{P1R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P1R_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<textField>
+					<reportElement x="371" y="428" width="183" height="61" uuid="60ec0158-d9a0-4efd-a8a4-ae92d7b1e29b">
+						<printWhenExpression><![CDATA[($F{P2R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="36" isBold="true" pdfFontName="Times-Bold" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{P2R_LOC_CD}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="322" y="218" width="282" height="48" uuid="da20dad2-6462-4c0e-a437-87c4c2da3fd2">
+						<printWhenExpression><![CDATA[($F{P3R_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="0">
+						<jr:codeExpression><![CDATA[$F{P3R_LOC_CD_BARCODE}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<textField>
+					<reportElement x="40" y="588" width="183" height="61" uuid="e6fc7d87-6d39-4629-9547-510ceecef1c3">
+						<printWhenExpression><![CDATA[($F{P1L_LOC_CD} != null ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="36" isBold="true" pdfFontName="Times-Bold" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{P1L_LOC_CD}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+</jasperReport>

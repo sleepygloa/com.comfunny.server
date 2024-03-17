@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sys.repository.UserClientDao">
+
+    <select id="selectUserList" resultType="HMap" >
+        SELECT
+            USER_ID  VALUE
+             , USER_NM  NAME
+        FROM user
+        WHERE 1=1
+          AND BIZ_CD = #{s_bizCd}
+    </select>
+
+    <select id="selectClientList" resultType="HMap" >
+        SELECT
+            CLIENT_CD  VALUE
+             , CLIENT_NM  NAME
+        FROM tb_ms_client
+        WHERE 1=1
+          AND BIZ_CD = #{s_bizCd}
+    </select>
+
+    <select id="selectUserClientList" resultType="HMap" >
+      SELECT
+             BIZ_CD
+           , USER_ID
+           , CLIENT_CD
+           , ORDR
+           , RMRK
+           , USE_YN
+           , IN_USER_ID
+           , IN_DT
+           , UP_USER_ID
+           , UP_DT
+       FROM tb_sy_user_client
+      WHERE 1=1
+    </select>
+</mapper>

@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="stManuDistDisAssyListReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="74eabd2c-4279-40bd-adf3-2155dcc14e03">
+	<property name="ireport.zoom" value="1.239669421487619"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="DIST_MANF_NO" class="java.lang.String">
+		<parameterDescription><![CDATA[DIST_MANF_NO]]></parameterDescription>
+	</parameter>
+	<parameter name="COMPANY_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[COMPANY_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="CLIENT_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[CLIENT_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="DC_CD" class="java.lang.String">
+		<parameterDescription><![CDATA[DC_CD]]></parameterDescription>
+	</parameter>
+	<parameter name="USER_ID" class="java.lang.String"/>
+	<parameter name="USER_NM" class="java.lang.String">
+		<parameterDescription><![CDATA[USER_NM]]></parameterDescription>
+	</parameter>
+	<parameter name="WORK_YMD" class="java.lang.String">
+		<parameterDescription><![CDATA[WORK_YMD]]></parameterDescription>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="labels" class="java.lang.Object"/>
+	<parameter name="subReport" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[$P{SUBREPORT_DIR} + "stManuDistDisAssyListReport_sub1.jasper"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subReport2" class="net.sf.jasperreports.engine.JasperReport">
+		<defaultValueExpression><![CDATA[$P{SUBREPORT_DIR} + "stManuDistDisAssyListReport_sub2.jasper"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LANG_CD" class="java.lang.String"/>
+	<parameter name="DIST_MANF_GBN_CD" class="java.lang.String"/>
+	<parameter name="IOB_GBN_CD" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT /* [DistributionManufactureService.query][listStManuDist][유통가공처리 세트제품목록][Kim Seon Ho][2019-01-08] */
+                M.COMPANY_CD
+            ,   M.DC_CD
+            ,   DC.DC_NM
+            ,   M.CLIENT_CD
+            ,   CL.CLIENT_NM
+            ,   M.DIST_MANF_NO
+            ,   $P{USER_NM}  AS USER_NM
+            ,   TO_CHAR(TO_DATE(M.WORK_YMD, 'YYYYMMDD'), 'YYYY-MM-DD')   AS WORK_YMD
+            ,   M.DIST_MANF_GBN_CD
+            ,   D.IOB_GBN_CD
+            ,   TO_CHAR(D.WORK_DT,'YYYY-MM-DD HH24:MI:SS')       AS WORK_DT
+        FROM    TB_ST_DIST_MANF_M M
+            ,   TB_ST_DIST_MANF_D D
+            ,   TB_ST_DIST_MANF_W W
+            ,   TB_MS_CLIENT_M CL
+            ,   TB_MS_DC_M DC
+       WHERE    M.COMPANY_CD            = D.COMPANY_CD
+         AND    M.DIST_MANF_NO          = D.DIST_MANF_NO
+         AND    M.COMPANY_CD            = W.COMPANY_CD(+)
+         AND    M.DIST_MANF_NO          = W.DIST_MANF_NO(+)
+         AND    D.DIST_MANF_DETAIL_SEQ  = W.DIST_MANF_DETAIL_SEQ(+)
+         AND    M.COMPANY_CD            = CL.COMPANY_CD
+         AND    M.CLIENT_CD             = CL.CLIENT_CD
+         AND    M.COMPANY_CD            = DC.COMPANY_CD
+         AND    M.DC_CD                 = DC.DC_CD
+         AND    M.USE_YN                = 'Y'
+         AND    D.USE_YN                = 'Y'
+         AND    W.USE_YN(+)             = 'Y'
+         AND    M.COMPANY_CD            = $P{COMPANY_CD}
+         AND    M.CLIENT_CD             = $P{CLIENT_CD}
+         AND    M.DC_CD                 = $P{DC_CD}
+         AND    M.DIST_MANF_GBN_CD      = $P{DIST_MANF_GBN_CD}
+         AND    D.IOB_GBN_CD            = $P{IOB_GBN_CD}
+         AND    M.DIST_MANF_NO          =$P{DIST_MANF_NO}
+    ORDER BY M.DIST_MANF_NO, M.WORK_YMD, W.DIST_MANF_INST_NO]]>
+	</queryString>
+	<field name="COMPANY_CD" class="java.lang.String"/>
+	<field name="DC_CD" class="java.lang.String"/>
+	<field name="DC_NM" class="java.lang.String"/>
+	<field name="CLIENT_CD" class="java.lang.String"/>
+	<field name="CLIENT_NM" class="java.lang.String"/>
+	<field name="DIST_MANF_NO" class="java.lang.String"/>
+	<field name="USER_NM" class="java.lang.String"/>
+	<field name="WORK_YMD" class="java.lang.String"/>
+	<field name="DIST_MANF_GBN_CD" class="java.lang.String"/>
+	<field name="IOB_GBN_CD" class="java.lang.String"/>
+	<field name="WORK_DT" class="java.lang.String"/>
+	<group name="distManfNoGrp" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{DIST_MANF_NO}]]></groupExpression>
+		<groupHeader>
+			<band height="160">
+				<elementGroup/>
+				<line>
+					<reportElement x="666" y="21" width="1" height="51" uuid="adaa67a1-80da-4773-b1b9-22d5a5a4db66"/>
+				</line>
+				<line>
+					<reportElement x="666" y="71" width="111" height="1" uuid="43c599be-ed07-48e1-9a22-504b5872ae63"/>
+				</line>
+				<line>
+					<reportElement x="721" y="21" width="1" height="50" uuid="3bfc82ff-547a-4e5b-af26-0baeaf7c70c8"/>
+				</line>
+				<line>
+					<reportElement x="666" y="20" width="111" height="1" uuid="ebf1e01c-761d-4b9a-9c61-80493dea51d0"/>
+				</line>
+				<line>
+					<reportElement x="666" y="39" width="111" height="1" uuid="05dda781-bdd9-415a-aa9f-429098260284"/>
+				</line>
+				<line>
+					<reportElement x="776" y="21" width="1" height="50" uuid="84f86d3d-cc4b-4627-bb9b-ff246fc5482c"/>
+				</line>
+				<elementGroup/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="135" y="20" width="500" height="29" uuid="428d6bcf-ff56-4041-8e82-2a407e6e6dd3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="20" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("PWMST107E_R2")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="87" y="90" width="5" height="20" uuid="10dc1d96-6534-4de0-8890-b496590d46c7"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="30" y="90" width="58" height="20" uuid="addd042a-3bf5-4305-b6f8-d869a11537d6"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("CLIENT_NM")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="87" y="110" width="5" height="20" uuid="fff7be54-7899-4501-a8a1-e7e7f00c8234"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="93" y="90" width="172" height="20" uuid="abb8d7d4-0b97-4691-813e-5ee779bc3f46"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CLIENT_NM}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="30" y="70" width="58" height="20" uuid="4262904d-2d56-4894-b037-ba7ca8c523a2"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("DC_NM")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="30" y="110" width="58" height="20" uuid="b0f1615c-4ad6-4041-ae53-02466c63e84a"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("DIST_MANF_NO")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="93" y="70" width="170" height="20" uuid="23df582b-22dd-4515-8f52-655cf4798015"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DC_NM}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="87" y="70" width="5" height="20" uuid="41e18dde-9d47-4b77-b964-3a7a04627b3e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="93" y="110" width="90" height="20" uuid="fadeb282-c5fe-43c2-b825-3ba14f8612c1"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DIST_MANF_NO}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="93" y="130" width="90" height="20" uuid="61503a27-9012-4446-b02e-c003d663fc4f"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{WORK_YMD}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="30" y="130" width="58" height="20" uuid="840adec3-f195-4c09-9876-852970726175"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("WORK_YMD")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="87" y="130" width="5" height="20" uuid="ab2ff835-8256-45a2-869e-bc8660d35c03"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="724" y="20" width="52" height="20" uuid="f4698b4f-7b8a-47c6-bb31-cbc12ffbd249"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("WORK_USER")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="670" y="20" width="52" height="20" uuid="7b2b3b4e-00c9-45cc-857c-24d921e0e9c8"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("INST_USER")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="665" y="80" width="5" height="20" uuid="4dd9a2b0-577e-4dbd-9a33-71688690bb6a"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="672" y="80" width="100" height="20" uuid="df30332d-df86-41fd-82ca-f9e55735286a"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{WORK_YMD}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="672" y="100" width="100" height="20" uuid="db2a59b8-c6c3-42f2-a979-09a1ee3396a0"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{USER_NM}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="571" y="120" width="92" height="20" uuid="1dffbc23-9bdf-4ea2-b5c4-6e93ee69a8b6"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("PAGE")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="570" y="80" width="93" height="20" uuid="341b69f5-9609-4080-94c0-cd527a0260d2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("WORK_DT")]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="571" y="100" width="92" height="20" uuid="fe38606e-a51a-4c7e-a436-9f754957e206"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{labels}.get("OUTPUT_USER")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="665" y="100" width="5" height="20" uuid="9a193e56-ac5b-4157-b86e-9eef2694f3b6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField evaluationTime="Report" isBlankWhenNull="true">
+					<reportElement x="692" y="120" width="80" height="20" uuid="add4eccf-8201-4da1-9b53-7958d609030f"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" / " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="665" y="120" width="5" height="20" uuid="8f29d891-872b-4a50-8614-c3c8f84116d6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="672" y="120" width="20" height="20" uuid="fe22f631-030e-43e6-902e-560a37302293"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="100">
+			<subreport isUsingCache="true" runToBottom="false">
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="802" height="100" isPrintWhenDetailOverflows="true" uuid="f4d8dbc0-cd4c-40fc-8e45-408111e1ffbf"/>
+				<subreportParameter name="DIST_MANF_NO">
+					<subreportParameterExpression><![CDATA[$P{DIST_MANF_NO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="labels">
+					<subreportParameterExpression><![CDATA[$P{labels}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LANG_CD">
+					<subreportParameterExpression><![CDATA[$P{LANG_CD}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DC_CD">
+					<subreportParameterExpression><![CDATA[$P{DC_CD}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="COMPANY_CD">
+					<subreportParameterExpression><![CDATA[$P{COMPANY_CD}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CLIENT_CD">
+					<subreportParameterExpression><![CDATA[$P{CLIENT_CD}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="100">
+			<subreport isUsingCache="true" runToBottom="false">
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="802" height="100" isPrintWhenDetailOverflows="true" uuid="3a3dcc21-9586-4e89-890c-de03dd9d6e80"/>
+				<subreportParameter name="DIST_MANF_NO">
+					<subreportParameterExpression><![CDATA[$P{DIST_MANF_NO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="labels">
+					<subreportParameterExpression><![CDATA[$P{labels}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LANG_CD">
+					<subreportParameterExpression><![CDATA[$P{LANG_CD}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DC_CD">
+					<subreportParameterExpression><![CDATA[$P{DC_CD}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="COMPANY_CD">
+					<subreportParameterExpression><![CDATA[$P{COMPANY_CD}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CLIENT_CD">
+					<subreportParameterExpression><![CDATA[$P{CLIENT_CD}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subReport2}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
