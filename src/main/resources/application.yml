@@ -1,0 +1,37 @@
+server:
+  port: 8090
+  servlet:
+    session:
+      timeout: 2592000
+
+#JPA
+spring:
+  main:
+    allow-bean-definition-overriding: true #Spring Boot ??? Bean Autowired ? ???? false
+  # application-real-db ?? ??, .ignore?? ????
+#  profiles:
+#    include: real-db, jwt, log4j
+  session:
+    store-type: jdbc
+  jpa:
+    show-sql: true
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/views/
+#      suffix: .jsp
+  devtools:
+    livereload:
+      enabled: true
+  thymeleaf:
+    cache: false
+
+
+
+
+mybatis:
+  # Vo Path
+  type-aliases-package: com.comfunny.server.proj.com.**.repository
+  # Mapper Path
+  mapper-locations: mapper/proj/**/*.xml
+  #VO & DTO ? Mapper ? ????
+  config-location: classpath:mapper/mybatis-config.xml
