@@ -1,16 +1,13 @@
-buildscript{
+buildscript {
     ext{
-        set("springBootVersion", "2.1.7.RELEASE")
-        set("frontendDir", "$projectDir/frontend")
+        springBootVersion = '2.4.5'
     }
     repositories {
-
         mavenCentral()
-        jcenter()
     }
     dependencies{
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-
+        classpath("io.spring.gradle:dependency-management-plugin:1.1.4")
     }
 }
 
@@ -19,7 +16,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group 'com.comfunny.server'
+group = 'com.comfunny.server'
 version '1.0.1-SNAPSHOT-' + new Date().format("yyyyMMddHHmmss")
 sourceCompatibility = 11
 
@@ -28,12 +25,11 @@ repositories {
 }
 
 dependencies {
-
     //스프링 부트 관련
-    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-devtools'
-    implementation('org.projectlombok:lombok')
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+    implementation 'org.projectlombok:lombok'
+//    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter'
 
     //데이터베이스 관련
     implementation 'com.h2database:h2'
@@ -43,76 +39,22 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-jdbc')
     implementation('org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16')
 
-    //테스트 관련
-    implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
-
     //보안 관련
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 
-//    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
-
-    //세션 관련
-    //compile('org.springframework.session:spring-session-jdbc')
-
-    //JSON
 
     //DTO TO ENTITY, ENTITY TO DTO
     implementation('org.modelmapper:modelmapper:3.1.0')
 
-    //JSP
-//    implementation('javax.servlet:jstl')
-//    implementation("org.apache.tomcat.embed:tomcat-embed-jasper")
-
     implementation('org.apache.poi:poi-ooxml:5.0.0')
 
-    // https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.io
-    implementation group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
-    implementation group: 'com.google.code.gson', name: 'gson', version: '2.10'
-
+//    testImplementation platform('org.junit:junit-bom:5.9.1')
+//    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
-
-def frontendDir = "$projectDir/src/main/frontend"
-
-sourceSets {
-    main {
-        resources { srcDirs = ["$projectDir/src/main/resources"]
-        }
-    }
-}
-
-processResources { dependsOn "copyReactBuildFiles" }
-
-task installReact(type: Exec) {
-    workingDir "$frontendDir"
-    inputs.dir "$frontendDir"
-    group = BasePlugin.BUILD_GROUP
-    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        commandLine "npm.cmd", "audit", "fix"
-        commandLine 'npm.cmd', 'install' }
-    else {
-        commandLine "npm", "audit", "fix" commandLine 'npm', 'install'
-    }
-}
-
-task buildReact(type: Exec) {
-    dependsOn "installReact"
-    workingDir "$frontendDir"
-    inputs.dir "$frontendDir"
-    group = BasePlugin.BUILD_GROUP
-    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        commandLine "npm.cmd", "run-script", "build"
-    } else {
-        commandLine "npm", "run-script", "build"
-    }
-}
-
-task copyReactBuildFiles(type: Copy) {
-    dependsOn "buildReact"
-    from "$frontendDir/build"
-    into "$projectDir/src/main/resources/static"
+test {
+    useJUnitPlatform()
 }
