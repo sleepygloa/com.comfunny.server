@@ -83,7 +83,7 @@ task buildReact(type: Exec) {
 //        commandLine "npm.cmd", "run-script", "build"
 //    } else {
 //        commandLine "npm", "run-script", "build"
-        commandLine "yarn", "start"
+        commandLine "yarn", "build"
 //    }
 }
 
