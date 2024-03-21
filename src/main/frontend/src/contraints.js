@@ -6,7 +6,8 @@ export const blogMenu = [
     { menuCd: 221, label: "엑셀", link: "", thumbnail:"", blog:"",
         children:[
             {menuCd: 222, label: "엑셀파일Json변환", link: "/blog/excel/excelfiletojson", thumbnail:"", blog:"",},
-            {menuCd: 223, label: "엑셀데이터 Json변환", link: "/blog/excel/exceldatatojson", thumbnail:"", blog:"",}
+            {menuCd: 223, label: "엑셀데이터 Json변환", link: "/blog/excel/exceldatatojson", thumbnail:"", blog:"",},
+            {menuCd: 224, label: "문자배열로 문자열 일괄치환", link: "/blog/excel/strarrchangestr", thumbnail:"", blog:"",}
             ]
     },
 ]

@@ -11,6 +11,7 @@ import Dashboard from "../pages/dashboard";
 import BlogLayout from "../pages/blogLayout";
 import ExcelFileToJson from "../pages/excelfiletojson";
 import ExcelDataToJson from "../pages/exceldatatojson";
+import StrArrChangeStr from "../pages/strarrchangestr";
 
 // context
 import { useUserState } from "../context/UserContext";
@@ -26,6 +27,7 @@ console.log('isAuthenticated',isAuthenticated);
         <Route exact path="/" render={()=><BlogLayout props={<Dashboard />}></BlogLayout>} />
         <Route exact path="/blog/excel/excelfiletojson" render={()=><BlogLayout props={<ExcelFileToJson />}></BlogLayout>} />
         <Route exact path="/blog/excel/exceldatatojson" render={()=><BlogLayout props={<ExcelDataToJson />}></BlogLayout>} />
+        <Route exact path="/blog/excel/strarrchangestr" render={()=><BlogLayout props={<StrArrChangeStr />}></BlogLayout>} />
 
         {/* <Route
           exact
