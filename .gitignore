@@ -1,5 +1,6 @@
 
 src/main/frontend/node_modules
+src/main/frontend/yarn.lock
 .gradle
 .idea
 application-oauth.properties
