@@ -9,8 +9,8 @@ spring:
   main:
     allow-bean-definition-overriding: true #Spring Boot ??? Bean Autowired ? ???? false
   # application-real-db ?? ??, .ignore?? ????
-#  profiles:
-#    include: real-db, jwt, log4j
+  profiles:
+    include: real-db, jwt, log4j
   session:
     store-type: jdbc
   jpa:
