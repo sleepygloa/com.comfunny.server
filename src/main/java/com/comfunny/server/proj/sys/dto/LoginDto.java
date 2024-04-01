@@ -30,11 +30,4 @@ public class LoginDto extends CommonDto {
 
     private String loginOs;
 
-    public User toEntity(){
-        return User.builder()
-                .userPk(new UserPk(userId))
-                .bizCd(bizCd)
-                .password(password)
-                .build();
-    }
 }

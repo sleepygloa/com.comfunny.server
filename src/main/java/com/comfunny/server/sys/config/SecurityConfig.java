@@ -1,10 +1,9 @@
 package com.comfunny.server.sys.config;
 
 import com.comfunny.server.proj.sys.repository.UserRepository;
-import com.comfunny.server.sys.security.JwtAccessDeniedHandler;
-import com.comfunny.server.sys.security.JwtAuthenticationEntryPoint;
-import com.comfunny.server.sys.security.JwtSecurityConfig;
-import com.comfunny.server.sys.security.JwtTokenProvider;
+import com.comfunny.server.sys.security.*;
+import com.comfunny.server.sys.security.controller.dto.Role;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,26 +18,30 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-@EnableWebSecurity
+
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@RequiredArgsConstructor
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final UserRepository userRepository;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
-    public SecurityConfig(
-            JwtTokenProvider jwtTokenProvider,
-            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-            JwtAccessDeniedHandler jwtAccessDeniedHandler,
-            UserRepository userRepository
-    ) {
-        this.jwtTokenProvider = jwtTokenProvider;
-        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
-        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
-        this.userRepository = userRepository;
-    }
+
+//    public SecurityConfig(
+//            JwtTokenProvider jwtTokenProvider,
+//            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+//            JwtAccessDeniedHandler jwtAccessDeniedHandler,
+//            UserRepository userRepository
+//    ) {
+//        this.jwtTokenProvider = jwtTokenProvider;
+//        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+//        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
+//        this.userRepository = userRepository;
+//    }
 
     @Override
     public void configure(WebSecurity web) {
@@ -61,12 +64,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
 
                 //인증허가에러처리
-                .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
+//                .exceptionHandling()
+//                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+//                .accessDeniedHandler(jwtAccessDeniedHandler)
 
                 // enable h2-console
-                .and()
+//                .and()
                 .headers()
                 .frameOptions()
                 .sameOrigin()
@@ -81,8 +84,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/login/test").authenticated()
-                .antMatchers("/", "/api/**", "/login/**").permitAll()
+                .antMatchers("/", "/test", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
+                .antMatchers("/api/**", "/login/auth/**").hasRole(Role.USER.name())
+//                .anyRequest().authenticated(
+//                .antMatchers("/login/test").authenticated()
+//                .antMatchers("/", "/api/**", "/login/**").permitAll()
 
                 //JWT 검증
                 .and()
@@ -93,6 +99,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //로그아웃시
                 .and()
                 .logout().logoutSuccessUrl("/")
+
+        //oauth2
+
+                .and()
+                .oauth2Login() //OAuth2 로그인 설정 시작점
+//                .defaultSuccessUrl("/oauth/loginInfo", true) //OAuth2 성공시
+                .successHandler(new MyAuthenticationSuccessHandler()) //인증에 성공하면 실행할 handler (redirect 시킬 목적)
+                .userInfoEndpoint() //OAuth2 로그인 성공 이후 사용자 정보를 가져올 때 설정 담당
+                .userService(customOAuth2UserService); //OAuth2 로그인 성공 시, 작업을 진행할 MemberService
         ;
     }
 
@@ -101,7 +116,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*");
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedOrigin("http://sleepygloa.github.io");
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);

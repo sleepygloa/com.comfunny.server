@@ -35,11 +35,14 @@ public class LoginController {
 //        return bizDao.selectBizCmb();
 //    }
 //
-//    @RequestMapping("/login")
-//    public Params authenticate(Params params, HttpServletResponse response) throws IOException {
-//        Params outParams = userService.login(response, params);
-//        return outParams;
-//    }
+    @RequestMapping("/auth/socialAuthCheck")
+    public void socialAuthCheck(@RequestBody Map map) throws IOException {
+        userService.socialAuthCheck(map);
+    }
+    @RequestMapping("/login")
+    public Map authenticate(Map map, HttpServletResponse response) throws IOException {
+        return userService.login(response, map);
+    }
 //
 //    @RequestMapping("/saveUser")
 //    public ResponseEntity<TokenDto> saveUser(@Valid @RequestBody LoginDto loginDto) {

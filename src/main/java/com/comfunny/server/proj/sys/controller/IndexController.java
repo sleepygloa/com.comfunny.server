@@ -79,35 +79,35 @@ public class IndexController {
         log.debug("toMainContents ");
         return "main/mainContent";
     }
-    @RequestMapping("/api/sys/index/selectSysData")
-    public @ResponseBody Map selectSysData(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-        Map map = new HashMap<>();
-
-
-        String refreshTokens = request.getHeader("refresh_token");
-        if(refreshTokens.equals("")) throw new Exception("데이터가 정상적으로 호출되지 않았습니다.");
-
-        String refreshtoken = refreshTokens.split(Contraints.TOKEN_TYPE)[1];
-
-        log.debug("[DEVLOG] ##### selectSysData refreshToken check ##### {}",refreshtoken);
-        Optional<UserToken> optUserToken = userTokenRepository.findByRefreshToken(refreshtoken);
-        if(!optUserToken.isPresent()) throw new Exception("데이터가 정상적으로 호출되지 않았습니다.");
-        UserToken userToken = optUserToken.get();
-        String userId = userToken.getUserPk().getUserId();
-
-        Optional<User> optUser = userRepository.findByUserPk(new UserPk(userId));
-        if(!optUser.isPresent()) throw new Exception("데이터가 정상적으로 호출되지 않았습니다.");
-        User user = optUser.get();
-        String bizCd = user.getBizCd();
-
-        //세션
-        session.setAttribute("sBizCd", bizCd);
-        session.setAttribute("sUserId", userId);
-
-        //리턴 데이터
-        map.put("sBizCd", bizCd);
-        map.put("sUserId", userId);
-        return map;
-    }
+//    @RequestMapping("/api/sys/index/selectSysData")
+//    public @ResponseBody Map selectSysData(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+//        Map map = new HashMap<>();
+//
+//
+//        String refreshTokens = request.getHeader("refresh_token");
+//        if(refreshTokens.equals("")) throw new Exception("데이터가 정상적으로 호출되지 않았습니다.");
+//
+//        String refreshtoken = refreshTokens.split(Contraints.TOKEN_TYPE)[1];
+//
+//        log.debug("[DEVLOG] ##### selectSysData refreshToken check ##### {}",refreshtoken);
+//        Optional<UserToken> optUserToken = userTokenRepository.findByRefreshToken(refreshtoken);
+//        if(!optUserToken.isPresent()) throw new Exception("데이터가 정상적으로 호출되지 않았습니다.");
+//        UserToken userToken = optUserToken.get();
+//        String userId = userToken.getUserPk().getUserId();
+//
+//        Optional<User> optUser = userRepository.findByUserPk(new UserPk(userId));
+//        if(!optUser.isPresent()) throw new Exception("데이터가 정상적으로 호출되지 않았습니다.");
+//        User user = optUser.get();
+//        String bizCd = user.getBizCd();
+//
+//        //세션
+//        session.setAttribute("sBizCd", bizCd);
+//        session.setAttribute("sUserId", userId);
+//
+//        //리턴 데이터
+//        map.put("sBizCd", bizCd);
+//        map.put("sUserId", userId);
+//        return map;
+//    }
 
 }
