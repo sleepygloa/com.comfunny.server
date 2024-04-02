@@ -25,6 +25,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "user_id", length = 50)
+    private String userId;
+
     @Column(name = "username", length = 50)
     private String name;
 
@@ -37,13 +40,18 @@ public class User {
     @Column(name = "nickname", length = 50)
     private String nickname;
 
+    @Column(name = "password", length = 50)
+    private String password;
+
     @Builder
-    public User(Long id, String name, String email, String provider, String nickname) {
+    public User(Long id, String userId, String name, String email, String provider, String nickname, String password){
         this.id = id;
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.provider = provider;
         this.nickname = nickname;
+        this.password = password;
     }
 
     public User update(String name, String email){

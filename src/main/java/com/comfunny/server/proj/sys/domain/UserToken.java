@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 
 /**
@@ -19,8 +20,10 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserToken {
-    @EmbeddedId
-    private UserPk userPk;
+
+    @Column(name = "user_id", length = 20)
+    @NotBlank
+    private String userId; //사용자ID
 
 
     @Column(name = "access_token")

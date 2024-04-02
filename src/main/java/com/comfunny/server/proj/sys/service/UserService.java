@@ -123,92 +123,92 @@ public class UserService {
             Map map) throws IOException {
 
         //요청 값 세팅
-//        LoginDto userDto = new LoginDto();
-//        userDto.setUserId((String)map.get("userId"));
-//        userDto.setPassword((String)map.get("password"));
-////        userDto.setBizCd((String)map.get("bizCd"));
-////        userDto.setLoginOs((String)map.get("loginOs"));
-//
-//        Authority authority = Authority.builder()
-//                .authorityName(Contraints.ROLE_ADMIN)
-//                .build();
-//
-//        //1. 사용자정보 객체화
-//        User user = User.builder()
-//                .userPk(new UserPk(userDto.getUserId()))
-//                .username(userDto.getUserId())
-//                .password(passwordEncoder.encode(userDto.getPassword()))
-//                .nickname(userDto.getUserId())
+        LoginDto userDto = new LoginDto();
+        userDto.setUserId((String)map.get("userId"));
+        userDto.setPassword((String)map.get("password"));
+//        userDto.setBizCd((String)map.get("bizCd"));
+//        userDto.setLoginOs((String)map.get("loginOs"));
+
+        Authority authority = Authority.builder()
+                .authorityName(Contraints.ROLE_ADMIN)
+                .build();
+
+        //1. 사용자정보 객체화
+        User user = User.builder()
+                .userId(userDto.getUserId())
+                .name(userDto.getUserNm())
+                .password(passwordEncoder.encode(userDto.getPassword()))
+                .nickname(userDto.getUserId())
 //                .authorities(Collections.singleton(authority))
 //                .activated(true)
 //                .pwdFailCnt(0)
-//                .build();
+                .build();
 //
-//        //2. 사용자정보확인
-//        Optional<User> optUser = userRepository.findByUserPk(new UserPk(userDto.getUserId()));
-//        if(!optUser.isPresent()){
-//            String msg = "아이디가 존재하지 않습니다.";
-//            log.debug("[DEVLOG] ##### listUserId is null ##### {}",msg);
-//            new BadCredentialsException(msg);
-//        }
-//        User selDto = optUser.get();
-//        if(!passwordEncoder.matches(userDto.getPassword(), selDto.getPassword())){
-//            String msg = "비밀번호가 틀립니다.";
-//            log.debug("##### password is not matched ##### {}",msg);
-//            new BadCredentialsException(msg);
-//        }
-//
-//        //3. 토큰 생성
-//        UsernamePasswordAuthenticationToken authenticationToken =
-//                new UsernamePasswordAuthenticationToken(userDto.getUserId(), userDto.getPassword());
-//        Map mapAccessToken = jwtTokenProvider.createAccessToken(authenticationToken);
-//        Map mapRefreshToken = jwtTokenProvider.createRefreshToken(authenticationToken);
-//        log.debug("[DEVLOG] ##### accessToken : {}",mapAccessToken.get(Contraints.ACCESS_TOKEN));
-//        log.debug("[DEVLOG] ##### refreshToken : {}",mapRefreshToken.get(Contraints.REFRESH_TOKEN));
-//        String accessToken = (String)mapAccessToken.get(Contraints.ACCESS_TOKEN);
-//        String refreshToken = (String)mapRefreshToken.get(Contraints.REFRESH_TOKEN);
-//        float accessTokenDt = ((float)mapAccessToken.get(Contraints.ACCESS_TOKEN+"_dt"));
-//        float refreshTokenDt = ((float)mapRefreshToken.get(Contraints.REFRESH_TOKEN+"_dt"));
-//
-//        //4. 토큰저장
-//        UserToken newUserToken = new UserToken();
-//        newUserToken.setUserPk(userDto.toEntity().getUserPk());
-//        newUserToken.setAccessToken(accessToken);
-//        newUserToken.setRefreshToken(refreshToken);
-//        userTokenRepository.save(newUserToken);
-//
-//        //5. 세션처리
-////        userDto.setSessions(session);
-//        UserCnnLog userCnnLog = new UserCnnLog();
-//        userCnnLog.setUserId(userDto.getUserId());
-//        userCnnLog.setInUserId(userDto.getUserId());
-//        userCnnLog.setUpUserId(userDto.getUserId());
+        //2. 사용자정보확인
+        Optional<User> optUser = userRepository.findByUserId(userDto.getUserId());
+        if(!optUser.isPresent()){
+            String msg = "아이디가 존재하지 않습니다.";
+            log.debug("[DEVLOG] ##### listUserId is null ##### {}",msg);
+            new BadCredentialsException(msg);
+        }
+        User selDto = optUser.get();
+        if(!passwordEncoder.matches(userDto.getPassword(), selDto.getPassword())){
+            String msg = "비밀번호가 틀립니다.";
+            log.debug("##### password is not matched ##### {}",msg);
+            new BadCredentialsException(msg);
+        }
+
+        //3. 토큰 생성
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(userDto.getUserId(), userDto.getPassword());
+        Map mapAccessToken = jwtTokenProvider.createAccessToken(authenticationToken);
+        Map mapRefreshToken = jwtTokenProvider.createRefreshToken(authenticationToken);
+        log.debug("[DEVLOG] ##### accessToken : {}",mapAccessToken.get(Contraints.ACCESS_TOKEN));
+        log.debug("[DEVLOG] ##### refreshToken : {}",mapRefreshToken.get(Contraints.REFRESH_TOKEN));
+        String accessToken = (String)mapAccessToken.get(Contraints.ACCESS_TOKEN);
+        String refreshToken = (String)mapRefreshToken.get(Contraints.REFRESH_TOKEN);
+        float accessTokenDt = ((float)mapAccessToken.get(Contraints.ACCESS_TOKEN+"_dt"));
+        float refreshTokenDt = ((float)mapRefreshToken.get(Contraints.REFRESH_TOKEN+"_dt"));
+
+        //4. 토큰저장
+        UserToken newUserToken = new UserToken();
+        newUserToken.setUserId(userDto.getUserId());
+        newUserToken.setAccessToken(accessToken);
+        newUserToken.setRefreshToken(refreshToken);
+        userTokenRepository.save(newUserToken);
+
+        //5. 세션처리
+//        userDto.setSessions(session);
+        UserCnnLog userCnnLog = new UserCnnLog();
+        userCnnLog.setUserId(userDto.getUserId());
+        userCnnLog.setInUserId(userDto.getUserId());
+        userCnnLog.setUpUserId(userDto.getUserId());
 //        userCnnLog.setLoginOs(userDto.getLoginOs());
-//        userCnnLog.setBizCd((userDto.getBizCd() != null ? userDto.getBizCd()  : Contraints.COMPANY_CD));
-//        userCnnLog.setLangCd((userDto.getLangCd() != null ? userDto.getLangCd()  : Contraints.INIT_SESSION_VALUE_LANG_CD));
-//        userCnnLog.setCountryCd((userDto.getCountryCd() != null ? userDto.getCountryCd()  : Contraints.INIT_SESSION_VALUE_COUNTRY_CD));
-////        userCnnLog.setDcCd(userDto.getLoginOs());
-////        userCnnLog.setClientCd(userDto.getLoginOs());
-//        userCnnLogRepository.save(userCnnLog);
-//
-//        //6. header 토큰 저장 및 메인화면으로
-//        map.put("accessToken",accessToken);
-//        map.put("accessTokenDt",accessTokenDt);
-//        map.put("refreshToken",refreshToken);
-//        map.put("refreshTokenDt",refreshTokenDt);
-//
-//        Cookie cookie = new Cookie(Contraints.ACCESS_TOKEN, accessToken);
-//        cookie.setDomain("localhost");
-//        cookie.setPath("/");
-//        cookie.setMaxAge((int)accessTokenDt);
-//        cookie.setSecure(true);
-//        Cookie cookie2 = new Cookie(Contraints.REFRESH_TOKEN, refreshToken);
-//        cookie2.setDomain("localhost");
-//        cookie2.setPath("/");
-//        cookie2.setMaxAge((int)refreshTokenDt);
-//        cookie2.setSecure(true);
-//        response.addCookie(cookie);
-//        response.addCookie(cookie2);
+        userCnnLog.setBizCd((userDto.getBizCd() != null ? userDto.getBizCd()  : Contraints.COMPANY_CD));
+        userCnnLog.setLangCd((userDto.getLangCd() != null ? userDto.getLangCd()  : Contraints.INIT_SESSION_VALUE_LANG_CD));
+        userCnnLog.setCountryCd((userDto.getCountryCd() != null ? userDto.getCountryCd()  : Contraints.INIT_SESSION_VALUE_COUNTRY_CD));
+//        userCnnLog.setDcCd(userDto.getLoginOs());
+//        userCnnLog.setClientCd(userDto.getLoginOs());
+        userCnnLogRepository.save(userCnnLog);
+
+        //6. header 토큰 저장 및 메인화면으로
+        map.put("accessToken",accessToken);
+        map.put("accessTokenDt",accessTokenDt);
+        map.put("refreshToken",refreshToken);
+        map.put("refreshTokenDt",refreshTokenDt);
+
+        Cookie cookie = new Cookie(Contraints.ACCESS_TOKEN, accessToken);
+        cookie.setDomain("localhost");
+        cookie.setPath("/");
+        cookie.setMaxAge((int)accessTokenDt);
+        cookie.setSecure(true);
+        Cookie cookie2 = new Cookie(Contraints.REFRESH_TOKEN, refreshToken);
+        cookie2.setDomain("localhost");
+        cookie2.setPath("/");
+        cookie2.setMaxAge((int)refreshTokenDt);
+        cookie2.setSecure(true);
+        response.addCookie(cookie);
+        response.addCookie(cookie2);
 
 
         return map;
