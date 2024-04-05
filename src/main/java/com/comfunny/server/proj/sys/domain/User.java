@@ -2,12 +2,16 @@ package com.comfunny.server.proj.sys.domain;
 
 import com.comfunny.server.proj.sys.dto.Authority;
 import com.comfunny.server.sys.security.controller.dto.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -18,8 +22,10 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,22 +43,17 @@ public class User {
     @Column(name = "provider", length = 50)
     private String provider;
 
+    @Column(name = "username", length = 50, insertable = false, updatable = false)
+    private String username;
+
     @Column(name = "nickname", length = 50)
     private String nickname;
 
-    @Column(name = "password", length = 50)
+    @Column(name = "password", length = 100)
     private String password;
 
-    @Builder
-    public User(Long id, String userId, String name, String email, String provider, String nickname, String password){
-        this.id = id;
-        this.userId = userId;
-        this.name = name;
-        this.email = email;
-        this.provider = provider;
-        this.nickname = nickname;
-        this.password = password;
-    }
+
+
 
     public User update(String name, String email){
         this.name = name;
@@ -61,13 +62,13 @@ public class User {
     }
 //
 //    public String getRoleKey() {
-//        return this.role.getKey();
+//        return this.roles.getKey();
 //    }
 ////    @Column(name = "biz_cd", length = 20)
 ////    private String bizCd; //회사코드
 ////
-////    @Column(name = "activated", length = 1)
-////    private boolean activated;
+    @Column(name = "activated", length = 1)
+    private boolean activated;
 ////
 ////    @Column(name = "nickname", length = 50)
 ////    private String nickname;
@@ -86,12 +87,12 @@ public class User {
 ////    @Column(name = "user_position", length = 13)
 ////    private String userPosition;
 ////
-////    @Column(name = "roles", length = 13)
-////    private String roles;
+    @Column(name = "roles", length = 13)
+    private String roles;
 ////
-////    @Column(name = "pwd_fail_cnt", length = 11)
-////    @ColumnDefault("0")
-////    private long pwdFailCnt = 0;
+    @Column(name = "pwd_fail_cnt", length = 11)
+    @ColumnDefault("0")
+    private long pwdFailCnt = 0;
 ////
 ////    @Column(name = "lately_try")
 ////    private LocalDateTime latelyTry;
@@ -131,15 +132,38 @@ public class User {
 ////    private String delYn;
 ////
 ////
-////    @ManyToMany
-////    @JoinTable(
-////            name = "user_authority",
-////            joinColumns = {
-////                    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-////            },
-////            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
-////    private Set<Authority> authorities;
-////
+    @ManyToMany
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = {
+                    @JoinColumn(name = "id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
+    private Set<Authority> authorities;
 
 
+    @JsonIgnore
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(new SimpleGrantedAuthority(Role.USER.getKey()));
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

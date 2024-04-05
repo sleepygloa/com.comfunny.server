@@ -12,9 +12,9 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-//    //로그인 확인
-//    @EntityGraph(attributePaths = "authorities")
-//    Optional<User> findOneWithAuthoritiesByUsername(String username);
+    //로그인 확인
+    @EntityGraph(attributePaths = "authorities")
+    Optional<User> findOneWithAuthoritiesByUsername(String username);
 //
 //    Optional<User> findByUserPk(UserPk userPk);
 //

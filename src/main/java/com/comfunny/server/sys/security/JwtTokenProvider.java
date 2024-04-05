@@ -1,6 +1,7 @@
 package com.comfunny.server.sys.security;
 
 
+import com.comfunny.server.proj.sys.dto.UserAuthority;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -8,14 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -49,10 +51,10 @@ public class JwtTokenProvider implements InitializingBean {
     @Override
     public void afterPropertiesSet() {
         //accessToken
-        this.accessTokenKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(acessSecretKey));
+        accessTokenKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(acessSecretKey));
 
         //refreshToken
-        this.refreshTokenKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(refreshSecretKey));
+        refreshTokenKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(refreshSecretKey));
     }
 
     //토큰을 생성한다.
@@ -100,7 +102,23 @@ public class JwtTokenProvider implements InitializingBean {
 
     //토큰에서 아이디 추출
     //token을 매개변수로 받아서, 토큰에 담긴 정보를 이용해 Authenticaion 객체를 리턴
-    public String getAuthentication(String token) {
+    public Authentication getAuthentication(String token) {
+        Claims claims = Jwts
+                .parserBuilder()
+                .setSigningKey(accessTokenKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        Collection<? extends GrantedAuthority> authorities =
+                Arrays.stream(claims.get(ACESSS_TOKEN_KEY).toString().split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
+
+        User principal = new User(claims.getSubject(), "", authorities);
+        return new UsernamePasswordAuthenticationToken(claims.getSubject(), token, authorities);
+    }
+    public String getAuthenticationUserId(String token) {
         Claims claims = Jwts
                 .parserBuilder()
                 .setSigningKey(accessTokenKey)
@@ -109,15 +127,6 @@ public class JwtTokenProvider implements InitializingBean {
                 .getBody();
 
         return claims.getSubject();
-//
-//        Collection<? extends GrantedAuthority> authorities =
-//                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
-//                        .map(SimpleGrantedAuthority::new)
-//                        .collect(Collectors.toList());
-//
-//        User principal = new User(claims.getSubject(), "", authorities);
-//
-//        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
     //token을 매개변수로 받아서, 토큰의 유효성 검증을 수행하는 validateToken 메소드

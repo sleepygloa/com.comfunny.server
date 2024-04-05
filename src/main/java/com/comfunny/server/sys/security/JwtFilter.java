@@ -23,7 +23,7 @@ public class JwtFilter extends GenericFilterBean {
     public static final String ACCESS_TOKEN_HEADER = "access_token";
     public static final String REFRESH_TOKEN_HEADER = "refresh_token";
 
-    private JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
     private UserRepository userRepository;
 
     public JwtFilter(JwtTokenProvider jwtTokenProvider) {
@@ -41,8 +41,8 @@ public class JwtFilter extends GenericFilterBean {
             String jwt = (resolveToken(httpServletRequest) == null? null : resolveToken(httpServletRequest).get("accessToken"));
             String requestURI = httpServletRequest.getRequestURI();
 
-            if (StringUtils.hasText(jwt) && jwtTokenProvider.isAccessTokenValid(jwt)) {
-                String userId = jwtTokenProvider.getAuthentication(jwt); //jwt에서 사용자 id를 꺼낸다.
+            if (StringUtils.hasText(jwt) && JwtTokenProvider.isAccessTokenValid(jwt)) {
+                String userId = jwtTokenProvider.getAuthenticationUserId(jwt); //jwt에서 사용자 id를 꺼낸다.
                 log.debug("[DEVLOG] ##### doFilter String userId = jwtTokenProvider.getAuthentication(jwt) {} #####", userId);
 
                 UserAuthentication authentication = new UserAuthentication(userId, null, null); //id를 인증한다.

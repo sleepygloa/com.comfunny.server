@@ -2,10 +2,7 @@ package com.comfunny.server.proj.sys.dto;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "authority")
@@ -17,6 +14,8 @@ import javax.persistence.Table;
 public class Authority {
 
     @Id
+    private Long id;
+
     @Column(name = "authority_name", length = 50, unique = false)
     private String authorityName;
 }

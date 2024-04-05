@@ -5,16 +5,16 @@ logging:
     sql: debug
     jdbc:
       sql-timing: debug
-      resultsettable: off
-      resultset: off
+      resultsettable: debug
+      resultset: debug
       audit: off
       result: off
       connection: off
-      sqlonly: off
+      sqlonly: debug
     org:
       springframework: info
       hibernate:
-        SQL: off
+        SQL: debug
 
 #logging:
 #  level:

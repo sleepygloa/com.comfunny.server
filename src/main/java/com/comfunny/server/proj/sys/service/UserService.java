@@ -2,18 +2,18 @@ package com.comfunny.server.proj.sys.service;
 
 import com.comfunny.server.proj.sys.domain.User;
 import com.comfunny.server.proj.sys.domain.UserCnnLog;
-import com.comfunny.server.proj.sys.domain.UserPk;
 import com.comfunny.server.proj.sys.domain.UserToken;
 import com.comfunny.server.proj.sys.dto.*;
 import com.comfunny.server.proj.sys.repository.*;
 import com.comfunny.server.sys.config.Contraints;
+import com.comfunny.server.sys.security.JwtFilter;
 import com.comfunny.server.sys.security.JwtTokenProvider;
 import com.comfunny.server.sys.security.controller.dto.TokenDto;
-import com.comfunny.server.sys.util.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -41,7 +41,7 @@ public class UserService {
     private UserTokenRepository userTokenRepository;
     private JwtTokenProvider jwtTokenProvider;
     private PasswordEncoder passwordEncoder;
-    private AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     private UserCnnLogRepository userCnnLogRepository;
 
@@ -118,16 +118,12 @@ public class UserService {
      * 로그인화면
      * 로그인
      * */
-    public Map login (
-            HttpServletResponse response,
-            Map map) throws IOException {
+    public Map login (HttpServletResponse response, Map map) throws IOException {
 
         //요청 값 세팅
         LoginDto userDto = new LoginDto();
         userDto.setUserId((String)map.get("userId"));
         userDto.setPassword((String)map.get("password"));
-//        userDto.setBizCd((String)map.get("bizCd"));
-//        userDto.setLoginOs((String)map.get("loginOs"));
 
         Authority authority = Authority.builder()
                 .authorityName(Contraints.ROLE_ADMIN)
@@ -136,26 +132,26 @@ public class UserService {
         //1. 사용자정보 객체화
         User user = User.builder()
                 .userId(userDto.getUserId())
-                .name(userDto.getUserNm())
+                .name(userDto.getNickname())
                 .password(passwordEncoder.encode(userDto.getPassword()))
-                .nickname(userDto.getUserId())
-//                .authorities(Collections.singleton(authority))
-//                .activated(true)
-//                .pwdFailCnt(0)
+                .nickname(userDto.getNickname())
+                .authorities(Collections.singleton(authority))
+                .activated(true)
+                .pwdFailCnt(0)
                 .build();
 //
         //2. 사용자정보확인
         Optional<User> optUser = userRepository.findByUserId(userDto.getUserId());
-        if(!optUser.isPresent()){
+        if(optUser.isEmpty()){
             String msg = "아이디가 존재하지 않습니다.";
             log.debug("[DEVLOG] ##### listUserId is null ##### {}",msg);
-            new BadCredentialsException(msg);
+            throw new BadCredentialsException(msg);
         }
         User selDto = optUser.get();
         if(!passwordEncoder.matches(userDto.getPassword(), selDto.getPassword())){
             String msg = "비밀번호가 틀립니다.";
             log.debug("##### password is not matched ##### {}",msg);
-            new BadCredentialsException(msg);
+            throw new BadCredentialsException(msg);
         }
 
         //3. 토큰 생성
@@ -213,50 +209,52 @@ public class UserService {
 
         return map;
     }
-//
-//    /**
-//     * 로그인화면
-//     * 회원가입
-//     * */
-//    @Transactional
-//    public ResponseEntity<TokenDto> saveUserReg(LoginDto userDto){
-//        Authority authority = Authority.builder()
-//                .authorityName(Contraints.ROLE_ADMIN)
-//                .build();
-//
-//        User user = User.builder()
-//                .userPk(new UserPk(userDto.getUserId()))
-//                .username(userDto.getUserId())
-//                .password(passwordEncoder.encode(userDto.getPassword()))
-//                .nickname(userDto.getUserId())
-//                .authorities(Collections.singleton(authority))
-//                .activated(true)
-//                .pwdFailCnt(0)
-//                .build();
-//
-//        //아이디 확인
-//        List<UserInfoResDto> listUserId = userDao.selectLoginUserId(user);
-//        if(listUserId.size() != 0) {
-//            log.debug("아이디가 존재합니다.");
-//            new BadCredentialsException("아이디가 존재합니다.");
-//        }
-//
-//        userRepository.save(user);
-////        userAuthorityRepository.save(new UserAuthority(new UserAuthorityPk(userDto.getBizCd(), userDto.getUserId(), Contraints.ROLE_ADMIN)));
-//
-//        return getJwtHeader(userDto);
-//    }
+
+    /**
+     * 로그인화면
+     * 회원가입
+     */
+    @Transactional
+    public User saveUserReg(LoginDto loginDto) throws IOException{
+
+        Authority authority = Authority.builder()
+                .authorityName(Contraints.ROLE_USER)
+                .build();
+
+        User user = User.builder()
+                .userId(loginDto.getUserId())
+                .username(loginDto.getNickname())
+                .password(passwordEncoder.encode(loginDto.getPassword()))
+                .nickname(loginDto.getNickname())
+                .authorities(Collections.singleton(authority))
+                .activated(true)
+                .pwdFailCnt(0)
+                .build();
+
+        //아이디 확인
+        Optional<User> optUser = userRepository.findByUserId(user.getUserId());
+        if(optUser.isPresent()) {
+            log.debug("아이디가 존재합니다.");
+            throw new BadCredentialsException("아이디가 존재합니다.");
+        }
+
+        return userRepository.save(user);
+//        userAuthorityRepository.save(new UserAuthority(user.getId(), loginDto.getUserId(), Contraints.ROLE_ADMIN));
+
+//        return getJwtHeader(loginDto);
+    }
 
     /**
      * JWT 토큰 발급 및 반환 로직
      * */
-    public ResponseEntity getJwtHeader(LoginDto userDto){
+    public ResponseEntity getJwtHeader(LoginDto user) throws IOException{
         log.debug("##### getJwtHeader start #####");
         //토큰 생성
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(userDto.getUserId(), userDto.getPassword());
+                new UsernamePasswordAuthenticationToken(user.getUserId(), user.getPassword());
         //토큰 주입
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        AuthenticationManager o = authenticationManagerBuilder.getObject();
+        Authentication authentication = o.authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         Map mapAccessToken = jwtTokenProvider.createAccessToken(authentication);
@@ -268,11 +266,11 @@ public class UserService {
 
         //헤더에 토큰 추가
         HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.add(JwtFilter.ACCESS_TOKEN_HEADER, "Bearer " + accessToken);
-//        httpHeaders.add(JwtFilter.REFRESH_TOKEN_HEADER, "Bearer " + refreshToken);
+        httpHeaders.add(JwtFilter.ACCESS_TOKEN_HEADER, "Bearer " + accessToken);
+        httpHeaders.add(JwtFilter.REFRESH_TOKEN_HEADER, "Bearer " + refreshToken);
         log.debug("##### getJwtHeader jwt ##### bearer " +accessToken);
         log.debug("##### getJwtHeader end #####");
-        return new ResponseEntity<>(new TokenDto(accessToken, accessTokenDt, refreshToken, refreshTokenDt, userDto.getBizCd()), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(new TokenDto(accessToken, accessTokenDt, refreshToken, refreshTokenDt), httpHeaders, HttpStatus.OK);
     }
 
 

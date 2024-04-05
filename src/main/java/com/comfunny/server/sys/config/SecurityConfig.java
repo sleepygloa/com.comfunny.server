@@ -1,10 +1,12 @@
 package com.comfunny.server.sys.config;
 
 import com.comfunny.server.proj.sys.repository.UserRepository;
+import com.comfunny.server.proj.sys.service.CustomUserDetailsService;
 import com.comfunny.server.sys.security.*;
 import com.comfunny.server.sys.security.controller.dto.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -12,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -27,21 +30,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-    private final UserRepository userRepository;
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final CustomUserDetailsService customUserDetailsService;
 
 
-//    public SecurityConfig(
-//            JwtTokenProvider jwtTokenProvider,
-//            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-//            JwtAccessDeniedHandler jwtAccessDeniedHandler,
-//            UserRepository userRepository
-//    ) {
-//        this.jwtTokenProvider = jwtTokenProvider;
-//        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
-//        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
-//        this.userRepository = userRepository;
-//    }
+@Override
+protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(customUserDetailsService); // customUserDetailsService 등록
+}
 
     @Override
     public void configure(WebSecurity web) {
@@ -64,12 +60,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
 
                 //인증허가에러처리
-//                .exceptionHandling()
-//                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//                .accessDeniedHandler(jwtAccessDeniedHandler)
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
 
                 // enable h2-console
-//                .and()
+                .and()
                 .headers()
                 .frameOptions()
                 .sameOrigin()
@@ -82,26 +78,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //허용URL
                 .and()
-                //.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .authorizeRequests()
-                .antMatchers("/", "/test", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
-                .antMatchers("/api/**", "/login/auth/**").hasRole(Role.USER.name())
-//                .anyRequest().authenticated(
+////                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+//                .authorizeRequests()
+//                .antMatchers("/", "/test", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/login/**").permitAll()
+//                .antMatchers("/api/**").hasRole(Role.USER.name())
+//                .anyRequest().authenticated()
 //                .antMatchers("/login/test").authenticated()
-//                .antMatchers("/", "/api/**", "/login/**").permitAll()
+                .authorizeRequests()
+                .antMatchers("/login/saveUser").permitAll()
+                .antMatchers("/").permitAll()
 
                 //JWT 검증
                 .and()
                 .apply(new JwtSecurityConfig(jwtTokenProvider))
 
-
-
                 //로그아웃시
                 .and()
                 .logout().logoutSuccessUrl("/")
 
-        //oauth2
-
+                //oauth2
                 .and()
                 .oauth2Login() //OAuth2 로그인 설정 시작점
 //                .defaultSuccessUrl("/oauth/loginInfo", true) //OAuth2 성공시

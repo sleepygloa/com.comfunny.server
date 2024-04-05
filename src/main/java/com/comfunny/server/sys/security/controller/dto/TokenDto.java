@@ -13,5 +13,4 @@ public class TokenDto {
     private float accessTokenDt;
     private String refreshToken;
     private float refreshTokenDt;
-    private String bizCd;
 }

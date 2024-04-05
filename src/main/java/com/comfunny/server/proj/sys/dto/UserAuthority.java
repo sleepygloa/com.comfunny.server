@@ -1,12 +1,11 @@
 package com.comfunny.server.proj.sys.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Client To Server
@@ -18,19 +17,17 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class UserAuthority {
 
-    @EmbeddedId
-    private UserAuthorityPk userAuthorityPk;
+    @Id
+    private Long id;
+    @Column(name = "user_id", unique = false)
+    private String userId;
+    @Column(name = "authority_name", length = 50, unique = false)
+    private String authorityName;
 
-    public UserAuthority(UserAuthorityPk userAuthorityPk) {
-        this.userAuthorityPk = userAuthorityPk;
-    }
-    public String getBizCd(){
-        return userAuthorityPk.getBizCd();
-    }
-    public String getUserId(){
-        return userAuthorityPk.getUserId();
-    }
-    public String getAuthorityName(){
-        return userAuthorityPk.getAuthorityName();
+    @Builder
+    public UserAuthority(Long id, String userId, String authorityName) {
+        this.id = id;
+        this.userId = userId;
+        this.authorityName = authorityName;
     }
 }

@@ -42,12 +42,19 @@ logging:
         web: info
         boot:
           autoconfigure: info
+          context:
+            applicationcontext: info
       hibernate:
         sql: DEBUG
         type:
           descriptor:
             sql:
               BasicBinder: DEBUG
+        orm:
+          type:
+            descriptor:
+              sql:
+                BasicBinder: DEBUG
 
     jpa: DEBUG
     jdbc:
