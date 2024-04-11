@@ -10,6 +10,7 @@ import com.comfunny.server.sys.security.JwtFilter;
 import com.comfunny.server.sys.security.JwtTokenProvider;
 import com.comfunny.server.sys.security.controller.dto.TokenDto;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -206,7 +209,6 @@ public class UserService {
         response.addCookie(cookie);
         response.addCookie(cookie2);
 
-
         return map;
     }
 
@@ -215,7 +217,7 @@ public class UserService {
      * 회원가입
      */
     @Transactional
-    public User saveUserReg(LoginDto loginDto) throws IOException{
+    public ResponseEntity saveUserReg(LoginDto loginDto) throws IOException{
 
         Authority authority = Authority.builder()
                 .authorityName(Contraints.ROLE_USER)
@@ -227,6 +229,8 @@ public class UserService {
                 .password(passwordEncoder.encode(loginDto.getPassword()))
                 .nickname(loginDto.getNickname())
                 .authorities(Collections.singleton(authority))
+                .roles(Contraints.ROLE_USER)
+                .provider(Contraints.SIGNUP_DEFAULT)
                 .activated(true)
                 .pwdFailCnt(0)
                 .build();
@@ -238,10 +242,29 @@ public class UserService {
             throw new BadCredentialsException("아이디가 존재합니다.");
         }
 
-        return userRepository.save(user);
-//        userAuthorityRepository.save(new UserAuthority(user.getId(), loginDto.getUserId(), Contraints.ROLE_ADMIN));
+        userRepository.save(user);
+//        userAuthorityRepository.save(new UserAuthority(user.getId(), loginDto.getUserId(), Contraints.ROLE_USER));
 
-//        return getJwtHeader(loginDto);
+        return new ResponseEntity<>(user, null, HttpStatus.OK);
+    }
+
+    /**
+     * 사용자정보 조회
+     */
+    @Transactional
+    public ResponseEntity getUserInfo(HttpServletRequest request) {
+        String userId = (request.getAttribute("s_userId") != null ? (String)request.getAttribute("s_userId") : null );
+        LoginDto loginDto = new LoginDto();
+        loginDto.setUserId(userId);
+        Optional<User> user = userRepository.findByUserId(loginDto.getUserId());
+        if(user.isEmpty()){
+            log.debug("사용자정보가 없습니다.");
+            throw new BadCredentialsException("사용자정보가 없습니다.");
+        }
+
+
+        return ResponseEntity.ok()
+                .body(user);
     }
 
     /**

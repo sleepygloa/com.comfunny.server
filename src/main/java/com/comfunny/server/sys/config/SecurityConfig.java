@@ -85,8 +85,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //                .anyRequest().authenticated()
 //                .antMatchers("/login/test").authenticated()
                 .authorizeRequests()
-                .antMatchers("/login/saveUser").permitAll()
-                .antMatchers("/").permitAll()
+                .antMatchers("/","/login/saveUser", "/login/getUserInfo").permitAll()
 
                 //JWT 검증
                 .and()
@@ -114,6 +113,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         configuration.addAllowedOrigin("http://localhost:3000");
         configuration.addAllowedOrigin("http://sleepygloa.github.io");
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type")); //허용할 헤더
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);

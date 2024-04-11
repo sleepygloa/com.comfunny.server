@@ -9,6 +9,10 @@ public class Contraints {
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final String ROLE_USER = "ROLE_USER";
 
+    //Login Type
+    public static final String SIGNUP_DEFAULT = "DEFAULT";
+
+
     //JWT 관련 변수
     public static final String ACCESS_TOKEN = "access_token";
     public static final String REFRESH_TOKEN = "refresh_token";

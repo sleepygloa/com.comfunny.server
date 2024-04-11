@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
@@ -43,6 +44,10 @@ public class LoginController {
 
     @RequestMapping("/saveUser")
     public ResponseEntity saveUser(@RequestBody LoginDto loginDto) throws IOException {
-        return new ResponseEntity<>(userService.saveUserReg(loginDto), null, HttpStatus.OK);
+        return userService.saveUserReg(loginDto);
+    }
+    @RequestMapping("/getUserInfo")
+    public ResponseEntity getUserInfo(HttpServletRequest request)  {
+        return userService.getUserInfo(request);
     }
 }
