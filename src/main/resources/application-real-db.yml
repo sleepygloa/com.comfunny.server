@@ -18,6 +18,10 @@ spring:
       max-lifetime: 1800000
 
 
+url:
+  client: http://sleepygloa.github.io
+  server: http://http://comfunnydevelopers.com
+
 #  jpa:
 #    hibernate:
 #      ddl-auto: none

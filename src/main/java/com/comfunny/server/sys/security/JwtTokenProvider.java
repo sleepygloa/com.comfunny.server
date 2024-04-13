@@ -63,7 +63,7 @@ public class JwtTokenProvider implements InitializingBean {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
-        long now = (long)((new Date()).getTime() + this.accessTokenValidTimeMs);
+        long now = (long)((new Date()).getTime() + this.accessTokenValidTimeMs); //한달뒤
         //토큰 유효일자
         Date expiryDate = new Date(now);
 
@@ -75,7 +75,7 @@ public class JwtTokenProvider implements InitializingBean {
                 .claim(ACESSS_TOKEN_KEY, authorities)
                 .signWith(accessTokenKey, SignatureAlgorithm.HS512) //사용할 암호화 알고리즘
                 .compact());
-        map.put("access_token_dt", ((new Date()).getTime() + this.accessTokenValidTimeMs) / 1000 / 60 / 60);
+        map.put("access_token_dt", ((new Date()).getTime() + this.accessTokenValidTimeMs));
         return map;
 
     }
@@ -84,7 +84,7 @@ public class JwtTokenProvider implements InitializingBean {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
-        long now = (long)((new Date()).getTime() + this.refreshTokenValidTimeMs);
+        long now = (long)((new Date()).getTime() + this.refreshTokenValidTimeMs); //한달뒤
         //토큰 유효일자
         Date expiryDate = new Date(now);
 
@@ -96,7 +96,7 @@ public class JwtTokenProvider implements InitializingBean {
                 .claim(REFRESH_TOKEN_KEY, authorities)
                 .signWith(refreshTokenKey, SignatureAlgorithm.HS512) //사용할 암호화 알고리즘
                 .compact());
-        map.put("refresh_token_dt", ((new Date()).getTime() + this.refreshTokenValidTimeMs) / 1000 / 60 / 60);
+        map.put("refresh_token_dt", ((new Date()).getTime() + this.accessTokenValidTimeMs));
         return map;
     }
 
@@ -169,4 +169,9 @@ public class JwtTokenProvider implements InitializingBean {
         return (header.split(" ").length > 1 ? header.split(" ")[1] : header);
     }
 
+    //토큰 만료
+    public boolean isTokenExpired(String token) {
+        Date expirationDate = Jwts.parser().setSigningKey(acessSecretKey).parseClaimsJws(token).getBody().getExpiration();
+        return expirationDate.before(new Date());
+    }
 }

@@ -5,10 +5,7 @@ import com.comfunny.server.proj.sys.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,26 +24,35 @@ public class LoginController {
     public String test(){
         return "<h2>Hello world</h2>";
     }
-//
-//    @GetMapping("/selectBizCmb")
-//    public List<Map<String, String>> selectLoginBiz() throws Exception{
-//        return bizDao.selectBizCmb();
-//    }
-//
+
     @RequestMapping("/auth/socialAuthCheck")
     public void socialAuthCheck(@RequestBody Map map) throws IOException {
         userService.socialAuthCheck(map);
     }
+    /**
+     * 로그인
+     * */
     @RequestMapping("/login")
-    public Map login(@RequestBody Map map, HttpServletResponse response) throws IOException {
-        return userService.login(response, map);
+    public Map login(@RequestBody Map map, HttpServletRequest req) throws Exception {
+        return userService.login(map, req);
+    }
+    /**
+     * 로그아웃
+     * */
+    @PostMapping("/logout")
+    public ResponseEntity logout(HttpServletRequest req) {
+        return userService.logout(req);
     }
 
     @RequestMapping("/saveUser")
     public ResponseEntity saveUser(@RequestBody LoginDto loginDto) throws IOException {
         return userService.saveUserReg(loginDto);
     }
-    @RequestMapping("/getUserInfo")
+
+    /**
+     * 사용자정보 불러오기
+     * */
+    @GetMapping("/getUserInfo")
     public ResponseEntity getUserInfo(HttpServletRequest request)  {
         return userService.getUserInfo(request);
     }

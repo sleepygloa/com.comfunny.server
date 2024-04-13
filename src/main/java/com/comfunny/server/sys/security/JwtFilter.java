@@ -3,8 +3,10 @@ package com.comfunny.server.sys.security;
 import com.comfunny.server.proj.sys.repository.UserRepository;
 import com.comfunny.server.sys.security.controller.dto.UserAuthentication;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -19,12 +21,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@Component
 public class JwtFilter extends GenericFilterBean {
-    public static final String ACCESS_TOKEN_HEADER = "access_token";
-    public static final String REFRESH_TOKEN_HEADER = "refresh_token";
+    public static final String ACCESS_TOKEN_HEADER = "accessToken";
+    public static final String REFRESH_TOKEN_HEADER = "refreshToken";
 
     private final JwtTokenProvider jwtTokenProvider;
-    private UserRepository userRepository;
+
+    @Autowired
+    private TokenBlacklist tokenBlacklist;
 
     public JwtFilter(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
@@ -41,7 +46,8 @@ public class JwtFilter extends GenericFilterBean {
             String jwt = (resolveToken(httpServletRequest) == null? null : resolveToken(httpServletRequest).get("accessToken"));
             String requestURI = httpServletRequest.getRequestURI();
 
-            if (StringUtils.hasText(jwt) && JwtTokenProvider.isAccessTokenValid(jwt)) {
+            if (StringUtils.hasText(jwt) && JwtTokenProvider.isAccessTokenValid(jwt)
+            && !tokenBlacklist.isBlacklisted(jwt)) {
                 String userId = jwtTokenProvider.getAuthenticationUserId(jwt); //jwt에서 사용자 id를 꺼낸다.
                 log.debug("[DEVLOG] ##### doFilter String userId = jwtTokenProvider.getAuthentication(jwt) {} #####", userId);
 

@@ -8,9 +8,11 @@ import com.comfunny.server.proj.sys.repository.*;
 import com.comfunny.server.sys.config.Contraints;
 import com.comfunny.server.sys.security.JwtFilter;
 import com.comfunny.server.sys.security.JwtTokenProvider;
+import com.comfunny.server.sys.security.TokenBlacklist;
 import com.comfunny.server.sys.security.controller.dto.TokenDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.http.HttpResponse;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -38,20 +44,20 @@ import java.util.Optional;
 @Service("userService")
 @Slf4j
 public class UserService {
-    private UserDao userDao;
-    private UserRepository userRepository;
-    private UserAuthorityRepository userAuthorityRepository;
-    private UserTokenRepository userTokenRepository;
-    private JwtTokenProvider jwtTokenProvider;
-    private PasswordEncoder passwordEncoder;
+    private final UserDao userDao;
+    private final UserRepository userRepository;
+    private final UserAuthorityRepository userAuthorityRepository;
+    private final UserTokenRepository userTokenRepository;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final PasswordEncoder passwordEncoder;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    private UserCnnLogRepository userCnnLogRepository;
-
-    private UserDcRepository userDcRepository;
-    private UserClientRepository userClientRepository;
+    private final UserCnnLogRepository userCnnLogRepository;
 
 
+
+    @Autowired
+    private TokenBlacklist tokenBlacklist;
 
 
     public UserService(
@@ -63,8 +69,6 @@ public class UserService {
             , PasswordEncoder passwordEncoder
             , JwtTokenProvider jwtTokenProvider
             , AuthenticationManagerBuilder authenticationManagerBuilder
-            , UserDcRepository userDcRepository
-            , UserClientRepository userClientRepository
     ) {
         this.userRepository = userRepository;
         this.userAuthorityRepository = userAuthorityRepository;
@@ -74,54 +78,17 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenProvider = jwtTokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
-        this.userDcRepository = userDcRepository;
-        this.userClientRepository = userClientRepository;
     }
-//
-//    @Transactional(readOnly = true)
-//    public UserDto signup(UserDto userDto) {
-//        if (userRepository.findOneWithAuthoritiesByUsername(userDto.getUsername()).orElse(null) != null) {
-//            throw new RuntimeException("이미 가입되어 있는 유저입니다.");
-//        }
-//
-//        Authority authority = Authority.builder()
-//                .authorityName("ROLE_USER")
-//                .build();
-//
-//        User user = User.builder()
-//                .username(userDto.getUsername())
-//                .password(passwordEncoder.encode(userDto.getPassword()))
-//                .nickname(userDto.getNickname())
-//                .authorities(Collections.singleton(authority))
-//                .activated(true)
-//                .pwdFailCnt(0)
-//                .build();
-//
-//        return UserDto.from(userRepository.save(user));
-//    }
-//
-//    @Transactional(readOnly = true)
-//    public UserDto getUserWithAuthorities(String username) {
-//        return UserDto.from(userRepository.findOneWithAuthoritiesByUsername(username).orElse(null));
-//    }
-//
-//    @Transactional(readOnly = true)
-//    public UserDto getMyUserWithAuthorities() {
-//        return UserDto.from(SecurityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername).orElse(null));
-//    }
-
-//
-//    public List<UserInfoResDto> selectMain (UserInfoReqDto dto){
-//        User ui = new User();
-//        setModelMapper(ui, dto);
-//        return userDao.selectMainBy(new UserInfoReqDto());
-//    }
-
     /**
      * 로그인화면
      * 로그인
      * */
-    public Map login (HttpServletResponse response, Map map) throws IOException {
+    public Map login (Map map, HttpServletRequest req) throws Exception {
+
+        //오늘날짜 구하기
+        Date now = new Date(System.currentTimeMillis());    //현재시간
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String today = sdf.format(now); //오늘날짜
 
         //요청 값 세팅
         LoginDto userDto = new LoginDto();
@@ -148,13 +115,13 @@ public class UserService {
         if(optUser.isEmpty()){
             String msg = "아이디가 존재하지 않습니다.";
             log.debug("[DEVLOG] ##### listUserId is null ##### {}",msg);
-            throw new BadCredentialsException(msg);
+            throw new Exception(msg);
         }
         User selDto = optUser.get();
         if(!passwordEncoder.matches(userDto.getPassword(), selDto.getPassword())){
             String msg = "비밀번호가 틀립니다.";
             log.debug("##### password is not matched ##### {}",msg);
-            throw new BadCredentialsException(msg);
+            throw new Exception(msg);
         }
 
         //3. 토큰 생성
@@ -171,9 +138,19 @@ public class UserService {
 
         //4. 토큰저장
         UserToken newUserToken = new UserToken();
+        newUserToken.setBgnDt(now);
         newUserToken.setUserId(userDto.getUserId());
         newUserToken.setAccessToken(accessToken);
         newUserToken.setRefreshToken(refreshToken);
+        newUserToken.setAccessTokenDt(new Date((long)accessTokenDt));
+        newUserToken.setRefreshTokenDt(new Date((long)refreshTokenDt));
+        //EndDt null을 찾아서 현재시각으로 세팅
+        Optional<UserToken> optTokenEndDtNull = userTokenRepository.findByUserIdAndEndDt(userDto.getUserId(), null);
+        if(optTokenEndDtNull.isPresent()){
+            UserToken selToken = optTokenEndDtNull.get();
+            selToken.setEndDt(now);
+            userTokenRepository.save(selToken);
+        }
         userTokenRepository.save(newUserToken);
 
         //5. 세션처리
@@ -196,18 +173,8 @@ public class UserService {
         map.put("refreshToken",refreshToken);
         map.put("refreshTokenDt",refreshTokenDt);
 
-        Cookie cookie = new Cookie(Contraints.ACCESS_TOKEN, accessToken);
-        cookie.setDomain("localhost");
-        cookie.setPath("/");
-        cookie.setMaxAge((int)accessTokenDt);
-        cookie.setSecure(true);
-        Cookie cookie2 = new Cookie(Contraints.REFRESH_TOKEN, refreshToken);
-        cookie2.setDomain("localhost");
-        cookie2.setPath("/");
-        cookie2.setMaxAge((int)refreshTokenDt);
-        cookie2.setSecure(true);
-        response.addCookie(cookie);
-        response.addCookie(cookie2);
+        //7. 세션사용
+        req.setAttribute("s_userId", userDto.getUserId());
 
         return map;
     }
@@ -226,6 +193,7 @@ public class UserService {
         User user = User.builder()
                 .userId(loginDto.getUserId())
                 .username(loginDto.getNickname())
+                .email(loginDto.getUserId())
                 .password(passwordEncoder.encode(loginDto.getPassword()))
                 .nickname(loginDto.getNickname())
                 .authorities(Collections.singleton(authority))
@@ -254,6 +222,9 @@ public class UserService {
     @Transactional
     public ResponseEntity getUserInfo(HttpServletRequest request) {
         String userId = (request.getAttribute("s_userId") != null ? (String)request.getAttribute("s_userId") : null );
+        if(userId == null)
+            return ResponseEntity.ok().build();
+
         LoginDto loginDto = new LoginDto();
         loginDto.setUserId(userId);
         Optional<User> user = userRepository.findByUserId(loginDto.getUserId());
@@ -262,9 +233,9 @@ public class UserService {
             throw new BadCredentialsException("사용자정보가 없습니다.");
         }
 
-
+        loginDto.setNickname(user.get().getNickname());
         return ResponseEntity.ok()
-                .body(user);
+                .body(loginDto);
     }
 
     /**
@@ -296,6 +267,41 @@ public class UserService {
         return new ResponseEntity<>(new TokenDto(accessToken, accessTokenDt, refreshToken, refreshTokenDt), httpHeaders, HttpStatus.OK);
     }
 
+
+    /**
+     * 사용자정보 조회
+     */
+    @Transactional
+    public ResponseEntity logout(HttpServletRequest request) {
+
+        //오늘날짜 구하기
+        Date now = new Date(System.currentTimeMillis());    //현재시간
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String today = sdf.format(now); //오늘날짜
+
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals(JwtFilter.ACCESS_TOKEN_HEADER)){
+                    String accessToken = cookie.getValue();
+                    Optional<UserToken> optUserToken = userTokenRepository.findByAccessToken(accessToken);
+                    if(optUserToken.isPresent()){
+                        UserToken userToken = optUserToken.get();
+                        userToken.setEndDt(now);
+                        userTokenRepository.save(userToken);
+                    }
+
+                    //블랙리스트 추가
+                    tokenBlacklist.addToBlacklist(accessToken);
+                }
+            }
+        }
+        //세션삭제
+        request.getSession().invalidate();
+
+
+        return ResponseEntity.ok().build();
+    }
 
     //사용자관리 저장
     public void saveUser(Map Map){

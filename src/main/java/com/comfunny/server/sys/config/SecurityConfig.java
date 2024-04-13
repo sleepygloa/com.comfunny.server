@@ -86,6 +86,8 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //                .antMatchers("/login/test").authenticated()
                 .authorizeRequests()
                 .antMatchers("/","/login/saveUser", "/login/getUserInfo").permitAll()
+                .antMatchers("/api/**")
+                .hasRole(Role.USER.name())
 
                 //JWT 검증
                 .and()
@@ -99,7 +101,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
                 .and()
                 .oauth2Login() //OAuth2 로그인 설정 시작점
 //                .defaultSuccessUrl("/oauth/loginInfo", true) //OAuth2 성공시
-                .successHandler(new MyAuthenticationSuccessHandler()) //인증에 성공하면 실행할 handler (redirect 시킬 목적)
+                .successHandler(new MyAuthenticationSuccessHandler(jwtTokenProvider)) //인증에 성공하면 실행할 handler (redirect 시킬 목적)
                 .userInfoEndpoint() //OAuth2 로그인 성공 이후 사용자 정보를 가져올 때 설정 담당
                 .userService(customOAuth2UserService); //OAuth2 로그인 성공 시, 작업을 진행할 MemberService
         ;

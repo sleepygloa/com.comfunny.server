@@ -21,6 +21,10 @@ public class CodeController {
 
     @Resource
     private CodeDao codeDao;
+
+    @PostMapping("/code")
+    public void getCodeListForSelectBox() {
+    }
 //
 //
 //    /*********************************************************************************

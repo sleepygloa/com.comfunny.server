@@ -1,39 +1,39 @@
 
 ##Log
-logging:
-  level:
-    sql: debug
-    jdbc:
-      sql-timing: debug
-      resultsettable: debug
-      resultset: debug
-      audit: off
-      result: off
-      connection: off
-      sqlonly: debug
-    org:
-      springframework: info
-      hibernate:
-        SQL: debug
-
 #logging:
 #  level:
-#    com:
-#      comfunny:
-#        MyProject: debug
-#    org:
-#      springframework:
-#        web: debug
-#      hibernate:
-#        SQL: off
-#    sql: error
+#    sql: debug
 #    jdbc:
-#      sqltiming: info
-#      resultsettable: info
-#      audit: off
-#      resultset: off
+#      sql-timing: debug
+#      resultsettable: debug
+#      resultset: debug
+#      audit: debug
+#      result: debug
 #      connection: off
 #      sqlonly: debug
+#    org:
+#      springframework: info
+#      hibernate:
+#        SQL: debug
+
+logging:
+  level:
+    com:
+      comfunny:
+        server: debug
+    org:
+      springframework:
+        web: debug
+      hibernate:
+        SQL: debug
+    sql: error
+    jdbc:
+      sqltiming: debug
+      resultsettable: debug
+      audit: off
+      resultset: off
+      connection: off
+      sqlonly: debug
 #  file:
 #    max-history: 9999999
 #    max-size: 100MB

@@ -61,4 +61,6 @@ logging:
       audit: DEBUG
       resultset: DEBUG
 
-
+url:
+  client: http://localhost:3000
+  server: http://localhost:8090
