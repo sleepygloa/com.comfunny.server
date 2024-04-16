@@ -2,6 +2,7 @@ package com.comfunny.server.proj.sys.controller;
 
 import com.comfunny.server.proj.sys.dto.LoginDto;
 import com.comfunny.server.proj.sys.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,5 +56,12 @@ public class LoginController {
     @GetMapping("/getUserInfo")
     public ResponseEntity getUserInfo(HttpServletRequest request)  {
         return userService.getUserInfo(request);
+    }
+    /**
+     * OAuth2 구글 로그인 성공후 리다이렉팅
+     * */
+    @GetMapping("/oauth2/code")
+    public void redirectAuthCode(@Param("userId") String userId, @Param("password") String password, @Param("username") String username, HttpServletRequest request, HttpServletResponse response) throws IOException {
+         userService.redirectAuthCode(request, response, userId, password, username);
     }
 }

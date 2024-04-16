@@ -30,8 +30,8 @@ public class JwtTokenProvider implements InitializingBean {
 
     private final String acessSecretKey;
     private final String refreshSecretKey;
-    private final float accessTokenValidTimeMs;
-    private final float refreshTokenValidTimeMs;
+    private final long accessTokenValidTimeMs;
+    private final long refreshTokenValidTimeMs;
 
     private static Key accessTokenKey;
     private static Key refreshTokenKey;
@@ -39,13 +39,13 @@ public class JwtTokenProvider implements InitializingBean {
     public JwtTokenProvider(
             @Value("${jwt.acessSecretKey}") String acessSecretKey,
             @Value("${jwt.refreshSecretKey}") String refreshSecretKey,
-            @Value("${jwt.access-token-validity-in-seconds}") float accessTokenValidInSec,
-            @Value("${jwt.refresh-token-validity-in-seconds}") float refreshTokenValidInSec
+            @Value("${jwt.access-token-validity-in-seconds}") long accessTokenValidInSec,
+            @Value("${jwt.refresh-token-validity-in-seconds}") long refreshTokenValidInSec
     ) {
         this.acessSecretKey = acessSecretKey; //BASE64암호화 되어있음.
         this.refreshSecretKey = refreshSecretKey; //BASE64암호화 되어있음.
-        this.accessTokenValidTimeMs = accessTokenValidInSec * 1000;
-        this.refreshTokenValidTimeMs = refreshTokenValidInSec * 1000;
+        this.accessTokenValidTimeMs = accessTokenValidInSec;
+        this.refreshTokenValidTimeMs = refreshTokenValidInSec;
     }
 
     @Override

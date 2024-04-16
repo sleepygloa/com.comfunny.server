@@ -24,7 +24,7 @@ public class UserProfile implements Serializable {
                 .email(email)
                 .provider(provider)
                 .nickname(nickname)
-                .activated(true).pwdFailCnt(0).build();
+                .activated(true).build();
 
     }
 }

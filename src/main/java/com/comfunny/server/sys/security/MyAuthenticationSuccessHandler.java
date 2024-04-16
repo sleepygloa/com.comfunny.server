@@ -40,18 +40,12 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
         System.out.println("oAuth2User = " + oAuth2User.getName());
         System.out.println("oAuth2User = " + oAuth2User.getAttribute("email"));
 
-
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(oAuth2User.getAttribute("name") , oAuth2User.getAttribute("sub"));
-        Map mapAccessToken = jwtTokenProvider.createAccessToken(authenticationToken);
-        Map mapRefreshToken = jwtTokenProvider.createRefreshToken(authenticationToken);
-        httpServletResponse.addCookie(new Cookie("accessToken", (String)mapAccessToken.get(Contraints.ACCESS_TOKEN)));
-        httpServletResponse.addCookie(new Cookie("refreshToken", (String)mapRefreshToken.get(Contraints.REFRESH_TOKEN)));
-//        httpServletResponse.sendRedirect(UriComponentsBuilder.fromUriString("http://localhost:3000")
-//                .build()
-//                .encode(StandardCharsets.UTF_8).toUriString());
-        httpServletResponse.sendRedirect(UriComponentsBuilder.fromUriString("http://sleepygloa.github.io")
+        httpServletResponse
+                .sendRedirect(UriComponentsBuilder.fromUriString("/login/oauth2/code")
+                        .queryParam("userId", (String)oAuth2User.getAttribute("email"))
+                        .queryParam("password", (String)oAuth2User.getName())
                 .build()
-                .encode(StandardCharsets.UTF_8).toUriString());
+                .encode(StandardCharsets.UTF_8)
+                        .toUriString());
     }
 }

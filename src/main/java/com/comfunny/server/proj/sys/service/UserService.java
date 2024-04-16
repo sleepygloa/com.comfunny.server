@@ -3,16 +3,19 @@ package com.comfunny.server.proj.sys.service;
 import com.comfunny.server.proj.sys.domain.User;
 import com.comfunny.server.proj.sys.domain.UserCnnLog;
 import com.comfunny.server.proj.sys.domain.UserToken;
+import com.comfunny.server.proj.sys.domain.UserTokenPk;
 import com.comfunny.server.proj.sys.dto.*;
 import com.comfunny.server.proj.sys.repository.*;
 import com.comfunny.server.sys.config.Contraints;
 import com.comfunny.server.sys.security.JwtFilter;
 import com.comfunny.server.sys.security.JwtTokenProvider;
 import com.comfunny.server.sys.security.TokenBlacklist;
+import com.comfunny.server.sys.security.controller.dto.Role;
 import com.comfunny.server.sys.security.controller.dto.TokenDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -35,60 +39,41 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+
+import static com.comfunny.server.sys.security.JwtFilter.resolveToken;
 
 
 @Service("userService")
 @Slf4j
 public class UserService {
-    private final UserDao userDao;
-    private final UserRepository userRepository;
-    private final UserAuthorityRepository userAuthorityRepository;
-    private final UserTokenRepository userTokenRepository;
-    private final JwtTokenProvider jwtTokenProvider;
-    private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
-
-    private final UserCnnLogRepository userCnnLogRepository;
-
-
+    @Autowired
+    private  UserRepository userRepository;
+    @Autowired
+    private  UserTokenRepository userTokenRepository;
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserCnnLogRepository userCnnLogRepository;
+    @Autowired
+    private UserCnnLogService userCnnLogService;
 
     @Autowired
     private TokenBlacklist tokenBlacklist;
 
+    @Value("${url.client}")
+    private String urlClient;
 
-    public UserService(
-            UserRepository userRepository
-            , UserAuthorityRepository userAuthorityRepository
-            , UserTokenRepository userTokenRepository
-            , UserCnnLogRepository userCnnLogRepository
-            , UserDao userDao
-            , PasswordEncoder passwordEncoder
-            , JwtTokenProvider jwtTokenProvider
-            , AuthenticationManagerBuilder authenticationManagerBuilder
-    ) {
-        this.userRepository = userRepository;
-        this.userAuthorityRepository = userAuthorityRepository;
-        this.userTokenRepository = userTokenRepository;
-        this.userCnnLogRepository = userCnnLogRepository;
-        this.userDao = userDao;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtTokenProvider = jwtTokenProvider;
-        this.authenticationManagerBuilder = authenticationManagerBuilder;
-    }
+
+
     /**
      * 로그인화면
      * 로그인
      * */
     public Map login (Map map, HttpServletRequest req) throws Exception {
 
-        //오늘날짜 구하기
-        Date now = new Date(System.currentTimeMillis());    //현재시간
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        String today = sdf.format(now); //오늘날짜
 
         //요청 값 세팅
         LoginDto userDto = new LoginDto();
@@ -107,7 +92,6 @@ public class UserService {
                 .nickname(userDto.getNickname())
                 .authorities(Collections.singleton(authority))
                 .activated(true)
-                .pwdFailCnt(0)
                 .build();
 //
         //2. 사용자정보확인
@@ -133,45 +117,20 @@ public class UserService {
         log.debug("[DEVLOG] ##### refreshToken : {}",mapRefreshToken.get(Contraints.REFRESH_TOKEN));
         String accessToken = (String)mapAccessToken.get(Contraints.ACCESS_TOKEN);
         String refreshToken = (String)mapRefreshToken.get(Contraints.REFRESH_TOKEN);
-        float accessTokenDt = ((float)mapAccessToken.get(Contraints.ACCESS_TOKEN+"_dt"));
-        float refreshTokenDt = ((float)mapRefreshToken.get(Contraints.REFRESH_TOKEN+"_dt"));
+        long accessTokenDt = ((long)mapAccessToken.get(Contraints.ACCESS_TOKEN+"_dt"));
+        long refreshTokenDt = ((long)mapRefreshToken.get(Contraints.REFRESH_TOKEN+"_dt"));
 
         //4. 토큰저장
-        UserToken newUserToken = new UserToken();
-        newUserToken.setBgnDt(now);
-        newUserToken.setUserId(userDto.getUserId());
-        newUserToken.setAccessToken(accessToken);
-        newUserToken.setRefreshToken(refreshToken);
-        newUserToken.setAccessTokenDt(new Date((long)accessTokenDt));
-        newUserToken.setRefreshTokenDt(new Date((long)refreshTokenDt));
-        //EndDt null을 찾아서 현재시각으로 세팅
-        Optional<UserToken> optTokenEndDtNull = userTokenRepository.findByUserIdAndEndDt(userDto.getUserId(), null);
-        if(optTokenEndDtNull.isPresent()){
-            UserToken selToken = optTokenEndDtNull.get();
-            selToken.setEndDt(now);
-            userTokenRepository.save(selToken);
-        }
-        userTokenRepository.save(newUserToken);
-
-        //5. 세션처리
-//        userDto.setSessions(session);
-        UserCnnLog userCnnLog = new UserCnnLog();
-        userCnnLog.setUserId(userDto.getUserId());
-        userCnnLog.setInUserId(userDto.getUserId());
-        userCnnLog.setUpUserId(userDto.getUserId());
-//        userCnnLog.setLoginOs(userDto.getLoginOs());
-        userCnnLog.setBizCd((userDto.getBizCd() != null ? userDto.getBizCd()  : Contraints.COMPANY_CD));
-        userCnnLog.setLangCd((userDto.getLangCd() != null ? userDto.getLangCd()  : Contraints.INIT_SESSION_VALUE_LANG_CD));
-        userCnnLog.setCountryCd((userDto.getCountryCd() != null ? userDto.getCountryCd()  : Contraints.INIT_SESSION_VALUE_COUNTRY_CD));
-//        userCnnLog.setDcCd(userDto.getLoginOs());
-//        userCnnLog.setClientCd(userDto.getLoginOs());
-        userCnnLogRepository.save(userCnnLog);
-
-        //6. header 토큰 저장 및 메인화면으로
         map.put("accessToken",accessToken);
         map.put("accessTokenDt",accessTokenDt);
         map.put("refreshToken",refreshToken);
         map.put("refreshTokenDt",refreshTokenDt);
+        saveUserToken(map);
+
+        //5. 로그저장
+        userCnnLogService.insertUserCnnLog(req, userDto.getUserId(), "LOGIN", "");
+
+        //6. header 토큰 저장 및 메인화면으로
 
         //7. 세션사용
         req.setAttribute("s_userId", userDto.getUserId());
@@ -186,10 +145,12 @@ public class UserService {
     @Transactional
     public ResponseEntity saveUserReg(LoginDto loginDto) throws IOException{
 
+        //1. 사용자정보 객체화
         Authority authority = Authority.builder()
                 .authorityName(Contraints.ROLE_USER)
                 .build();
 
+        //2. 사용자정보확인
         User user = User.builder()
                 .userId(loginDto.getUserId())
                 .username(loginDto.getNickname())
@@ -197,10 +158,8 @@ public class UserService {
                 .password(passwordEncoder.encode(loginDto.getPassword()))
                 .nickname(loginDto.getNickname())
                 .authorities(Collections.singleton(authority))
-                .roles(Contraints.ROLE_USER)
                 .provider(Contraints.SIGNUP_DEFAULT)
                 .activated(true)
-                .pwdFailCnt(0)
                 .build();
 
         //아이디 확인
@@ -221,10 +180,14 @@ public class UserService {
      */
     @Transactional
     public ResponseEntity getUserInfo(HttpServletRequest request) {
-        String userId = (request.getAttribute("s_userId") != null ? (String)request.getAttribute("s_userId") : null );
-        if(userId == null)
+        //1. AccessToken 추출
+        String jwt = (resolveToken(request) == null? null : resolveToken(request).get("accessToken"));
+        if(jwt == null){
             return ResponseEntity.ok().build();
+        }
 
+        //2. 사용자정보(userId) 추출
+        String userId = jwtTokenProvider.getAuthenticationUserId(jwt); //jwt에서 사용자 id를 꺼낸다.
         LoginDto loginDto = new LoginDto();
         loginDto.setUserId(userId);
         Optional<User> user = userRepository.findByUserId(loginDto.getUserId());
@@ -233,52 +196,72 @@ public class UserService {
             throw new BadCredentialsException("사용자정보가 없습니다.");
         }
 
+        //3. 사용자정보(nickname) 세팅
+        //(Client 화면에서 보여주는 내용)
         loginDto.setNickname(user.get().getNickname());
         return ResponseEntity.ok()
                 .body(loginDto);
     }
 
     /**
-     * JWT 토큰 발급 및 반환 로직
-     * */
-    public ResponseEntity getJwtHeader(LoginDto user) throws IOException{
-        log.debug("##### getJwtHeader start #####");
-        //토큰 생성
+     * Oauth2 로그인 성공시 리다이렉트 되는 메소드
+     */
+    @Transactional
+    public void redirectAuthCode(HttpServletRequest request, HttpServletResponse response, String userId, String  password, String username) throws IOException {
+        //1. 사용자정보확인
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(user.getUserId(), user.getPassword());
-        //토큰 주입
-        AuthenticationManager o = authenticationManagerBuilder.getObject();
-        Authentication authentication = o.authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+                new UsernamePasswordAuthenticationToken(userId, password);
+        Map mapAccessToken = jwtTokenProvider.createAccessToken(authenticationToken);
+        Map mapRefreshToken = jwtTokenProvider.createRefreshToken(authenticationToken);
 
-        Map mapAccessToken = jwtTokenProvider.createAccessToken(authentication);
-        Map mapRefreshToken = jwtTokenProvider.createRefreshToken(authentication);
+        //2. 토큰 생성
+        Map map = new HashMap();
         String accessToken = (String)mapAccessToken.get(Contraints.ACCESS_TOKEN);
         String refreshToken = (String)mapRefreshToken.get(Contraints.REFRESH_TOKEN);
-        float accessTokenDt = ((float)mapAccessToken.get(Contraints.ACCESS_TOKEN+"_dt"));
-        float refreshTokenDt = ((float)mapRefreshToken.get(Contraints.REFRESH_TOKEN+"_dt"));
+        long accessTokenDt = ((long)mapAccessToken.get(Contraints.ACCESS_TOKEN+"_dt"));
+        long refreshTokenDt = ((long)mapRefreshToken.get(Contraints.REFRESH_TOKEN+"_dt"));
 
-        //헤더에 토큰 추가
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JwtFilter.ACCESS_TOKEN_HEADER, "Bearer " + accessToken);
-        httpHeaders.add(JwtFilter.REFRESH_TOKEN_HEADER, "Bearer " + refreshToken);
-        log.debug("##### getJwtHeader jwt ##### bearer " +accessToken);
-        log.debug("##### getJwtHeader end #####");
-        return new ResponseEntity<>(new TokenDto(accessToken, accessTokenDt, refreshToken, refreshTokenDt), httpHeaders, HttpStatus.OK);
+        //3. 토큰저장
+        map.put("userId",userId);
+        map.put("accessToken",accessToken);
+        map.put("accessTokenDt",accessTokenDt);
+        map.put("refreshToken",refreshToken);
+        map.put("refreshTokenDt",refreshTokenDt);
+        saveUserToken(map);
+
+        //4. 사용자정보 저장
+        User user = new User();
+        user.setUserId(userId);
+        user.setNickname(username);
+        user.setEmail(userId);
+        user.setActivated(true);
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+
+        //5. 로그저장
+        userCnnLogService.insertUserCnnLog(request, userId, "OAUTH_LOGIN", "GOOGLE");
+
+        //6. 토큰 저장
+        String ckAccessTokenStr = "accessToken="+(String)mapAccessToken.get(Contraints.ACCESS_TOKEN)+"; Path=/; Max-Age=115000; HttpOnly; Secure; SameSite=None";
+        String ckRefreshTokenStr = "refreshToken="+(String)mapRefreshToken.get(Contraints.REFRESH_TOKEN)+"; Path=/; Max-Age=115000; HttpOnly; Secure; SameSite=None";
+        response.addHeader("Set-Cookie", ckAccessTokenStr);
+        response.addHeader("Set-Cookie", ckRefreshTokenStr);
+        response.sendRedirect(urlClient);
     }
 
-
     /**
-     * 사용자정보 조회
+     * 로그아웃
+     * 토큰삭제 및 세션 삭제
      */
     @Transactional
     public ResponseEntity logout(HttpServletRequest request) {
 
-        //오늘날짜 구하기
+        //1.오늘날짜 구하기
         Date now = new Date(System.currentTimeMillis());    //현재시간
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String today = sdf.format(now); //오늘날짜
 
+        //2.사용자정보확인
         Cookie[] cookies = request.getCookies();
         if(cookies != null){
             for(Cookie cookie : cookies){
@@ -288,15 +271,18 @@ public class UserService {
                     if(optUserToken.isPresent()){
                         UserToken userToken = optUserToken.get();
                         userToken.setEndDt(now);
+                        //1) 토큰저장
                         userTokenRepository.save(userToken);
+                        //2) 로그저장
+                        userCnnLogService.insertUserCnnLog(request, userToken.getUserTokenPk().getUserId(), "OAUTH_LOGIN", "GOOGLE");
                     }
 
-                    //블랙리스트 추가
+                    //3) 블랙리스트추가
                     tokenBlacklist.addToBlacklist(accessToken);
                 }
             }
         }
-        //세션삭제
+        //3.세션삭제
         request.getSession().invalidate();
 
 
@@ -359,5 +345,38 @@ public class UserService {
         log.debug("##### socialAuthCheck start #####");
 
         log.debug("##### socialAuthCheck end #####");
+    }
+
+
+    /**
+     * Save UserToken Table
+     * */
+    private void saveUserToken(Map map){
+
+        //오늘날짜 구하기
+        Date now = new Date(System.currentTimeMillis());    //현재시간
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String today = sdf.format(now); //오늘날짜
+
+        //4. 토큰저장
+        UserTokenPk userTokenPk = new UserTokenPk();
+        userTokenPk.setBgnDt(now);
+        userTokenPk.setUserId(map.get("userId").toString());
+
+
+        UserToken newUserToken = new UserToken();
+        newUserToken.setUserTokenPk(userTokenPk);
+        newUserToken.setAccessToken(map.get("accessToken").toString());
+        newUserToken.setRefreshToken(map.get("refreshToken").toString());
+        newUserToken.setAccessTokenDt(new Date((long)map.get("accessTokenDt")));
+        newUserToken.setRefreshTokenDt(new Date((long)map.get("refreshTokenDt")));
+        //EndDt null을 찾아서 현재시각으로 세팅
+        Optional<UserToken> optTokenEndDtNull = userTokenRepository.findByUserTokenPkUserIdAndEndDt(map.get("userId").toString(), null);
+        if(optTokenEndDtNull.isPresent()){
+            UserToken selToken = optTokenEndDtNull.get();
+            selToken.setEndDt(now);
+            userTokenRepository.save(selToken);
+        }
+        userTokenRepository.save(newUserToken);
     }
 }

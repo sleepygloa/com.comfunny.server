@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 /**
  * Client To Server
@@ -19,12 +20,8 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class UserToken {
 
-    @Id
-    @Column(name = "bgn_dt")
-    private Date bgnDt;
-
-    @Column(name = "user_id", length = 20)
-    private String userId; //사용자ID
+    @EmbeddedId
+    private UserTokenPk userTokenPk;
 
     /*  */
     @Column(name = "access_token")
@@ -43,4 +40,16 @@ public class UserToken {
     @Column(name = "end_dt")
     private Date endDt;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserToken userToken = (UserToken) o;
+        return Objects.equals(userTokenPk, userToken.userTokenPk) && Objects.equals(accessToken, userToken.accessToken) && Objects.equals(accessTokenDt, userToken.accessTokenDt) && Objects.equals(refreshToken, userToken.refreshToken) && Objects.equals(refreshTokenDt, userToken.refreshTokenDt) && Objects.equals(endDt, userToken.endDt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userTokenPk, accessToken, accessTokenDt, refreshToken, refreshTokenDt, endDt);
+    }
 }

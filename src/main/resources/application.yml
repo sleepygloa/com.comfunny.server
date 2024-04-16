@@ -10,7 +10,7 @@ spring:
     allow-bean-definition-overriding: true #Spring Boot ??? Bean Autowired ? ???? false
   # application-real-db ?? ??, .ignore?? ????
   profiles:
-    include: real, jwt, log4j, security
+    include: real-db, jwt, log4j, security
   session:
     store-type: jdbc
   jpa:

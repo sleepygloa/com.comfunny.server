@@ -46,8 +46,10 @@ public class JwtFilter extends GenericFilterBean {
             String jwt = (resolveToken(httpServletRequest) == null? null : resolveToken(httpServletRequest).get("accessToken"));
             String requestURI = httpServletRequest.getRequestURI();
 
-            if (StringUtils.hasText(jwt) && JwtTokenProvider.isAccessTokenValid(jwt)
-            && !tokenBlacklist.isBlacklisted(jwt)) {
+            boolean isTokenValid = JwtTokenProvider.isAccessTokenValid(jwt);
+            boolean isTokenBlacklisted = tokenBlacklist.isBlacklisted(jwt);
+            boolean isToken = StringUtils.hasText(jwt);
+            if (isToken && isTokenValid && !isTokenBlacklisted) {
                 String userId = jwtTokenProvider.getAuthenticationUserId(jwt); //jwt에서 사용자 id를 꺼낸다.
                 log.debug("[DEVLOG] ##### doFilter String userId = jwtTokenProvider.getAuthentication(jwt) {} #####", userId);
 
