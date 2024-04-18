@@ -84,7 +84,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //                .anyRequest().authenticated()
 //                .antMatchers("/login/test").authenticated()
                 .authorizeRequests()
-                .antMatchers("/", "/test", "/css/**", "/images/**", "/js/**", "/h2-console/**","/login/**").permitAll()
+                .antMatchers("/", "/test", "/css/**", "/images/**", "/js/**", "/h2-console/**","/login/**", "/wms/**").permitAll()
 //                .antMatchers("/","/login/**/**").permitAll()
                 .antMatchers("/api/**")
                 .hasRole(Role.USER.name())

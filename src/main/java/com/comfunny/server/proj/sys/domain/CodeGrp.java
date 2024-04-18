@@ -38,4 +38,5 @@ public class CodeGrp extends BaseTimeEntity {
     @ColumnDefault("'N'")
     private String delYn;
 
+
 }
