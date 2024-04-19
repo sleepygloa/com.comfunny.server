@@ -22,6 +22,8 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import static com.comfunny.server.sys.util.Utils.*;
+
 @Controller
 @Slf4j
 @RequestMapping("/wms/sys/code")
@@ -81,119 +83,50 @@ public class CodeController {
      * @Desc : 코드 조회
      * */
     @RequestMapping("/selectCodeList")
-    public ResponseEntity selectCodeList(Map map){
+    public ResponseEntity selectCodeList(@RequestBody Map map){
         List<Map> list =  convertEntityListToMapList(codeDao.selectCodeList(map));
         return ResponseEntity.ok().body(list);
     }
 
-    // Entity 리스트를 Map 리스트로 변환하는 메서드
-    private <T> List<Map> convertEntityListToMapList(List<T> entityList) {
-        AtomicInteger counter = new AtomicInteger(1);
-        return entityList.stream()
-                .map(entity -> entityToMap(entity, counter.getAndIncrement()))
-                .collect(Collectors.toList());
-    }
-    // Entity 객체를 Map으로 변환하여 순번을 추가하는 메서드
-    private <T> Map entityToMap(T entity, int id) {
-        Map<String, Object> map = new HashMap<>();
-        // Entity 객체의 각 필드를 동적으로 가져와서 Map에 추가
-        try {
-            Class<?> clazz = entity.getClass();
-            Field tableField = clazz.getDeclaredField("table");
-            tableField.setAccessible(true);
-            Object[] table = (Object[]) tableField.get(entity);
-            for (Object node : table) {
-                if (node != null) {
-                    Field keyField = node.getClass().getDeclaredField("key");
-                    keyField.setAccessible(true);
-                    Object key = keyField.get(node);
-                    if (key != null) {
-                        Field valueField = node.getClass().getDeclaredField("value");
-                        valueField.setAccessible(true);
-                        Object value = valueField.get(node);
-                        if (value != null) {
-                            map.put(convertSnakeToCamel(key.toString()), value.toString());
-                        }
-                    }
-                }
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        }
-        // 순번을 Map에 추가
-        map.put("id", id);
-        return map;
+
+    /**
+     * @Program : 코드관리
+     * @Desc : 코드그룹 저장
+     * */
+    @RequestMapping("/saveCodeGrp")
+    public ResponseEntity saveCodeGrp(@RequestBody Map map) {
+        codeService.saveCodeGrp(map);
+        return ResponseEntity.ok().build();
     }
 
-    private String convertSnakeToCamel(String snakeCase) {
-        StringBuilder camelCase = new StringBuilder();
-
-        // 문자열을 '_'로 분리하여 배열로 저장
-        String[] parts = snakeCase.split("_");
-
-        // 첫 단어는 소문자로 유지
-        camelCase.append(parts[0].toLowerCase());
-
-        // 나머지 단어의 첫 글자만 대문자로 변환하여 이어붙임
-        for (int i = 1; i < parts.length; i++) {
-            camelCase.append(Character.toUpperCase(parts[i].charAt(0)));
-            if (parts[i].length() > 1) {
-                camelCase.append(parts[i].substring(1).toLowerCase());
-            }
-        }
-
-        return camelCase.toString();
+    /**
+     * @Program : 코드관리
+     * @Desc : 코드그룹 삭제
+     * */
+    @RequestMapping("/deleteCodeGrp")
+    public ResponseEntity deleteCodeGrp(@RequestBody Map map) {
+        codeService.deleteCodeGrp(map);
+        return ResponseEntity.ok().build();
     }
-//
-//    /**
-//     * @Program : 코드관리
-//     * @Desc : 코드그룹 저장
-//     * */
-//    @RequestMapping("/saveCodeGrp")
-//    public Params saveCodeGrp(Params params) throws Exception{
-//        codeService.saveCodeGrp(params);
-//        Params outParams = new CommParams();
-//        outParams.setStsCd(200);
-//        return outParams;
-//    }
-//
-//    /**
-//     * @Program : 코드관리
-//     * @Desc : 코드그룹 삭제
-//     * */
-//    @RequestMapping("/deleteCodeGrp")
-//    public Params deleteCodeGrp(Params params) throws Exception{
-//        codeService.deleteCodeGrp(params);
-//        Params outParams = new CommParams();
-//        outParams.setStsCd(200);
-//        return outParams;
-//    }
-//
-//    /**
-//     * @Program : 코드관리
-//     * @Desc : 코드 저장
-//     * */
-//    @RequestMapping("/saveCode")
-//    public Params saveCode(Params params) throws Exception{
-//        codeService.saveCode(params);
-//
-//        Params outParams = new CommParams();
-//        outParams.setStsCd(200);
-//        return outParams;
-//    }
-//
-//    /**
-//     * @Program : 코드관리
-//     * @Desc : 코드 삭제
-//     * */
-//    @RequestMapping("/deleteCode")
-//    public Params deleteCode(Params params) throws Exception{
-//        codeService.deleteCode(params);
-//        Params outParams = new CommParams();
-//        outParams.setStsCd(200);
-//        return outParams;
-//    }
+
+    /**
+     * @Program : 코드관리
+     * @Desc : 코드 저장
+     * */
+    @RequestMapping("/saveCode")
+    public ResponseEntity saveCode(@RequestBody Map map) {
+        codeService.saveCode(map);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * @Program : 코드관리
+     * @Desc : 코드 삭제
+     * */
+    @RequestMapping("/deleteCode")
+    public ResponseEntity deleteCode(@RequestBody Map map) {
+        codeService.deleteCode(map);
+        return ResponseEntity.ok().build();
+    }
 
 }

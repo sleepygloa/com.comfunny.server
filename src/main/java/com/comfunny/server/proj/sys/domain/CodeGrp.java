@@ -30,6 +30,7 @@ public class CodeGrp extends BaseTimeEntity {
     @Column(name = "CODE_GRP_TP", length = 20)
     private String codeGrpTp;
 
+
     @Column(name = "USE_YN", length = 1)
     @ColumnDefault("'Y'")
     private String useYn;

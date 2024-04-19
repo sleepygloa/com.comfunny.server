@@ -65,6 +65,7 @@
              , CODE_GRP_CD
              , CODE_CD
              , CODE_NM
+             , CODE_DESC
              , CODE_ORDER
              , CODE_OTHER1
              , CODE_OTHER2

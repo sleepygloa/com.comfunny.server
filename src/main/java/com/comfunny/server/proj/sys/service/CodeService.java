@@ -36,71 +36,64 @@ public class CodeService extends CommonService {
 
 
     //코드그룹 저장
-    public void saveCodeGrp(Map map) throws Exception{
-//        for(DataRow dr : params.getDataTable("dt_data")) {
-//            CodeGrpPk codeGrpPk = new CodeGrpPk();
-//            codeGrpPk.setBizCd(params.getString("s_bizCd"));
-//            codeGrpPk.setCodeGrpCd(dr.getString("codeGrpCd"));
-//
-//            CodeGrp codeGrp = new CodeGrp();
-//            codeGrp.setCodeGrpPk(codeGrpPk);
-//            codeGrp.setCodeGrpNm(dr.getString("codeGrpNm"));
-//            codeGrp.setCodeGrpDesc(dr.getString("codeGrpDesc"));
-//            codeGrp.setCodeGrpTp(dr.getString("codeGrpTp"));
-//            codeGrp.setUseYn(dr.getString("useYn"));
-////            codeGrp.setDelYn(dr.getString("delYn"));
-//
-//            codeGrpRepository.save(codeGrp);
-//        }
+    public void saveCodeGrp(Map map) {
+
+        CodeGrpPk codeGrpPk = new CodeGrpPk();
+        codeGrpPk.setBizCd((String)map.get("bizCd"));
+        codeGrpPk.setCodeGrpCd((String)map.get("codeGrpCd"));
+
+        CodeGrp codeGrp = new CodeGrp();
+        codeGrp.setCodeGrpPk(codeGrpPk);
+        codeGrp.setCodeGrpNm((String)map.get("codeGrpNm"));
+        codeGrp.setCodeGrpDesc((String)map.get("codeGrpDesc"));
+        codeGrp.setCodeGrpTp((String)map.get("codeGrpTp"));
+        codeGrp.setUseYn((String)map.get("useYn"));
+
+        codeGrpRepository.save(codeGrp);
     }
 
     //코드그룹 삭제
-    public void deleteCodeGrp(Map map) throws Exception{
-//        for(DataRow dr : params.getDataTable("dt_data")){
-//            CodeGrpPk codeGrpPk = new CodeGrpPk(params.getString("s_bizCd"), dr.getString("codeGrpCd"));
-//            CodeGrp selDto = codeGrpRepository.findById(codeGrpPk).orElseThrow(()->new IllegalArgumentException("해당 데이터가 없습니다. codeGrpCd={"+params.getString("codeGrpCd")+"}"));
-//
-//            Optional<Code> codeList = codeRepository.findAllByCodePkBizCdAndCodePkCodeGrpCd(params.getString("s_bizCd"), dr.getString("codeGrpCd"));
-//            if(codeList.isPresent()){
-//                new IllegalArgumentException("코드 데이터가 존재하여 삭제 할 수 없습니다.");
-//            }
-//
-//            codeGrpRepository.delete(selDto);
-//        }
+    public void deleteCodeGrp(Map map) {
+        String bizCd = (String)map.get("bizCd");
+        String codeGrpCd = (String)map.get("codeGrpCd");
+        CodeGrpPk codeGrpPk = new CodeGrpPk(bizCd, codeGrpCd);
+        CodeGrp selDto = codeGrpRepository.findById(codeGrpPk).orElseThrow(()->new IllegalArgumentException("해당 데이터가 없습니다. codeGrpCd={"+codeGrpCd+"}"));
+
+        //해당 코드그룹에 코드 데이터가 존재하는지 확인
+        Optional<Code> codeList = codeRepository.findAllByCodePkBizCdAndCodePkCodeGrpCd(bizCd, codeGrpCd);
+        if(codeList.isPresent()){
+            new IllegalArgumentException("코드 데이터가 존재하여 삭제 할 수 없습니다.");
+        }
+
+        codeGrpRepository.delete(selDto);
     }
 
     //코드그룹 저장
-    public void saveCode(Map map) throws Exception{
-//        for(DataRow dr : params.getDataTable("dt_data")) {
-//            CodePk codePk = new CodePk();
-//            codePk.setBizCd(dr.getString("s_bizCd"));
-//            codePk.setCodeGrpCd(dr.getString("codeGrpCd"));
-//            codePk.setCodeCd(dr.getString("codeCd"));
-//
-//            Code code = new Code();
-//            code.setCodePk(codePk);
-//            code.setCodeNm(dr.getString("codeNm"));
-//            code.setCodeDesc(dr.getString("codeDesc"));
-//            code.setCodeOrder(dr.getString("codeOrder"));
-//            code.setCodeOther1(dr.getString("codeOther1"));
-//            code.setCodeOther2(dr.getString("codeOther2"));
-//            code.setCodeOther3(dr.getString("codeOther3"));
-//            code.setCodeOther4(dr.getString("codeOther4"));
-//            code.setCodeOther5(dr.getString("codeOther5"));
-//            code.setUseYn(dr.getString("useYn"));
-////            code.setDelYn(dr.getString("delYn"));
-//
-//            codeRepository.save(code);
-//        }
+    public void saveCode(Map map) {
+        CodePk codePk = new CodePk();
+        codePk.setBizCd((String)map.get("bizCd"));
+        codePk.setCodeGrpCd((String)map.get("codeGrpCd"));
+        codePk.setCodeCd((String)map.get("codeCd"));
 
+        Code code = new Code();
+        code.setCodePk(codePk);
+        code.setCodeNm((String)map.get("codeNm"));
+        code.setCodeDesc((String)map.get("codeDesc"));
+        code.setCodeOrder((String)map.get("codeOrder"));
+        code.setCodeOther1((String)map.get("codeOther1"));
+        code.setCodeOther2((String)map.get("codeOther2"));
+        code.setCodeOther3((String)map.get("codeOther3"));
+        code.setCodeOther4((String)map.get("codeOther4"));
+        code.setCodeOther5((String)map.get("codeOther5"));
+        code.setUseYn((String)map.get("useYn"));
+
+        codeRepository.save(code);
     }
 
     //코드그룹 삭제
-    public void deleteCode(Map map) throws Exception{
-//        for(DataRow dr : params.getDataTable("dt_data")){
-//            CodePk codePk = new CodePk(params.getString("s_bizCd"), dr.getString("codeGrpCd"), dr.getString("codeCd"));
-//            Code selDto = codeRepository.findById(codePk).orElseThrow(()->new IllegalArgumentException("해당 데이터가 없습니다. codeCd={"+dr.getString("codeCd")+"}, codeNm={"+dr.getString("codeNm")+"}"));
-//            codeRepository.delete(selDto);
-//        }
+    public void deleteCode(Map map) {
+        CodePk codePk = new CodePk((String)map.get("bizCd"), (String)map.get("codeGrpCd"), (String)map.get("codeCd"));
+        Code selDto = codeRepository.findById(codePk).orElseThrow(()->new IllegalArgumentException("해당 데이터가 없습니다. codeCd={"+(String)map.get("codeCd")+"}, codeNm={"+(String)map.get("codeNm")+"}"));
+        codeRepository.delete(selDto);
     }
 }

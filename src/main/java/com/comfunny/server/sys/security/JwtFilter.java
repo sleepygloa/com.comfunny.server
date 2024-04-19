@@ -46,21 +46,23 @@ public class JwtFilter extends GenericFilterBean {
             String jwt = (resolveToken(httpServletRequest) == null? null : resolveToken(httpServletRequest).get("accessToken"));
             String requestURI = httpServletRequest.getRequestURI();
 
-            boolean isTokenValid = JwtTokenProvider.isAccessTokenValid(jwt);
-            boolean isTokenBlacklisted = tokenBlacklist.isBlacklisted(jwt);
-            boolean isToken = StringUtils.hasText(jwt);
-            if (isToken && isTokenValid && !isTokenBlacklisted) {
-                String userId = jwtTokenProvider.getAuthenticationUserId(jwt); //jwt에서 사용자 id를 꺼낸다.
-                log.debug("[DEVLOG] ##### doFilter String userId = jwtTokenProvider.getAuthentication(jwt) {} #####", userId);
+            if(jwt !=  null){
+                boolean isTokenValid = JwtTokenProvider.isAccessTokenValid(jwt);
+                boolean isTokenBlacklisted = tokenBlacklist.isBlacklisted(jwt);
+                boolean isToken = StringUtils.hasText(jwt);
+                if (isToken && isTokenValid && !isTokenBlacklisted) {
+                    String userId = jwtTokenProvider.getAuthenticationUserId(jwt); //jwt에서 사용자 id를 꺼낸다.
+                    log.debug("[DEVLOG] ##### doFilter String userId = jwtTokenProvider.getAuthentication(jwt) {} #####", userId);
 
-                UserAuthentication authentication = new UserAuthentication(userId, null, null); //id를 인증한다.
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest)); //기본적으로 제공한 details 세팅
+                    UserAuthentication authentication = new UserAuthentication(userId, null, null); //id를 인증한다.
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest)); //기본적으로 제공한 details 세팅
 
-                //세션에서 계속 사용하기 위해 securityContext에 Authentication 등록
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                log.debug("[DEVLOG] Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
+                    //세션에서 계속 사용하기 위해 securityContext에 Authentication 등록
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    log.debug("[DEVLOG] Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
 
-                request.setAttribute("s_userId", userId);
+                    request.setAttribute("s_userId", userId);
+                }
             }
         }catch(Exception ex){
             log.error("[DEVLOG] Could not set user authentication in security context", ex);
