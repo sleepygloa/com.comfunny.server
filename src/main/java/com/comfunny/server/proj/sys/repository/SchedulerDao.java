@@ -6,9 +6,13 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * */
 @Mapper
 public interface SchedulerDao {
 
-    List<Scheduler> selectSchedulerList(Map map);
+    // 스케쥴러관리 조회
+    List<Map<String, Object>> selectSchedulerList(Map map);
 
 }

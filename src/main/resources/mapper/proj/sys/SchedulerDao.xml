@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sys.repository.SchedulerDao">
+
+
+    <select id="selectSchedulerList" resultType="HMap" >
+      SELECT
+             SCHE_SEQ
+           , SCHE_NM
+           , SCHE_DESC
+           , SCHE_CLASS_PATH
+           , SCHE_SEC
+           , SCHE_MIN
+           , SCHE_HOUR
+           , SCHE_DAY
+           , SCHE_MONTH
+           , SCHE_YEAR
+           , USE_YN
+       FROM tb_sy_scheduler
+      WHERE 1=1
+        <if test="codeCd != NULL and !''.equals(codeCd)">
+            AND SCHE_NM LIKE '%' || #{codeCd} || '%'
+        </if>
+    </select>
+</mapper>

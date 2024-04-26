@@ -1,10 +1,7 @@
 package com.comfunny.server.proj.sys.domain;
 
 import com.comfunny.server.sys.BaseTimeEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
@@ -17,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Getter
 @Table(name = "tb_sy_scheduler")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Scheduler extends BaseTimeEntity {

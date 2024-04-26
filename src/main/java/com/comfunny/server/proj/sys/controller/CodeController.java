@@ -3,10 +3,12 @@ package com.comfunny.server.proj.sys.controller;
 import com.comfunny.server.proj.sys.domain.Code;
 import com.comfunny.server.proj.sys.domain.CodeGrp;
 import com.comfunny.server.proj.sys.repository.CodeDao;
+import com.comfunny.server.proj.sys.repository.CodeRepository;
 import com.comfunny.server.proj.sys.service.CodeService;
 import com.nimbusds.oauth2.sdk.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.formula.functions.T;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,10 +36,9 @@ public class CodeController {
 
     @Resource
     private CodeDao codeDao;
+    @Resource
+    private CodeRepository codeRepository;
 
-    @PostMapping("/code")
-    public void getCodeListForSelectBox() {
-    }
 //
 //
 //    /*********************************************************************************
@@ -75,7 +76,8 @@ public class CodeController {
      * */
     @RequestMapping("/selectCodeGrpList")
     public ResponseEntity selectCodeGrpList(@RequestBody Map map){
-        List<Map> list =  convertEntityListToMapList(codeDao.selectCodeGrpList(map));
+        List<Map<String, Object>> s = codeDao.selectCodeGrpList(map);
+        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(s);
         return ResponseEntity.ok().body(list);
     }
     /**
@@ -84,7 +86,7 @@ public class CodeController {
      * */
     @RequestMapping("/selectCodeList")
     public ResponseEntity selectCodeList(@RequestBody Map map){
-        List<Map> list =  convertEntityListToMapList(codeDao.selectCodeList(map));
+        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(codeDao.selectCodeList(map));
         return ResponseEntity.ok().body(list);
     }
 

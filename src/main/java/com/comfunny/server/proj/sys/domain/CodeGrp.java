@@ -1,9 +1,7 @@
 package com.comfunny.server.proj.sys.domain;
 
 import com.comfunny.server.sys.BaseTimeEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
@@ -38,6 +36,5 @@ public class CodeGrp extends BaseTimeEntity {
     @Column(name = "DEL_YN", length = 1)
     @ColumnDefault("'N'")
     private String delYn;
-
 
 }

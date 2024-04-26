@@ -13,42 +13,39 @@ import java.util.Map;
 @Slf4j
 public class SchedulerService extends CommonService {
 
+    //스케쥴러 레파지토리
     @Resource
     SchedulerRepository schedulerRepository;
 
     //스케쥴러 저장
     public void saveScheduler(Map map) throws Exception{
-//        for(DataRow dr : params.getDataTable("dt_data")) {
-//            SchedulerPk schedulerPk = new SchedulerPk();
-//            schedulerPk.setBizCd(params.getString("s_bizCd"));
-//            schedulerPk.setScheSeq(dr.getString("scheSeq"));
-//
-//            Scheduler scheduler = new Scheduler();
-//            scheduler.setScheNm(dr.getString("scheNm"));
-//            scheduler.setScheDesc(dr.getString("scheDesc"));
-//            scheduler.setScheClassPath(dr.getString("scheCalssPath"));
-//            scheduler.setScheSec(dr.getString("scheSec"));
-//            scheduler.setScheMin(dr.getString("scheMin"));
-//            scheduler.setScheHour(dr.getString("scheHour"));
-//            scheduler.setScheDay(dr.getString("scheDay"));
-//            scheduler.setScheMonth(dr.getString("scheMonth"));
-//            scheduler.setScheYear(dr.getString("scheYear"));
-//            scheduler.setUseYn(dr.getString("useYn"));
-//
-//            schedulerRepository.save(scheduler);
-//        }
+        SchedulerPk schedulerPk = new SchedulerPk();
+        schedulerPk.setBizCd((String)map.get("bizCd"));
+        schedulerPk.setScheSeq((String)map.get("scheSeq"));
+
+        Scheduler scheduler = new Scheduler();
+        scheduler.setScheNm((String)map.get("scheNm"));
+        scheduler.setScheDesc((String)map.get("scheDesc"));
+        scheduler.setScheClassPath((String)map.get("scheCalssPath"));
+        scheduler.setScheSec((String)map.get("scheSec"));
+        scheduler.setScheMin((String)map.get("scheMin"));
+        scheduler.setScheHour((String)map.get("scheHour"));
+        scheduler.setScheDay((String)map.get("scheDay"));
+        scheduler.setScheMonth((String)map.get("scheMonth"));
+        scheduler.setScheYear((String)map.get("scheYear"));
+        scheduler.setUseYn((String)map.get("useYn"));
+
+        schedulerRepository.save(scheduler);
     }
 
 
     //스케쥴러 삭제
     public void deleteScheduler(Map map) throws Exception{
-//        for(DataRow dr : params.getDataTable("dt_data")) {
-//            SchedulerPk schedulerPk = new SchedulerPk();
-//            schedulerPk.setBizCd(params.getString("s_bizCd"));
-//            schedulerPk.setScheSeq(dr.getString("scheSeq"));
-//
-//            Scheduler scheduler = schedulerRepository.findById(schedulerPk).orElseThrow(()->new IllegalArgumentException("해당 데이터가 없습니다. codeCd={"+dr.getString("bizCd")+"}, schedulerNm={"+dr.getString("scheNm")+"}"));
-//            schedulerRepository.delete(scheduler);
-//        }
+        SchedulerPk schedulerPk = new SchedulerPk();
+        schedulerPk.setBizCd((String)map.get("bizCd"));
+        schedulerPk.setScheSeq((String)map.get("scheSeq"));
+
+        Scheduler scheduler = schedulerRepository.findById(schedulerPk).orElseThrow(()->new IllegalArgumentException("해당 데이터가 없습니다. codeCd={"+(String)map.get("bizCd")+"}, schedulerNm={"+(String)map.get("scheNm")+"}"));
+        schedulerRepository.delete(scheduler);
     }
 }
