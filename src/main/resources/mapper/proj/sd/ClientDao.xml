@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sd.repository.ClientDao">
+    <select id="selectClientList" resultType="HMap" >
+        SELECT /*[ClientDao.xml][selectClientList] 고객사 데이터들을 조회 */
+               BIZ_CD
+             , CLIENT_CD
+             , CLIENT_NM
+             , BIZ_NO
+             , BIZ_NM
+             , CEO_NM
+             , POST_NO
+             , BASIC_ADDR
+             , DETAIL_ADDR
+             , DETAIL_ADDR
+             , BIZ_TP
+             , BIZ_KND
+             , TEL_NO
+             , FAX_NO
+             , CONTACT_NM
+             , CONTACT_TEL_NO
+             , CONTACT_EMAIL
+             , COUNTRY_CD
+             , CITY_CD
+             , USER_COL1
+             , USER_COL2
+             , USER_COL3
+             , USER_COL4
+             , USER_COL5
+             , REMARK
+             , USE_YN
+             , IN_DT
+             , IN_USER_ID
+             , UP_DT
+             , UP_USER_ID
+          FROM tb_ms_client
+         WHERE 1=1
+          <if test="codeCd != null and codeCd != ''">
+           AND CLIENT_NM LIKE '%'#{codeCd}'%'
+          </if>
+    </select>
+
+     <select id="select"
+             resultType="com.comfunny.server.proj.sd.domain.Biz"
+             parameterType="com.comfunny.server.proj.sd.domain.Biz">
+          SELECT /*[BizDao.xml][select] 회사 데이터를 조회 */
+                 ID
+               , BIZ_CD
+               , BIZ_NO
+               , BIZ_NM
+               , BIZ_SNM
+               , CEO
+               , ZIP
+               , ADDR
+               , DETAIL_ADDR
+               , INDUTY
+               , BIZ_CND
+               , TEL
+               , FAX
+               , ETC_NO1
+               , ETC_NO2
+               , ETC_TP1
+               , ETC_TP2
+               , EXT_COL1
+               , EXT_COL2
+               , EXT_COL3
+               , EXT_COL4
+               , EXT_COL5
+               , USE_YN
+               , IN_DT
+               , IN_USER_ID
+               , UP_DT
+               , UP_USER_ID
+          FROM tb_ms_biz
+         WHERE ID = #{id}
+     </select>
+
+
+     <select id="selectMaxId"
+             resultType="java.lang.Long"
+             parameterType="com.comfunny.server.proj.sd.domain.Biz">
+        SELECT /*[BizDao.xml][selectMaxId] 회사 생성을 위한 ID 채번*/
+               MAX(ID) + 1 AS ID
+          FROM tb_ms_biz
+     </select>
+
+
+     <select id="selectBizCmb"
+             resultType="java.util.Map"
+             >
+        SELECT /*[BizDao.xml][selectBizCmb] 회사 데이터(코드, 명)을 이용해 콤보를 구성 */
+               BIZ_CD AS CODE
+             , BIZ_NM AS NAME
+          FROM tb_ms_biz
+     </select>
+</mapper>

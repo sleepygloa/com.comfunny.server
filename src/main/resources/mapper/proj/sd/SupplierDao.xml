@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sd.repository.SupplierDao">
+    <select id="selectSupplierList" resultType="HMap" >
+  SELECT /*[SupplierDao.xml][selectSupplierList] 공급처 데이터들을 조회 */
+          BIZ_CD
+        , CLIENT_CD
+        , SUPPLIER_CD
+        , SUPPLIER_NM
+        , BIZ_NO
+        , BIZ_NM
+        , CEO_NM
+        , POST_NO
+        , BASIC_ADDR
+        , DETAIL_ADDR
+        , DETAIL_ADDR
+        , BIZ_TP
+        , BIZ_KND
+        , TEL_NO
+        , FAX_NO
+        , CONTACT_NM
+        , CONTACT_TEL_NO
+        , CONTACT_EMAIL
+        , COUNTRY_CD
+        , CITY_CD
+        , DEAL_START_YMD
+        , DEAL_END_YMD
+        , DEAL_GBN_CD
+        , USER_COL1
+        , USER_COL2
+        , USER_COL3
+        , USER_COL4
+        , USER_COL5
+        , REMARK
+        , USE_YN
+        , IN_DT
+        , IN_USER_ID
+        , UP_DT
+        , UP_USER_ID
+        FROM tb_ms_supplier
+        WHERE 1=1
+        <if test="codeCd != null and codeCd != ''">
+            AND SUPPLIER_NM LIKE '%'#{codeCd}'%'
+        </if>
+    </select>
+
+</mapper>

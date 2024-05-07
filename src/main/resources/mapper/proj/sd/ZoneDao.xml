@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sd.repository.ZoneDao">
+    <select id="selectAreaList" resultType="HMap" >
+   SELECT /*[ZoneDao.xml][selectAreaList] 존의 구역 데이터들을 조회 */
+          BIZ_CD
+        , DC_CD
+        , AREA_CD
+        , AREA_NM
+        , KEEP_TEMPE_GBN_CD
+        , REMARK
+        , USE_YN
+        , IN_DT
+        , IN_USER_ID
+        , UP_DT
+        , UP_USER_ID
+     FROM tb_ms_area
+    WHERE 1=1
+    <if test="codeCd != null and codeCd != ''">
+        AND AREA_NM LIKE '%'#{codeCd}'%'
+    </if>
+    </select>
+
+    <select id="selectZoneList" resultType="HMap" >
+   SELECT /*[ZoneDao.xml][selectAreaList] 지역 데이터들을 조회 */
+          BIZ_CD
+        , DC_CD
+        , AREA_CD
+        , ZONE_CD
+        , ZONE_NM
+        , KEEP_TYPE_CD
+        , HOLD_ST_CD
+        , REMARK
+        , USE_YN
+        , IN_DT
+        , IN_USER_ID
+        , UP_DT
+        , UP_USER_ID
+     FROM tb_ms_zone
+    WHERE 1=1
+    <if test="codeCd != null and codeCd != ''">
+        AND ZONE_NM LIKE '%'#{codeCd}'%'
+    </if>
+    </select>
+
+</mapper>

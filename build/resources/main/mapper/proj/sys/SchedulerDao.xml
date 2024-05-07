@@ -19,7 +19,7 @@
        FROM tb_sy_scheduler
       WHERE 1=1
         <if test="codeCd != NULL and !''.equals(codeCd)">
-            AND SCHE_NM LIKE '%' || ${codeCd} || '%'
+            AND SCHE_NM LIKE '%' || #{codeCd} || '%'
         </if>
     </select>
 </mapper>
