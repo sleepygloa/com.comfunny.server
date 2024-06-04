@@ -38,12 +38,8 @@ public class BizService {
         Biz biz = new Biz();
         biz.setBizCd((String)map.get("bizCd"));
         biz.setBizNm((String)map.get("bizNm"));
-        biz.setBizSnm((String)map.get("bizSnm"));
         biz.setCeo((String)map.get("ceo"));
         biz.setBizNo((String)map.get("bizNo"));
-        biz.setZip((String)map.get("zip"));
-        biz.setAddr((String)map.get("addr"));
-        biz.setDetailAddr((String)map.get("detailAddr"));
 //        biz.setInduty((String)map.get("induty"));
         biz.setBizCnd((String)map.get("bizCnd"));
         biz.setTel((String)map.get("tel"));
@@ -54,11 +50,20 @@ public class BizService {
         biz.setEtcNo2((String)map.get("etcNo2"));
 
         biz.setUseYn((String)map.get("useYn"));
-//        biz.setExtCol1((String)map.get("extCol1"));
-//        biz.setExtCol2((String)map.get("extCol2"));
-//        biz.setExtCol3((String)map.get("extCol3"));
-//        biz.setExtCol4((String)map.get("extCol4"));
-//        biz.setExtCol5((String)map.get("extCol5"));
+        biz.setExtCol1((String)map.get("extCol1"));
+        biz.setExtCol2((String)map.get("extCol2"));
+        biz.setExtCol3((String)map.get("extCol3"));
+        biz.setExtCol4((String)map.get("extCol4"));
+        biz.setExtCol5((String)map.get("extCol5"));
+
+
+        biz.setDeliveryNm((String)map.get("deliveryNm"));
+        biz.setZip((String)map.get("zip"));
+        biz.setJibunAddr((String)map.get("jibunAddr"));
+        biz.setRoadAddr((String)map.get("roadAddr"));
+        biz.setDetailAddr((String)map.get("detailAddr"));
+        biz.setLat((String)map.get("lat"));
+        biz.setLon((String)map.get("lon"));
 
         bizRepository.save(biz);
     }
