@@ -19,7 +19,7 @@ public class StoreService {
     /**
      * 배송처 저장
      * */
-    public void saveStore(Map map) throws Exception{
+    public void save(Map map) throws Exception{
             if(ObjectUtils.isEmpty(map.get("bizCd"))){
                     throw new IllegalArgumentException("사업자코드 는 필수 입력입니다.");
             }
@@ -44,9 +44,7 @@ public class StoreService {
             store.setBizNo((String)map.get("bizNo"));
             store.setBizNm((String)map.get("bizNm"));
             store.setCeoNm((String)map.get("ceoNm"));
-            store.setPostNo((String)map.get("postNo"));
-            store.setBasicAddr((String)map.get("basicAddr"));
-            store.setDetailAddr((String)map.get("detailAddr"));
+
             store.setBizTp((String)map.get("bizTp"));
             store.setBizKnd((String)map.get("bizKnd"));
             store.setTelNo((String)map.get("telNo"));
@@ -75,12 +73,20 @@ public class StoreService {
             store.setInUserId((String)map.get("s_userId"));
             store.setUpUserId((String)map.get("s_userId"));
 
+            store.setDeliveryNm((String)map.get("deliveryNm"));
+            store.setZip((String)map.get("zip"));
+            store.setJibunAddr((String)map.get("jibunAddr"));
+            store.setRoadAddr((String)map.get("roadAddr"));
+            store.setDetailAddr((String)map.get("detailAddr"));
+            store.setLat((String)map.get("lat"));
+            store.setLon((String)map.get("lon"));
+
             storeRepository.save(store);
     }
     /**
      * 배송처 삭제
      * */
-    public void deleteStore(Map map) throws Exception{
+    public void delete(Map map) throws Exception{
 
             StorePk storePk = new StorePk();
             storePk.setBizCd((String)map.get("bizCd"));

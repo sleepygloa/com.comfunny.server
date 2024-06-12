@@ -32,35 +32,19 @@ public class ZoneController {
 	private ZoneService zoneService;
 
 	/**
-	 * 존 페이지이동
+	 * 물류챵고 조회
 	 * */
-	@GetMapping
-	public String zonePgMove() {
-		return "wms/sd/sdZone";
-	}
-
-	/**
-	 * 창고 그리드 조회
-	 * */
-	@RequestMapping("/selectLevelDcList")
-	public ResponseEntity selectLevelDcList(@RequestBody Map map) {
-		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(zoneDao.selectLevelDcList(map));
+	@RequestMapping("/selectDcList")
+	public ResponseEntity selectDcList() {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(zoneDao.selectDcList());
 		return ResponseEntity.ok().body(list);
 	}
 	/**
 	 * 구역 그리드 조회
 	 * */
-	@RequestMapping("/selectLevelAreaList")
-	public ResponseEntity selectLevelAreaList(@RequestBody Map map) {
-		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(zoneDao.selectLevelAreaList(map));
-		return ResponseEntity.ok().body(list);
-	}
-	/**
-	 * 존 그리드 조회
-	 * */
-	@RequestMapping("/selectLevelZoneList")
-	public ResponseEntity selectLevelZoneList(@RequestBody Map map) {
-		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(zoneDao.selectLevelZoneList(map));
+	@RequestMapping("/selectDcAreaList")
+	public ResponseEntity selectDcAreaList() {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(zoneDao.selectDcAreaList());
 		return ResponseEntity.ok().body(list);
 	}
 	/**

@@ -32,12 +32,6 @@ public class Supplier extends BaseTimeEntity {
     private String bizNm;
     @Column(length = 50)
     private String ceoNm;
-    @Column(length = 20)
-    private String postNo;
-    @Column(length = 500)
-    private String basicAddr;
-    @Column(length = 500)
-    private String detailAddr;
     @Column(length = 100)
     private String bizTp;
     @Column(length = 100)
@@ -78,6 +72,28 @@ public class Supplier extends BaseTimeEntity {
     @NotBlank
     @ColumnDefault("'Y'")
     private String useYn;
+
+    /* 장소명 */
+    @Column(length = 100)
+    private String deliveryNm;
+    /* 위도 */
+    @Column(length = 20)
+    private String lat;
+    /* 경도 */
+    @Column(length = 20)
+    private String lon;
+    /* 우편번호 */
+    @Column(length = 6)
+    private String zip;
+    /* 도로명주소 */
+    @Column(length = 200)
+    private String roadAddr;
+    /* 지번주소 */
+    @Column(length = 200)
+    private String jibunAddr;
+    /* 상세주소 */
+    @Column(length = 200)
+    private String detailAddr;
 
 
 }

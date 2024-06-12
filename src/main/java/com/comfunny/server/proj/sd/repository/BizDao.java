@@ -10,6 +10,6 @@ import java.util.Map;
 
 @Mapper
 public interface BizDao  {
-    List<Map<String, Object>> selectBizList(Map map);
+    List<Map<String, Object>> selectList(Map map);
 
 }

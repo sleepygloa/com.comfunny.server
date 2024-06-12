@@ -31,16 +31,16 @@ public class DcController {
 	/**
 	 * 물류센터 그리드 조회
 	 * */
-	@RequestMapping("/selectDcList")
-	public ResponseEntity selectDcList(@RequestBody Map map) {
-		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(dcDao.selectDcList(map));
+	@RequestMapping("/selectList")
+	public ResponseEntity selectList(@RequestBody Map map) {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(dcDao.selectList(map));
 		return ResponseEntity.ok().body(list);
 	}
 
 	/**
 	 * 물류센터 저장
 	 * */
-	@RequestMapping("/saveDc")
+	@RequestMapping("/save")
 	public ResponseEntity save(@RequestBody Map map)  throws Exception {
 		dcService.save(map);
 		return ResponseEntity.ok().build();
@@ -49,7 +49,7 @@ public class DcController {
 	/**
 	 * 물류센터 삭제
 	 * */
-	@PostMapping("/deleteDc")
+	@PostMapping("/delete")
 	public ResponseEntity delete(@RequestBody Map map)  throws Exception {
 		dcService.delete(map);
 		return ResponseEntity.ok().build();

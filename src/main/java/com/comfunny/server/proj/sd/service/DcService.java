@@ -40,9 +40,6 @@ public class DcService {
         dc.setBizNo((String)map.get("bizNo"));
         dc.setBizNm((String)map.get("bizNm"));
         dc.setCeoNm((String)map.get("ceoNm"));
-        dc.setPostNo((String)map.get("postNo"));
-        dc.setBasicAddr((String)map.get("basicAddr"));
-        dc.setDetailAddr((String)map.get("detailAddr"));
         dc.setBizTp((String)map.get("bizTp"));
         dc.setBizKnd((String)map.get("bizKnd"));
         dc.setTelNo((String)map.get("telNo"));
@@ -61,6 +58,15 @@ public class DcService {
         dc.setUseYn((String)map.get("useYn"));
         dc.setInUserId((String)map.get("s_userId"));
         dc.setUpUserId((String)map.get("s_userId"));
+
+
+        dc.setDeliveryNm((String)map.get("deliveryNm"));
+        dc.setZip((String)map.get("zip"));
+        dc.setJibunAddr((String)map.get("jibunAddr"));
+        dc.setRoadAddr((String)map.get("roadAddr"));
+        dc.setDetailAddr((String)map.get("detailAddr"));
+        dc.setLat((String)map.get("lat"));
+        dc.setLon((String)map.get("lon"));
 
         dcRepository.save(dc);
     }

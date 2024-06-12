@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.comfunny.server.proj.sd.repository.SupplierDao">
-    <select id="selectSupplierList" resultType="HMap" >
-  SELECT /*[SupplierDao.xml][selectSupplierList] 공급처 데이터들을 조회 */
+    <select id="selectList" resultType="HMap" >
+  SELECT /*[SupplierDao.xml][selectList] 공급처 데이터들을 조회 */
           BIZ_CD
         , CLIENT_CD
         , SUPPLIER_CD
@@ -11,9 +11,13 @@
         , BIZ_NM
         , CEO_NM
         , POST_NO
-        , BASIC_ADDR
+        , DELIVERY_NM
+        , ZIP
+        , ROAD_ADDR
+        , JIBUN_ADDR
         , DETAIL_ADDR
-        , DETAIL_ADDR
+        , LAT
+        , LON
         , BIZ_TP
         , BIZ_KND
         , TEL_NO

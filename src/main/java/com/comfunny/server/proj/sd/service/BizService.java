@@ -42,8 +42,8 @@ public class BizService {
         biz.setBizNo((String)map.get("bizNo"));
 //        biz.setInduty((String)map.get("induty"));
         biz.setBizCnd((String)map.get("bizCnd"));
-        biz.setTel((String)map.get("tel"));
-        biz.setFax((String)map.get("fax"));
+        biz.setTelNo((String)map.get("telNo"));
+        biz.setFaxNo((String)map.get("faxNo"));
         biz.setEtcTp1((String)map.get("etcTp1"));
         biz.setEtcTp2((String)map.get("etcTp2"));
         biz.setEtcNo1((String)map.get("etcNo1"));

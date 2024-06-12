@@ -30,6 +30,14 @@ public class AreaController {
 
 	@Autowired
 	private AreaService areaService;
+	/**
+	 * 물류창고 조회
+	 * */
+	@RequestMapping("/selectDcList")
+	public ResponseEntity selectDcList() {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(areaDao.selectDcList());
+		return ResponseEntity.ok().body(list);
+	}
 
 	/**
 	 * 구역 그리드 조회

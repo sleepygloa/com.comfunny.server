@@ -20,7 +20,7 @@ public class ClientService {
     /**
      * 고객사 저장
      * */
-    public void saveClient(Map map) throws Exception{
+    public void save(Map map) throws Exception{
         if(ObjectUtils.isEmpty(map.get("bizCd"))){
             throw new IllegalArgumentException("사업자코드 는 필수 입력입니다.");
         }
@@ -41,8 +41,6 @@ public class ClientService {
         client.setBizNo((String)map.get("bizNo"));
         client.setBizNm((String)map.get("bizNm"));
         client.setCeoNm((String)map.get("ceoNm"));
-        client.setPostNo((String)map.get("postNo"));
-        client.setBasicAddr((String)map.get("basicAddr"));
         client.setDetailAddr((String)map.get("detailAddr"));
         client.setBizTp((String)map.get("bizTp"));
         client.setBizKnd((String)map.get("bizKnd"));
@@ -60,22 +58,23 @@ public class ClientService {
         client.setUserCol5((String)map.get("userCol5"));
         client.setRemark((String)map.get("remark"));
         client.setUseYn((String)map.get("useYn"));
-        client.setInUserId((String)map.get("s_userId"));
-        client.setUpUserId((String)map.get("s_userId"));
 
-//            if("INSERT".equals((String)map.get("modFlag"))){
-//                clientRepository.findById(clientPk).ifPresent( a -> { throw new IllegalArgumentException("이미 등록되어있습니다. "); });
-//
-//                clientRepository.save(client);
-//            }else if("UPDATE".equals((String)map.get("modFlag"))){
-//                clientRepository.save(client);
-//            }
+
+
+        client.setDeliveryNm((String)map.get("deliveryNm"));
+        client.setZip((String)map.get("zip"));
+        client.setJibunAddr((String)map.get("jibunAddr"));
+        client.setRoadAddr((String)map.get("roadAddr"));
+        client.setDetailAddr((String)map.get("detailAddr"));
+        client.setLat((String)map.get("lat"));
+        client.setLon((String)map.get("lon"));
+
         clientRepository.save(client);
     }
     /**
      * 고객사 삭제
      * */
-    public void deleteClient(Map map) throws Exception{
+    public void delete(Map map) throws Exception{
 
             ClientPk clientPk = new ClientPk();
             clientPk.setBizCd((String)map.get("bizCd"));

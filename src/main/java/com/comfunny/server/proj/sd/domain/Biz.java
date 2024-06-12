@@ -33,9 +33,9 @@ public class Biz extends BaseTimeEntity {
     @Column(length = 100)
     private String bizCnd;
     @Column(length = 20)
-    private String tel;
+    private String telNo;
     @Column(length = 20)
-    private String fax;
+    private String faxNo;
     @Column(length = 20)
     private String etcTp1;
     @Column(length = 20)

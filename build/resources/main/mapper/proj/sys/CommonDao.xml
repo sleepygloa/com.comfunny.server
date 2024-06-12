@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sys.repository.CommonDao">
+
+    <select id="selectCodeByGroupCodeAllList" resultType="HMap" parameterType="HMap">
+        SELECT /*[CodeDao.xml][selectCodeByGroupCodeAllList] [공통] 전역변수 공통코드 조회 */
+               BIZ_CD
+             , CODE_GRP_CD
+             , CODE_CD
+             , CODE_NM
+        FROM tb_sy_code
+    </select>
+</mapper>

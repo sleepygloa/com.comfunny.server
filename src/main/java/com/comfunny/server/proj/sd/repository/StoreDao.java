@@ -8,5 +8,5 @@ import java.util.Map;
 @Mapper
 public interface StoreDao {
 
-    List<Map<String, Object>> selectStoreList(Map map);
+    List<Map<String, Object>> selectList(Map map);
 }

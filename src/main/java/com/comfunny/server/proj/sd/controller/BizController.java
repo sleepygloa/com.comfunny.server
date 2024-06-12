@@ -33,9 +33,9 @@ public class BizController {
     @Resource
     BizDao bizDao;
 
-    @RequestMapping("/selectBizList")
-    public ResponseEntity selectBizList(@RequestBody Map map){
-        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(bizDao.selectBizList(map));
+    @RequestMapping("/selectList")
+    public ResponseEntity selectList(@RequestBody Map map){
+        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(bizDao.selectList(map));
         return ResponseEntity.ok().body(list);
     }
 
@@ -43,8 +43,8 @@ public class BizController {
      * @Program : 사업자 관리
      * @Desc : 사업자 저장
      * */
-    @RequestMapping("/saveBiz")
-    public ResponseEntity saveBiz(@RequestBody Map map){
+    @RequestMapping("/save")
+    public ResponseEntity save(@RequestBody Map map){
         bizService.save(map);
         return ResponseEntity.ok().build();
     }
@@ -53,8 +53,8 @@ public class BizController {
      * @Program : 사업자 관리
      * @Desc : 사업자 삭제
      * */
-    @RequestMapping("/deleteBiz")
-    public ResponseEntity deleteBiz(@RequestBody Map map){
+    @RequestMapping("/delete")
+    public ResponseEntity delete(@RequestBody Map map){
         bizService.delete(map);
         return ResponseEntity.ok().build();
     }

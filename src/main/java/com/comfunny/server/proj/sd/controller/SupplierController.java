@@ -40,27 +40,27 @@ public class SupplierController {
 	/**
 	 * 공급처 그리드 조회
 	 * */
-	@RequestMapping("/selectSupplierList")
-	public ResponseEntity selectSupplierList(@RequestBody Map map) {
-		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(supplierDao.selectSupplierList(map));
+	@RequestMapping("/selectList")
+	public ResponseEntity selectList(@RequestBody Map map) {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(supplierDao.selectList(map));
 		return ResponseEntity.ok().body(list);
 	}
 
 	/**
 	 * 공급처 저장
 	 * */
-	@RequestMapping("/saveSupplier")
+	@RequestMapping("/save")
 	public ResponseEntity save(@RequestBody Map map)  throws Exception {
-		supplierService.saveSupplier(map);
+		supplierService.save(map);
 		return ResponseEntity.ok().build();
 	}
 
 	/**
 	 * 공급처 삭제처
 	 * */
-	@PostMapping("/deleteSupplier")
+	@PostMapping("/delete")
 	public ResponseEntity delete(@RequestBody Map map) throws Exception {
-		supplierService.deleteSupplier(map);
+		supplierService.delete(map);
 		return ResponseEntity.ok().build();
 	}
 }

@@ -19,7 +19,7 @@ public class SupplierService {
     /**
      * 공급처 저장
      * */
-    public void saveSupplier(Map map) throws Exception{
+    public void save(Map map) throws Exception{
         if(ObjectUtils.isEmpty(map.get("bizCd"))){
             throw new IllegalArgumentException("사업자코드 는 필수 입력입니다.");
         }
@@ -44,9 +44,7 @@ public class SupplierService {
         supplier.setBizNo((String)map.get("bizNo"));
         supplier.setBizNm((String)map.get("bizNm"));
         supplier.setCeoNm((String)map.get("ceoNm"));
-        supplier.setPostNo((String)map.get("postNo"));
-        supplier.setBasicAddr((String)map.get("basicAddr"));
-        supplier.setDetailAddr((String)map.get("detailAddr"));
+
         supplier.setBizTp((String)map.get("bizTp"));
         supplier.setBizKnd((String)map.get("bizKnd"));
         supplier.setTelNo((String)map.get("telNo"));
@@ -69,12 +67,20 @@ public class SupplierService {
         supplier.setInUserId((String)map.get("s_userId"));
         supplier.setUpUserId((String)map.get("s_userId"));
 
+        supplier.setDeliveryNm((String)map.get("deliveryNm"));
+        supplier.setZip((String)map.get("zip"));
+        supplier.setJibunAddr((String)map.get("jibunAddr"));
+        supplier.setRoadAddr((String)map.get("roadAddr"));
+        supplier.setDetailAddr((String)map.get("detailAddr"));
+        supplier.setLat((String)map.get("lat"));
+        supplier.setLon((String)map.get("lon"));
+
         supplierRepository.save(supplier);
     }
     /**
      * 공급처 삭제
      * */
-    public void deleteSupplier(Map map) throws Exception{
+    public void delete(Map map) throws Exception{
 
             SupplierPk supplierPk = new SupplierPk();
             supplierPk.setBizCd((String)map.get("bizCd"));

@@ -7,9 +7,7 @@ import java.util.Map;
 
 @Mapper
 public interface ZoneDao {
-    List<Map<String, Object>> selectLevelDcList(Map map);
-    List<Map<String, Object>> selectLevelAreaList(Map map);
-    List<Map<String, Object>> selectLevelZoneList(Map map);
-
+    List<Map<String, Object>> selectDcList();
+    List<Map<String, Object>> selectDcAreaList();
     List<Map<String, Object>> selectZoneList(Map map);
 }

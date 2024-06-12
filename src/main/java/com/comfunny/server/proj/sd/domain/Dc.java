@@ -25,12 +25,6 @@ public class Dc extends BaseTimeEntity {
     private String bizNm;
     @Column(length = 50)
     private String ceoNm;
-    @Column(length = 20)
-    private String postNo;
-    @Column(length = 500)
-    private String basicAddr;
-    @Column(length = 500)
-    private String detailAddr;
     @Column(length = 100)
     private String bizTp;
     @Column(length = 100)
@@ -67,30 +61,27 @@ public class Dc extends BaseTimeEntity {
     private String useYn;
 
 
-    @Builder
-    public Dc(DcPk dcPk, String dcNm, String bizNo, String bizNm, String ceoNm, String postNo, String basicAddr, String detailAddr, String bizTp, String bizKnd, String telNo, String faxNo, String countryCd, String cityCd, String userCol1, String userCol2, String userCol3, String userCol4, String userCol5, String remark, String useYn, String inUserId, String upUserId) {
-        this.dcPk = dcPk;
-        this.dcNm = dcNm;
-        this.bizNo = bizNo;
-        this.bizNm = bizNm;
-        this.ceoNm = ceoNm;
-        this.postNo = postNo;
-        this.basicAddr = basicAddr;
-        this.detailAddr = detailAddr;
-        this.bizTp = bizTp;
-        this.bizKnd = bizKnd;
-        this.telNo = telNo;
-        this.faxNo = faxNo;
-        this.countryCd = countryCd;
-        this.cityCd = cityCd;
-        this.userCol1 = userCol1;
-        this.userCol2 = userCol2;
-        this.userCol3 = userCol3;
-        this.userCol4 = userCol4;
-        this.userCol5 = userCol5;
-        this.remark = remark;
-        this.useYn = useYn;
-        this.inUserId = inUserId;
-        this.upUserId = upUserId;
-    }
+    /* 장소명 */
+    @Column(length = 100)
+    private String deliveryNm;
+    /* 위도 */
+    @Column(length = 20)
+    private String lat;
+    /* 경도 */
+    @Column(length = 20)
+    private String lon;
+    /* 우편번호 */
+    @Column(length = 6)
+    private String zip;
+    /* 도로명주소 */
+    @Column(length = 200)
+    private String roadAddr;
+    /* 지번주소 */
+    @Column(length = 200)
+    private String jibunAddr;
+    /* 상세주소 */
+    @Column(length = 200)
+    private String detailAddr;
+
+
 }

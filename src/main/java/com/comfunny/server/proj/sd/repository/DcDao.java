@@ -7,5 +7,5 @@ import java.util.Map;
 
 @Mapper
 public interface DcDao {
-    List<Map<String, Object>> selectDcList(Map map);
+    List<Map<String, Object>> selectList(Map map);
 }

@@ -1,20 +1,27 @@
 package com.comfunny.server.proj.sys.controller;
 
+import com.comfunny.server.proj.sd.repository.AreaDao;
 import com.comfunny.server.proj.sys.repository.CodeDao;
+import com.comfunny.server.proj.sys.repository.CommonDao;
 import com.comfunny.server.proj.sys.repository.UserCnnLogRepository;
 import com.comfunny.server.proj.sys.service.CodeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
-@RestController
-@Slf4j
+import static com.comfunny.server.sys.util.Utils.convertSnakeCaseKeysToCamelCase;
+
+@Controller
+@RequestMapping("/wms/sys/common")
 public class CommonController {
 
     @Autowired
@@ -25,6 +32,19 @@ public class CommonController {
 
     @Resource
     private UserCnnLogRepository userCnnLogRepository;
+
+    @Resource
+    private CommonDao commonDao;
+
+
+    /**
+     * [공통] 전역변수 공통코드 조회
+     * */
+    @RequestMapping("/selectCodeByGroupCodeAllList")
+    public ResponseEntity selectCodeByGroupCodeAllList() {
+        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(commonDao.selectCodeByGroupCodeAllList());
+        return ResponseEntity.ok().body(list);
+    }
 //
 //    /**
 //     * [기능 설명] 공통컨트롤러 세션데이터 조회

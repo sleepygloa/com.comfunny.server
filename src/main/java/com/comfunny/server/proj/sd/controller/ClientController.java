@@ -44,27 +44,27 @@ public class ClientController {
 	/**
 	 * 고객사 그리드 조회
 	 * */
-	@RequestMapping("/selectClientList")
-	public ResponseEntity selectClientList(@RequestBody Map map) {
-		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(clientDao.selectClientList(map));
+	@RequestMapping("/selectList")
+	public ResponseEntity selectList(@RequestBody Map map) {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(clientDao.selectList(map));
 		return ResponseEntity.ok().body(list);
 	}
 
 	/**
 	 * 고객사 저장
 	 * */
-	@RequestMapping("/saveClient")
+	@RequestMapping("/save")
 	public ResponseEntity save(@RequestBody Map map)  throws Exception {
-		clientService.saveClient(map);
+		clientService.save(map);
 		return ResponseEntity.ok().build();
 	}
 
 	/**
 	 * 고객사 삭제
 	 * */
-	@PostMapping("/deleteClient")
+	@PostMapping("/delete")
 	public ResponseEntity delete(@RequestBody Map map)  throws Exception {
-		clientService.deleteClient(map);
+		clientService.delete(map);
 		return ResponseEntity.ok().build();
 	}
 }
