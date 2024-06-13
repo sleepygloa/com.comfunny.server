@@ -28,27 +28,27 @@ public class LocController {
 	private LocService locService;
 
 	/**
-	 * 창고 그리드 조회
+	 * 물류챵고 조회
 	 * */
-	@RequestMapping("/selectLevelDcList")
-	public ResponseEntity selectLevelDcList(@RequestBody Map map) {
-		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(locDao.selectLevelDcList(map));
+	@RequestMapping("/selectDcList")
+	public ResponseEntity selectDcList() {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(locDao.selectDcList());
 		return ResponseEntity.ok().body(list);
 	}
 	/**
-	 * 존 그리드 조회
+	 * 구역 그리드 조회
 	 * */
-	@RequestMapping("/selectLevelDcZoneList")
-	public ResponseEntity selectLevelDcZoneList(@RequestBody Map map) {
-		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(locDao.selectLevelDcZoneList(map));
+	@RequestMapping("/selectDcAreaList")
+	public ResponseEntity selectDcAreaList() {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(locDao.selectDcAreaList());
 		return ResponseEntity.ok().body(list);
 	}
 	/**
-	 * 로케이션 그리드 조회
+	 * 구역 그리드 조회
 	 * */
-	@RequestMapping("/selectLevelDcZoneLocList")
-	public ResponseEntity selectLevelDcZoneLocList(@RequestBody Map map) {
-		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(locDao.selectLevelDcZoneLocList(map));
+	@RequestMapping("/selectDcAreaZoneList")
+	public ResponseEntity selectDcAreaZoneList() {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(locDao.selectDcAreaZoneList());
 		return ResponseEntity.ok().body(list);
 	}
 	/**

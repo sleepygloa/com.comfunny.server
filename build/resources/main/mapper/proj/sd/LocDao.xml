@@ -1,6 +1,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.comfunny.server.proj.sd.repository.LocDao">
+
+
+<select id="selectDcList" resultType="HMap" >
+   SELECT /*[LocDao.xml][selectDcList] 로케이션관리의 물류창고 데이터들을 조회 */
+	      BIZ_CD
+		, DC_CD AS code
+		, DC_NM AS name
+     FROM tb_ms_dc
+    WHERE 1=1
+</select>
+
+<select id="selectDcAreaList" resultType="HMap" >
+   SELECT /*[LocDao.xml][selectDcAreaList] 로케이션관리의 물류창고,구역 데이터들을 조회 */
+	      BIZ_CD
+		, DC_CD AS parent
+		, AREA_CD AS code
+		, AREA_NM AS name
+     FROM tb_ms_area
+    WHERE 1=1
+</select>
+
+<select id="selectDcAreaZoneList" resultType="HMap" >
+   SELECT /*[LocDao.xml][selectDcAreaZoneList] 로케이션관리의 물류창고,구역,존 데이터들을 조회 */
+		  BIZ_CD
+		, DC_CD AS parent
+		, AREA_CD AS parent2
+		, ZONE_CD AS code
+		, ZONE_NM AS name
+     FROM tb_ms_zone
+    WHERE 1=1
+</select>
+
 	<!-- 관련테이블
 	
 	SD_AREA : 지역
@@ -13,6 +45,7 @@
           BIZ_CD
 		, DC_CD
 		, ZONE_CD
+		, AREA_CD
 		, LOC_CD
 		, LIN_CD
 		, ROW_CD
@@ -37,8 +70,9 @@
      FROM tb_ms_loc
     WHERE 1=1
 	<if test="codeCd != null and codeCd != ''">
-		AND LOC_NM LIKE '%'#{codeCd}'%'
+	  AND LOC_NM LIKE '%'#{codeCd}'%'
 	</if>
+ORDER BY BIZ_CD, DC_CD, AREA_CD, ZONE_CD, LOC_CD
 	</select>
 
 <!--

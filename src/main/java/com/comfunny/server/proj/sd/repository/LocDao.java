@@ -7,8 +7,8 @@ import java.util.Map;
 
 @Mapper
 public interface LocDao {
-    List<Map<String, Object>> selectLevelDcList(Map map);
-    List<Map<String, Object>> selectLevelDcZoneList(Map map);
-    List<Map<String, Object>> selectLevelDcZoneLocList(Map map);
+    List<Map<String, Object>> selectDcList();
+    List<Map<String, Object>> selectDcAreaList();
+    List<Map<String, Object>> selectDcAreaZoneList();
     List<Map<String, Object>> selectLocList(Map map);
 }

@@ -29,6 +29,7 @@
           <if test="codeCd != null and codeCd != ''">
            AND AREA_NM LIKE '%'#{codeCd}'%'
           </if>
+      ORDER BY BIZ_CD, DC_CD, AREA_CD
     </select>
 
 </mapper>

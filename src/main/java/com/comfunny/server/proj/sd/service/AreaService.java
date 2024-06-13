@@ -3,6 +3,7 @@ package com.comfunny.server.proj.sd.service;
 import com.comfunny.server.proj.sd.domain.Area;
 import com.comfunny.server.proj.sd.domain.AreaPk;
 import com.comfunny.server.proj.sd.repository.AreaRepository;
+import com.comfunny.server.sys.config.Contraints;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -21,9 +22,6 @@ public class AreaService {
      * */
     public void saveArea(Map map) throws Exception{
 
-        if(ObjectUtils.isEmpty(map.get("bizCd"))){
-            throw new IllegalArgumentException("사업자코드 는 필수 입력입니다.");
-        }
         if(ObjectUtils.isEmpty(map.get("dcCd"))){
             throw new IllegalArgumentException("물류창고코드 는 필수 입력입니다.");
         }
@@ -35,7 +33,7 @@ public class AreaService {
         }
 
         AreaPk areaPk = new AreaPk();
-        areaPk.setBizCd((String)map.get("bizCd"));
+        areaPk.setBizCd(Contraints.BIZ_CD);
         areaPk.setDcCd((String)map.get("dcCd"));
         areaPk.setAreaCd((String)map.get("areaCd"));
 
@@ -56,7 +54,7 @@ public class AreaService {
     public void deleteArea(Map map) throws Exception{
 
             AreaPk areaPk = new AreaPk();
-            areaPk.setBizCd((String)map.get("bizCd"));
+            areaPk.setBizCd(Contraints.BIZ_CD);
             areaPk.setDcCd((String)map.get("dcCd"));
             areaPk.setAreaCd((String)map.get("areaCd"));
 

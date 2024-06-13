@@ -18,7 +18,7 @@ public class Contraints {
     public static final String REFRESH_TOKEN = "refresh_token";
     public static final String TOKEN_TYPE = "Bearer ";
 
-    public static String COMPANY_CD = "COMFUNNY";
+    public static String BIZ_CD = "COMFUNNY_DEVELOPERS";
     public static String GUEST = "guest";
 
 

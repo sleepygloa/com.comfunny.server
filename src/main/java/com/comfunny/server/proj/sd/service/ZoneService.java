@@ -3,6 +3,7 @@ package com.comfunny.server.proj.sd.service;
 import com.comfunny.server.proj.sd.domain.Zone;
 import com.comfunny.server.proj.sd.domain.ZonePk;
 import com.comfunny.server.proj.sd.repository.ZoneRepository;
+import com.comfunny.server.sys.config.Contraints;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -20,9 +21,6 @@ public class ZoneService {
      * 존 저장
      * */
     public void saveZone(Map map) throws Exception{
-        if(ObjectUtils.isEmpty(map.get("bizCd"))){
-            throw new IllegalArgumentException("사업자코드 는 필수 입력입니다.");
-        }
         if(ObjectUtils.isEmpty(map.get("dcCd"))){
             throw new IllegalArgumentException("물류창고코드 는 필수 입력입니다.");
         }
@@ -37,7 +35,7 @@ public class ZoneService {
         }
 
         ZonePk zonePk = new ZonePk();
-        zonePk.setBizCd((String)map.get("bizCd"));
+        zonePk.setBizCd(Contraints.BIZ_CD);
         zonePk.setDcCd((String)map.get("dcCd"));
         zonePk.setAreaCd((String)map.get("areaCd"));
         zonePk.setZoneCd((String)map.get("zoneCd"));
@@ -60,7 +58,7 @@ public class ZoneService {
     public void deleteZone(Map map) throws Exception{
 
             ZonePk zonePk = new ZonePk();
-            zonePk.setBizCd((String)map.get("bizCd"));
+            zonePk.setBizCd(Contraints.BIZ_CD);
             zonePk.setDcCd((String)map.get("dcCd"));
             zonePk.setAreaCd((String)map.get("areaCd"));
             zonePk.setZoneCd((String)map.get("zoneCd"));
