@@ -1,8 +1,5 @@
 package com.comfunny.server.proj.sd.controller;
 
-import com.comfunny.server.proj.sd.dto.BizReqSaveDto;
-import com.comfunny.server.proj.sd.dto.BizReqSchDto;
-import com.comfunny.server.proj.sd.dto.BizResDto;
 import com.comfunny.server.proj.sd.domain.Biz;
 import com.comfunny.server.proj.sd.repository.BizDao;
 import com.comfunny.server.proj.sd.repository.BizRepository;

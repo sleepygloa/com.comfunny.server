@@ -44,8 +44,8 @@
   SELECT /*[LocDao.xml][selectLocList] 로케이션 데이터들을 조회 */
           BIZ_CD
 		, DC_CD
-		, ZONE_CD
 		, AREA_CD
+		, ZONE_CD
 		, LOC_CD
 		, LIN_CD
 		, ROW_CD

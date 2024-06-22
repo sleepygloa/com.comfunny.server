@@ -77,4 +77,14 @@ public class LocController {
 		locService.deleteLoc(map);
 		return ResponseEntity.ok().build();
 	}
+
+
+	/**
+	 * 로케이션 멀티등록 저장
+	 * */
+	@RequestMapping("/saveLocMultiReg")
+	public ResponseEntity saveLocMultiReg(@RequestBody Map map)  throws Exception {
+		locService.saveLocMultiReg(map);
+		return ResponseEntity.ok().build();
+	}
 }

@@ -22,7 +22,7 @@
     </select>
 
     <select id="selectZoneList" resultType="HMap" >
-   SELECT /*[ZoneDao.xml][selectAreaList] 지역 데이터들을 조회 */
+   SELECT /*[ZoneDao.xml][selectZoneList] 지역 데이터들을 조회 */
           BIZ_CD
         , DC_CD
         , AREA_CD

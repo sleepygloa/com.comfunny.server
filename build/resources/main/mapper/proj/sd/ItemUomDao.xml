@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sd.repository.ItemUomDao">
+
+
+<select id="selectItemUomList" resultType="HMap" >
+   SELECT /*[ItemUomDao.xml][selectItemUomList] 상품단위 데이터들을 조회 */
+          BIZ_CD
+        , CLIENT_CD
+        , ITEM_CD
+        , STD_UOM_CD
+        , CONV_UOM_CD
+        , CONV_UOM_QTY
+        , REMARK
+        , USE_YN
+        , IN_USER_ID
+        , UP_USER_ID
+        , IN_DT
+        , UP_DT
+     FROM tb_ms_item_uom
+    WHERE 1=1
+    <if test="codeCd != null and codeCd != ''">
+        AND ITEM_CD LIKE '%'#{codeCd}'%'
+    </if>
+    </select>
+
+</mapper>

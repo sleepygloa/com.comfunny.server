@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comfunny.server.proj.sd.repository.ItemClassDao">
+
+
+<select id="selectItemClassList" resultType="HMap" >
+   SELECT /*[ItemClassDao.xml][selectItemClassList] 상품분류 데이터들을 조회 */
+          BIZ_CD
+        , CLIENT_CD
+        , ITEM_CLASS_CD
+        , LARGE_CLASS_CD
+        , MIDDLE_CLASS_CD
+        , SMALL_CLASS_CD
+        , REMARK
+        , USE_YN
+        , IN_USER_ID
+        , UP_USER_ID
+        , IN_DT
+        , UP_DT
+     FROM tb_ms_item_class
+    WHERE 1=1
+    <if test="codeCd != null and codeCd != ''">
+        AND ITEM_CLASS_CD LIKE '%'#{codeCd}'%'
+    </if>
+    </select>
+
+</mapper>

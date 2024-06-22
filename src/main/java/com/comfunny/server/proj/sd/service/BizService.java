@@ -1,8 +1,5 @@
 package com.comfunny.server.proj.sd.service;
 
-import com.comfunny.server.proj.sd.domain.Loc;
-import com.comfunny.server.proj.sd.domain.LocPk;
-import com.comfunny.server.proj.sd.dto.BizReqSaveDto;
 import com.comfunny.server.proj.sd.domain.Biz;
 import com.comfunny.server.proj.sd.repository.BizDao;
 import com.comfunny.server.proj.sd.repository.BizRepository;

@@ -1,0 +1,104 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.comfunny.server.proj.ib.repository.InboundPlanDao">
+
+
+<select id="selectInboundList" resultType="HMap" >
+   SELECT /*[InboundDao.xml][sele      BIZ_CD
+    , IB_NO
+    , DC_CD
+    , CLIENT_CD
+    , IB_GBN_CD
+    , IB_PROG_ST_CD
+    , IB_PLAN_YMD
+    , IB_YMD
+    , PO_NO
+    , PO_YMD
+    , SUPPLIER_CD
+    , CAR_NO
+    , TC_OB_NO
+    , USER_COL1
+    , USER_COL2
+    , USER_COL3
+    , USER_COL4
+    , USER_COL5
+    , REMARK
+    , USE_YNctInboundList] 입고관리의 입고전표 데이터들을 조회 */
+
+     FROM tb_ib_m
+    WHERE 1=1
+    <if test="ibNo != null and ibNo != ''">
+        AND IB_NO LIKE '%'#{ibNo}'%'
+    </if>
+    <if test="ibPlanYmd != null and ibPlanYmd != ''">
+        AND IB_PLAN_YMD = #{ibPlanYmd}
+    </if>
+</select>
+
+    <select id="selectInboundDetailList" resultType="HMap" >
+        SELECT /*[InboundDao.xml][selectInboundDetailList] 입고관리의 입고전표상세 데이터들을 조회 */
+        BIZ_CD
+        , IB_NO
+        , IB_DETAIL_SEQ
+        , PO_DETAIL_SEQ
+        , IB_PROG_ST_CD
+        , ITEM_CD
+        , ITEM_NM
+        , ITEM_ST_CD
+        , PO_UOM_CD
+        , PO_QTY
+        , PLAN_QTY
+        , CONF_QTY
+        , APPR_QTY
+        , EXAM_QTY
+        , INST_QTY
+        , PUTW_QTY
+        , NO_IB_RSN_CD
+        , IB_COST
+        , IB_VAT
+        , IB_AMT
+        , MAKE_LOT
+        , MAKE_YMD
+        , DIST_EXPIRY_YMD
+        , LOT_ID
+        , LOT_ATTR1
+        , LOT_ATTR2
+        , LOT_ATTR3
+        , LOT_ATTR4
+        , LOT_ATTR5
+        , TC_OB_DETAIL_SEQ
+        , USER_COL1
+        , USER_COL2
+        , USER_COL3
+        , USER_COL4
+        , USER_COL5
+        , APPR_DT
+        , APPR_USER_ID
+        , REMARK
+        , USE_YN
+        FROM tb_ib_d
+        WHERE 1=1
+        AND IB_NO = #{IB_NO}
+    </select>
+
+
+    <select id="selectDcCmbList" resultType="HMap" >
+        SELECT /*[InboundPlanDao.xml][selectDcCmbList] 입고관리의 물류창고 데이터들을 조회 */
+        BIZ_CD
+        , DC_CD AS code
+        , DC_NM AS name
+        FROM tb_ms_dc
+        WHERE 1=1
+    </select>
+
+
+    <select id="selectClientCmbList" resultType="HMap" >
+        SELECT /*[InboundPlanDao.xml][selectClientCmbList] 입고관리의 고객사 데이터들을 조회 */
+        BIZ_CD
+        , CLIENT_CD AS code
+        , CLIENT_NM AS name
+        FROM tb_ms_client
+        WHERE 1=1
+    </select>
+
+</mapper>

@@ -22,6 +22,8 @@ public class LocPk implements Serializable {
     @Column(length = 20)
     private String dcCd;
     @Column(length = 20)
+    private String areaCd;
+    @Column(length = 20)
     private String zoneCd;
     @Column(length = 20)
     private String locCd;
@@ -31,11 +33,11 @@ public class LocPk implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LocPk locPk = (LocPk) o;
-        return Objects.equals(bizCd, locPk.bizCd) && Objects.equals(dcCd, locPk.dcCd) && Objects.equals(zoneCd, locPk.zoneCd) && Objects.equals(locCd, locPk.locCd);
+        return Objects.equals(bizCd, locPk.bizCd) && Objects.equals(dcCd, locPk.dcCd) && Objects.equals(areaCd, locPk.areaCd) && Objects.equals(zoneCd, locPk.zoneCd) && Objects.equals(locCd, locPk.locCd);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bizCd, dcCd, zoneCd, locCd);
+        return Objects.hash(bizCd, dcCd, areaCd, zoneCd, locCd);
     }
 }
