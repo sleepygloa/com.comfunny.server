@@ -11,5 +11,5 @@ public interface ClientDao {
     //고객사 드랍박스 조회
     List<Map<String, Object>> selectClientCmbList(Map map);
 
-    List<Map<String, Object>> selectList(Map map);
+    List<Map<String, Object>> selectClientList(Map map);
 }

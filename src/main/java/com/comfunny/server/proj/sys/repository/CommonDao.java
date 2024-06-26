@@ -2,9 +2,12 @@ package com.comfunny.server.proj.sys.repository;
 
 import com.comfunny.server.proj.sys.domain.Code;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Mapper
 public interface CommonDao {
@@ -12,16 +15,28 @@ public interface CommonDao {
     //[공통] 전역변수 공통코드 조회
     List<Map<String, Object>> selectCodeByGroupCodeAllList();
 
+    //[공통] 물류창고 공통코드 조회
+    List<Map<String, Object>> selectDcList();
 
-    List<Code>  selectAuthMenuList();
-    Code select(String id);
+    //[공통] 고객사 공통코드 조회
+    List<Map<String, Object>> selectClientList();
 
-    List<Map> getCodeListForSelectBox(Map map);
+    //[공통] 신규채번 아이템코드
 
-    List<Map> getCodeDescListForSelectBox(Map map);
+    //상품코드 MAX 조회
+    public String findMaxItemCd(String bizCd, String clientCd);
 
-    List<Map<String, Object>> selectCodeGrpList(Map map);
+    //공급처 MAX 조회
+    public String findMaxSupplierCd(String bizCd, String clientCd);
 
-    List<Map<String, Object>> selectCodeList(Map map);
+    //배송처 MAX 조회
+    public String findMaxStoreCd(String bizCd, String clientCd);
+
+    //물류센터 MAX 조회
+    public String findMaxDcCd(String bizCd);
+
+    //고객사 MAX 조회
+    public String findMaxClientCd(String bizCd);
+
 
 }

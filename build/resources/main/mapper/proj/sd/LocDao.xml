@@ -5,6 +5,7 @@
 
 <select id="selectDcList" resultType="HMap" >
    SELECT /*[LocDao.xml][selectDcList] 로케이션관리의 물류창고 데이터들을 조회 */
+	DISTINCT
 	      BIZ_CD
 		, DC_CD AS code
 		, DC_NM AS name
@@ -14,6 +15,7 @@
 
 <select id="selectDcAreaList" resultType="HMap" >
    SELECT /*[LocDao.xml][selectDcAreaList] 로케이션관리의 물류창고,구역 데이터들을 조회 */
+	DISTINCT
 	      BIZ_CD
 		, DC_CD AS parent
 		, AREA_CD AS code
@@ -24,6 +26,7 @@
 
 <select id="selectDcAreaZoneList" resultType="HMap" >
    SELECT /*[LocDao.xml][selectDcAreaZoneList] 로케이션관리의 물류창고,구역,존 데이터들을 조회 */
+	DISTINCT
 		  BIZ_CD
 		, DC_CD AS parent
 		, AREA_CD AS parent2
@@ -51,11 +54,8 @@
 		, ROW_CD
 		, LEV_CD
 		, LOC_TYPE_CD
-		, LOAD_GBN_CD
 		, HOLD_ST_CD
 		, LOC_PRIOORD
-		, ITEM_MIX_LOAD_YN
-		, LOT_MIX_LOAD_YN
 		, HORIZONTAL
 		, VERTICAL
 		, HEIGHT

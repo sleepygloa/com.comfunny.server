@@ -54,4 +54,14 @@ public class ItemClassController {
 		itemClassService.deleteItemClass(map);
 		return ResponseEntity.ok().build();
 	}
+
+
+	/**
+	 * 상품분류리스트 저장
+	 * */
+	@RequestMapping("/saveItemClassList")
+	public ResponseEntity saveItemClassList(@RequestBody List<Map> list)  throws Exception {
+		itemClassService.saveItemClassList(list);
+		return ResponseEntity.ok().build();
+	}
 }

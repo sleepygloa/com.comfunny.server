@@ -35,27 +35,27 @@ public class StoreController {
 	/**
 	 * 배송처 그리드 조회
 	 * */
-	@RequestMapping("/selectList")
-	public ResponseEntity selectList(@RequestBody Map map) {
-		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(storeDao.selectList(map));
+	@RequestMapping("/selectStoreList")
+	public ResponseEntity selectStoreList(@RequestBody Map map) {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(storeDao.selectStoreList(map));
 		return ResponseEntity.ok().body(list);
 	}
 
 	/**
 	 * 배송처 저장
 	 * */
-	@RequestMapping("/save")
-	public ResponseEntity save(@RequestBody Map map)  throws Exception {
-		storeService.save(map);
+	@RequestMapping("/saveStore")
+	public ResponseEntity saveStore(@RequestBody Map map)  throws Exception {
+		storeService.saveStore(map);
 		return ResponseEntity.ok().build();
 	}
 
 	/**
 	 * 배송처 삭제처
 	 * */
-	@PostMapping("/delete")
-	public ResponseEntity delete(@RequestBody Map map)  throws Exception {
-		storeService.delete(map);
+	@PostMapping("/deleteStore")
+	public ResponseEntity deleteStore(@RequestBody Map map)  throws Exception {
+		storeService.deleteStore(map);
 		return ResponseEntity.ok().build();
 	}
 }

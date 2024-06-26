@@ -41,10 +41,6 @@ public class Store extends BaseTimeEntity {
     @Column(length = 20)
     private String faxNo;
     @Column(length = 20)
-    private String countryCd;
-    @Column(length = 20)
-    private String cityCd;
-    @Column(length = 20)
     private String contactNm;
     @Column(length = 20)
     private String contactTelNo;

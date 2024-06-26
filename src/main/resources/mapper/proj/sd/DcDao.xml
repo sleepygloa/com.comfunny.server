@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.comfunny.server.proj.sd.repository.DcDao">
-    <select id="selectList" resultType="HMap" >
-        SELECT /*[DcDao.xml][selectList] 물류창고 데이터들을 조회 */
+    <select id="selectDcList" resultType="HMap" >
+        SELECT /*[DcDao.xml][selectDcList] 물류창고 데이터들을 조회 */
                BIZ_CD
              , DC_CD
              , DC_NM
@@ -23,8 +23,6 @@
              , CONTACT_NM
              , CONTACT_TEL_NO
              , CONTACT_EMAIL
-             , COUNTRY_CD
-             , CITY_CD
              , USER_COL1
              , USER_COL2
              , USER_COL3

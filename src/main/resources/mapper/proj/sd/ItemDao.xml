@@ -2,6 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.comfunny.server.proj.sd.repository.ItemDao">
 
+<select id="selectLargeClassCdList" resultType="HMap" >
+     SELECT /*[ItemDao.xml][selectLargeClassCdList] 대분류 데이터들을 조회 */
+     DISTINCT
+       BIZ_CD
+     , CLIENT_CD
+     , LARGE_CLASS_CD AS code
+     , LARGE_CLASS_NM AS name
+     FROM tb_ms_item_class
+     WHERE 1=1
+</select>
+
+
+<select id="selectLargeMiddleClassCdList" resultType="HMap" >
+     SELECT /*[ItemDao.xml][selectLargeMiddleClassCdList] 중분류 데이터들을 조회 */
+     DISTINCT
+     BIZ_CD
+     , CLIENT_CD
+     , LARGE_CLASS_CD AS parent
+     , MIDDLE_CLASS_CD AS code
+     , MIDDLE_CLASS_NM AS name
+     FROM tb_ms_item_class
+     WHERE 1=1
+</select>
+
+
+<select id="selectLargeMiddleSmallClassCdList" resultType="HMap" >
+     SELECT /*[ItemDao.xml][selectLargeMiddleSmallClassCdList] 소분류 데이터들을 조회 */
+     DISTINCT
+     BIZ_CD
+     , CLIENT_CD
+     , LARGE_CLASS_CD AS parent
+     , MIDDLE_CLASS_CD AS parent2
+     , SMALL_CLASS_CD AS code
+     , SMALL_CLASS_NM AS name
+     FROM tb_ms_item_class
+     WHERE 1=1
+</select>
 
 <select id="selectItemList" resultType="HMap" >
    SELECT /*[ItemDao.xml][selectItemList] 상품 데이터들을 조회 */

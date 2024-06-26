@@ -3,6 +3,8 @@ package com.comfunny.server.proj.sd.service;
 import com.comfunny.server.proj.sd.domain.Dc;
 import com.comfunny.server.proj.sd.domain.DcPk;
 import com.comfunny.server.proj.sd.repository.DcRepository;
+import com.comfunny.server.proj.sys.service.CommonService;
+import com.comfunny.server.sys.config.Contraints;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -12,26 +14,28 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class DcService {
+public class DcService extends CommonService {
 
     @Resource
     DcRepository dcRepository;
     /**
      * 물류센터 저장
      * */
-    public void save(Map map) throws Exception{
-        if(ObjectUtils.isEmpty(map.get("bizCd"))){
-            throw new IllegalArgumentException("사업자코드 는 필수 입력입니다.");
-        }
-        if(ObjectUtils.isEmpty(map.get("dcCd"))){
-            throw new IllegalArgumentException("물류창고코드 는 필수 입력입니다.");
-        }
+    public void saveDc(Map map) throws Exception{
         if(ObjectUtils.isEmpty(map.get("dcNm"))){
             throw new IllegalArgumentException("물류창고명 는 필수 입력입니다.");
         }
 
         DcPk dcPk = new DcPk();
-        dcPk.setBizCd((String)map.get("bizCd"));
+        dcPk.setBizCd(Contraints.BIZ_CD);
+        //코드 채번
+        if(ObjectUtils.isEmpty(map.get("dcCd"))) {
+            dcPk.setDcCd(getMaxSeq(Contraints.DC_CD, map));
+        }else{
+            dcPk.setDcCd((String)map.get("dcCd"));
+        }
+
+
         dcPk.setDcCd((String)map.get("dcCd"));
 
         Dc dc = new Dc();
@@ -44,8 +48,6 @@ public class DcService {
         dc.setBizKnd((String)map.get("bizKnd"));
         dc.setTelNo((String)map.get("telNo"));
         dc.setFaxNo((String)map.get("faxNo"));
-        dc.setCountryCd((String)map.get("countryCd"));
-        dc.setCityCd((String)map.get("cityCd"));
         dc.setContactNm((String)map.get("contactNm"));
         dc.setContactTelNo((String)map.get("contactTelNo"));
         dc.setContactEmail((String)map.get("contactEmail"));
@@ -73,10 +75,10 @@ public class DcService {
     /**
      * 물류센터 삭제
      * */
-    public void delete(Map map) throws Exception{
+    public void deleteDc(Map map) throws Exception{
 
         DcPk dcPk = new DcPk();
-        dcPk.setBizCd((String)map.get("bizCd"));
+        dcPk.setBizCd(Contraints.BIZ_CD);
         dcPk.setDcCd((String)map.get("dcCd"));
 
             Dc dc = dcRepository.findById(dcPk)

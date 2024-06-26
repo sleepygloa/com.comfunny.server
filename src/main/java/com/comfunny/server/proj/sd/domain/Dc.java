@@ -33,10 +33,6 @@ public class Dc extends BaseTimeEntity {
     private String telNo;
     @Column(length = 20)
     private String faxNo;
-    @Column(length = 20)
-    private String countryCd;
-    @Column(length = 20)
-    private String cityCd;
     @Column(length = 50)
     private String contactNm;
     @Column(length = 20)

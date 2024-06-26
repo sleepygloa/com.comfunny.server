@@ -19,18 +19,44 @@ import java.util.Map;
 
 import static com.comfunny.server.sys.util.Utils.convertSnakeCaseKeysToCamelCase;
 
+
 @Controller
 @RequestMapping("/wms/sd/item")
 public class ItemController {
 
-//	@Resource
-//	private ItemRepository itemRepository;
 
 	@Resource
 	private ItemDao itemDao;
 
 	@Autowired
 	private ItemService itemService;
+
+	/**
+	 * 대분류 조회
+	 * */
+	@RequestMapping("/selectLargeClassCdList")
+	public ResponseEntity selectLargeClassCdList(@RequestBody Map map) {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(itemDao.selectLargeClassCdList(map));
+		return ResponseEntity.ok().body(list);
+	}
+
+	/**
+	 * 중분류 조회
+	 * */
+	@RequestMapping("/selectLargeMiddleClassCdList")
+	public ResponseEntity selectLargeMiddleClassCdList(@RequestBody Map map) {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(itemDao.selectLargeMiddleClassCdList(map));
+		return ResponseEntity.ok().body(list);
+	}
+
+	/**
+	 * 소분류 조회
+	 * */
+	@RequestMapping("/selectLargeMiddleSmallClassCdList")
+	public ResponseEntity selectLargeMiddleSmallClassCdList(@RequestBody Map map) {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(itemDao.selectLargeMiddleSmallClassCdList(map));
+		return ResponseEntity.ok().body(list);
+	}
 
 	/**
 	 * 상품 그리드 조회

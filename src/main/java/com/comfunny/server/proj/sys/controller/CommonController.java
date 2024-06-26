@@ -9,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -43,6 +40,24 @@ public class CommonController {
     @RequestMapping("/selectCodeByGroupCodeAllList")
     public ResponseEntity selectCodeByGroupCodeAllList() {
         List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(commonDao.selectCodeByGroupCodeAllList());
+        return ResponseEntity.ok().body(list);
+    }
+
+    /**
+     * [공통] 물류창고 드랍박스 조회
+     * */
+    @RequestMapping("/selectDcList")
+    public ResponseEntity selectClientCmbList() {
+        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(commonDao.selectDcList());
+        return ResponseEntity.ok().body(list);
+    }
+
+    /**
+     * [공통] 고객사 드랍박스 조회
+     * */
+    @RequestMapping("/selectClientList")
+    public ResponseEntity selectClientList() {
+        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(commonDao.selectClientList());
         return ResponseEntity.ok().body(list);
     }
 //

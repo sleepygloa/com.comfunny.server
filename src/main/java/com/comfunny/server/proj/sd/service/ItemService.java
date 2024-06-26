@@ -5,21 +5,26 @@ import com.comfunny.server.proj.sd.domain.ItemPk;
 import com.comfunny.server.proj.sd.domain.Zone;
 import com.comfunny.server.proj.sd.domain.ZonePk;
 import com.comfunny.server.proj.sd.repository.ItemRepository;
+import com.comfunny.server.proj.sys.service.CommonService;
 import com.comfunny.server.sys.config.Contraints;
 import com.comfunny.server.sys.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Slf4j
-public class ItemService {
+public class ItemService extends CommonService{
 
     @Resource
     ItemRepository itemRepository;
+
+
     /**
      * 상품 저장
      * */
@@ -43,7 +48,13 @@ public class ItemService {
         ItemPk itemPk = new ItemPk();
         itemPk.setBizCd(Contraints.BIZ_CD);
         itemPk.setClientCd((String)map.get("clientCd"));
-        itemPk.setItemCd((String)map.get("itemCd"));
+
+        //상품코드 채번
+        if(ObjectUtils.isEmpty(map.get("itemCd"))) {
+            itemPk.setItemCd(getMaxSeq(Contraints.ITEM_CD, map));
+        }else{
+            itemPk.setItemCd((String)map.get("itemCd"));
+        }
 
         //Item set
         Item item = new Item();
@@ -57,10 +68,10 @@ public class ItemService {
 
         long ibCost = StringUtils.safeToLong(map.get("ibCost"), 0l);
         long obCost = StringUtils.safeToLong(map.get("obCost"), 0l);
-        float horizontal = StringUtils.safeToFloat(map.get("horizontal"), 0f);
-        float vertical = StringUtils.safeToFloat(map.get("vertical"), 0f);
-        float height = StringUtils.safeToFloat(map.get("height"), 0f);
-        float cbm = StringUtils.safeToFloat(map.get("cbm"), 0f);
+        float horizontal = StringUtils.safeToFloat(map.get("horizontal"), 1f);
+        float vertical = StringUtils.safeToFloat(map.get("vertical"), 1f);
+        float height = StringUtils.safeToFloat(map.get("height"), 1f);
+        float cbm = StringUtils.safeToFloat(map.get("cbm"), 1f);
         float weight = StringUtils.safeToFloat(map.get("weight"), 0f);
         long distExpiryDays = StringUtils.safeToLong(map.get("distExpiryDays"), 9999l);
 

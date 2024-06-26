@@ -33,15 +33,9 @@ public class Loc extends BaseTimeEntity {
     @Column(length = 20)
     private String locTypeCd;
     @Column(length = 20)
-    private String loadGbnCd;
-    @Column(length = 20)
     private String holdStCd;
     @Column(length = 20)
     private float locPrioord;
-    @Column(length = 1)
-    private String itemMixLoadYn;
-    @Column(length = 1)
-    private String lotMixLoadYn;
     @Column(length = 11) //11.2
     private float horizontal;
     @Column(length = 11) //11.2

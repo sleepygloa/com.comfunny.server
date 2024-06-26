@@ -3,11 +3,63 @@
 <mapper namespace="com.comfunny.server.proj.sys.repository.CommonDao">
 
     <select id="selectCodeByGroupCodeAllList" resultType="HMap" parameterType="HMap">
-        SELECT /*[CodeDao.xml][selectCodeByGroupCodeAllList] [공통] 전역변수 공통코드 조회 */
-               BIZ_CD
-             , CODE_GRP_CD
-             , CODE_CD
-             , CODE_NM
+        SELECT /*[CommonDao.xml][selectCodeByGroupCodeAllList] [공통] 전역변수 공통코드 조회 */
+          BIZ_CD
+        , CODE_GRP_CD
+        , CODE_CD
+        , CODE_NM
         FROM tb_sy_code
+        ORDER BY CODE_ORDER
+    </select>
+
+    <select id="selectDcList" resultType="HMap" parameterType="HMap">
+        SELECT /*[CommonDao.xml][selectDcList] [공통] 물류센터 공통코드 조회 */
+          BIZ_CD
+        , DC_CD
+        , DC_NM
+        FROM tb_ms_dc
+    </select>
+
+    <select id="selectClientList" resultType="HMap" parameterType="HMap">
+        SELECT /*[CommonDao.xml][selectClientList] [공통] 고객사 공통코드 조회 */
+        BIZ_CD
+        , CLIENT_CD
+        , CLIENT_NM
+        FROM tb_ms_client
+    </select>
+
+    <select id="findMaxItemCd" resultType="String" parameterType="HMap">
+        SELECT /*[CommonDao.xml][findMaxItemCd] [공통] 아이템코드 신규채번 */
+        max(ITEM_CD)
+        FROM tb_ms_item
+        WHERE BIZ_CD = #{bizCd}
+        AND CLIENT_CD = #{clientCd}
+    </select>
+
+    <select id="findMaxSupplierCd" resultType="String" parameterType="HMap">
+        SELECT /*[CommonDao.xml][findMaxSupplierCd] [공통] 공급처코드 신규채번 */
+        max(SUPPLIER_CD)
+        FROM tb_ms_supplier
+        WHERE BIZ_CD = #{bizCd}
+        AND CLIENT_CD = #{clientCd}
+    </select>
+    <select id="findMaxStoreCd" resultType="String" parameterType="HMap">
+        SELECT /*[CommonDao.xml][findMaxStoreCd] [공통] 배송처코드 신규채번 */
+        max(STORE_CD)
+        FROM tb_ms_store
+        WHERE BIZ_CD = #{bizCd}
+        AND CLIENT_CD = #{clientCd}
+    </select>
+    <select id="findMaxDcCd" resultType="String" parameterType="HMap">
+        SELECT /*[CommonDao.xml][findMaxDcCd] [공통] 물류센터코드 신규채번 */
+        max(DC_CD)
+        FROM tb_ms_dc
+        WHERE BIZ_CD = #{bizCd}
+    </select>
+    <select id="findMaxClientCd" resultType="String" parameterType="HMap">
+        SELECT /*[CommonDao.xml][findMaxClientCd] [공통] 고객사코드 신규채번 */
+        max(CLIENT_CD)
+        FROM tb_ms_client
+        WHERE BIZ_CD = #{bizCd}
     </select>
 </mapper>

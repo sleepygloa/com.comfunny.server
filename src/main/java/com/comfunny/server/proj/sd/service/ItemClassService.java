@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -21,6 +23,7 @@ public class ItemClassService {
 
     @Resource
     ItemClassRepository itemClassRepository;
+
     /**
      * 상품분류 저장
      * */
@@ -57,8 +60,16 @@ public class ItemClassService {
         itemClass.setRemark((String)map.get("remark"));
         itemClass.setUseYn((String)map.get("useYn"));
 
+        Optional<ItemClass> optItemClass = itemClassRepository.findById(itemClassPk);
+        if(optItemClass.isPresent()){
+            if(Contraints.ADMIN_ID.equals(itemClass.getInUserId())){
+                new IllegalArgumentException("관리자가 등록한 데이터는 수정 할 수 없습니다.");
+            }
+        }
+
         itemClassRepository.save(itemClass);
     }
+
     /**
      * 상품분류 삭제
      * */
@@ -71,6 +82,27 @@ public class ItemClassService {
 
         ItemClass itemClass = itemClassRepository.findById(itemClassPk)
                 .orElseThrow(()->new IllegalArgumentException("해당 데이터가 없습니다. id="+itemClassPk.getItemClassCd()));
+
+        if(Contraints.ADMIN_ID.equals(itemClass.getInUserId())){
+            new IllegalArgumentException("관리자가 등록한 데이터는 수정 할 수 없습니다.");
+        }
+
         itemClassRepository.delete(itemClass);
+    }
+
+
+    /**
+     * 상품분류리스트 저장
+     * */
+    public void saveItemClassList(List list) throws Exception{
+        for(int i=0; i<list.size(); i++){
+            Map map = (Map)list.get(i);
+            if("I".equals(map.get("flag")) || "U".equals(map.get("flag"))){
+                saveItemClass(map);
+            }else if("D".equals(map.get("flag"))) {
+                deleteItemClass(map);
+            }
+        }
+
     }
 }

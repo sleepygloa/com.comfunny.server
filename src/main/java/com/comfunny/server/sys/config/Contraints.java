@@ -20,6 +20,7 @@ public class Contraints {
 
     public static String BIZ_CD = "COMFUNNY_DEVELOPERS";
     public static String GUEST = "guest";
+    public static String ADMIN_ID = "COMFUNNY_DEVELOPERS";
 
 
     //Pagingable
@@ -95,4 +96,10 @@ public class Contraints {
     //	public static final String PROG_HIERARCHY_LIST = "11";
     public static final String PARAGON_LOCALE = "s_language";
 
+    //CODES
+    public static final String ITEM_CD = "itemCd";
+    public static final String SUPPLIER_CD = "supplierCd";
+    public static final String STORE_CD = "storeCd";
+    public static final String DC_CD = "dcCd";
+    public static final String CLIENT_CD = "clientCd";
 }

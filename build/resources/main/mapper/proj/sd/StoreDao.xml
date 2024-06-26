@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.comfunny.server.proj.sd.repository.StoreDao">
-    <select id="selectList" resultType="HMap" >
-  SELECT /*[StoreDao.xml][selectList] 배송처관리 데이터들을 조회 */
+    <select id="selectStoreList" resultType="HMap" >
+  SELECT /*[StoreDao.xml][selectStoreList] 배송처관리 데이터들을 조회 */
           BIZ_CD
         , CLIENT_CD
         , STORE_CD
@@ -24,8 +24,6 @@
         , CONTACT_NM
         , CONTACT_TEL_NO
         , CONTACT_EMAIL
-        , COUNTRY_CD
-        , CITY_CD
         , DELIVERY_DC_CD
         , DELIVERY_DOMAIN_CD
         , ALLOC_PRIOORD_CD
@@ -49,6 +47,7 @@
         <if test="codeCd != null and codeCd != ''">
             AND STORE_NM LIKE '%'#{codeCd}'%'
         </if>
+          ORDER BY CLIENT_CD, STORE_CD
     </select>
 
 </mapper>

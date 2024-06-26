@@ -9,8 +9,11 @@
         , CLIENT_CD
         , ITEM_CLASS_CD
         , LARGE_CLASS_CD
+        , LARGE_CLASS_NM
         , MIDDLE_CLASS_CD
+        , MIDDLE_CLASS_NM
         , SMALL_CLASS_CD
+        , SMALL_CLASS_NM
         , REMARK
         , USE_YN
         , IN_USER_ID

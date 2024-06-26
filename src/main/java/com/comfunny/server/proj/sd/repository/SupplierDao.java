@@ -9,5 +9,5 @@ import java.util.Map;
 @Mapper
 public interface SupplierDao {
 
-    List<Map<String, Object>> selectList(Map map);
+    List<Map<String, Object>> selectSupplierList(Map map);
 }

@@ -54,10 +54,7 @@ public class LocService {
         loc.setRowCd((String)map.get("rowCd"));
         loc.setLevCd((String)map.get("levCd"));
         loc.setLocTypeCd((String)map.get("locTypeCd"));
-        loc.setLoadGbnCd((String)map.get("loadGbnCd"));
         loc.setHoldStCd((String)map.get("holdStCd"));
-        loc.setItemMixLoadYn((String)map.get("itemMixLoadYn"));
-        loc.setLotMixLoadYn((String)map.get("lotMixLoadYn"));
 
         loc.setLocPrioord(StringUtils.safeToFloat(map.get("locPrioord"), 0f));
         loc.setHorizontal(StringUtils.safeToFloat(map.get("horizontal"), 0f));

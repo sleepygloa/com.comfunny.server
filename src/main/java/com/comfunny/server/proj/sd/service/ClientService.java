@@ -3,6 +3,8 @@ package com.comfunny.server.proj.sd.service;
 import com.comfunny.server.proj.sd.domain.Client;
 import com.comfunny.server.proj.sd.domain.ClientPk;
 import com.comfunny.server.proj.sd.repository.ClientRepository;
+import com.comfunny.server.proj.sys.service.CommonService;
+import com.comfunny.server.sys.config.Contraints;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -12,7 +14,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class ClientService {
+public class ClientService extends CommonService {
 
     @Resource
     ClientRepository clientRepository;
@@ -20,20 +22,20 @@ public class ClientService {
     /**
      * 고객사 저장
      * */
-    public void save(Map map) throws Exception{
-        if(ObjectUtils.isEmpty(map.get("bizCd"))){
-            throw new IllegalArgumentException("사업자코드 는 필수 입력입니다.");
-        }
-        if(ObjectUtils.isEmpty(map.get("clientCd"))){
-            throw new IllegalArgumentException("고객사코드 는 필수 입력입니다.");
-        }
+    public void saveClient(Map map) throws Exception{
         if(ObjectUtils.isEmpty(map.get("clientNm"))){
             throw new IllegalArgumentException("고객사명 는 필수 입력입니다.");
         }
 
         ClientPk clientPk = new ClientPk();
-        clientPk.setBizCd((String)map.get("bizCd"));
+        clientPk.setBizCd(Contraints.BIZ_CD);
         clientPk.setClientCd((String)map.get("clientCd"));
+        //코드 채번
+        if(ObjectUtils.isEmpty(map.get("clientCd"))) {
+            clientPk.setClientCd(getMaxSeq(Contraints.CLIENT_CD, map));
+        }else{
+            clientPk.setClientCd((String)map.get("clientCd"));
+        }
 
         Client client = new Client();
         client.setClientPk(clientPk);
@@ -46,8 +48,6 @@ public class ClientService {
         client.setBizKnd((String)map.get("bizKnd"));
         client.setTelNo((String)map.get("telNo"));
         client.setFaxNo((String)map.get("faxNo"));
-        client.setCountryCd((String)map.get("countryCd"));
-        client.setCityCd((String)map.get("cityCd"));
         client.setContactNm((String)map.get("contactNm"));
         client.setContactTelNo((String)map.get("contactTelNo"));
         client.setContactEmail((String)map.get("contactEmail"));
@@ -74,10 +74,10 @@ public class ClientService {
     /**
      * 고객사 삭제
      * */
-    public void delete(Map map) throws Exception{
+    public void deleteClient(Map map) throws Exception{
 
             ClientPk clientPk = new ClientPk();
-            clientPk.setBizCd((String)map.get("bizCd"));
+            clientPk.setBizCd(Contraints.BIZ_CD);
             clientPk.setClientCd((String)map.get("clientCd"));
 
             Client client = clientRepository.findById(clientPk)

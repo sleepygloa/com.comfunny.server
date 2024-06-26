@@ -3,40 +3,47 @@ package com.comfunny.server.proj.sd.service;
 import com.comfunny.server.proj.sd.domain.Supplier;
 import com.comfunny.server.proj.sd.domain.SupplierPk;
 import com.comfunny.server.proj.sd.repository.SupplierRepository;
+import com.comfunny.server.proj.sys.service.CommonService;
+import com.comfunny.server.sys.config.Contraints;
+import com.comfunny.server.sys.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Slf4j
-public class SupplierService {
+public class SupplierService extends CommonService{
 
     @Resource
     SupplierRepository supplierRepository;
+
     /**
      * 공급처 저장
      * */
-    public void save(Map map) throws Exception{
-        if(ObjectUtils.isEmpty(map.get("bizCd"))){
-            throw new IllegalArgumentException("사업자코드 는 필수 입력입니다.");
-        }
+    public void saveSupplier(Map map) throws Exception{
         if(ObjectUtils.isEmpty(map.get("clientCd"))){
             throw new IllegalArgumentException("고객사코드 는 필수 입력입니다.");
-        }
-        if(ObjectUtils.isEmpty(map.get("supplierCd"))){
-            throw new IllegalArgumentException("공급처코드 는 필수 입력입니다.");
         }
         if(ObjectUtils.isEmpty(map.get("supplierNm"))){
             throw new IllegalArgumentException("공급처명 는 필수 입력입니다.");
         }
 
         SupplierPk supplierPk = new SupplierPk();
-        supplierPk.setBizCd((String)map.get("bizCd"));
+        supplierPk.setBizCd(Contraints.BIZ_CD);
         supplierPk.setClientCd((String)map.get("clientCd"));
-        supplierPk.setSupplierCd((String)map.get("supplierCd"));
+
+        //코드 채번
+        if(ObjectUtils.isEmpty(map.get("supplierCd"))) {
+            supplierPk.setSupplierCd(getMaxSeq(Contraints.SUPPLIER_CD, map));
+        }else{
+            supplierPk.setSupplierCd((String)map.get("supplierCd"));
+        }
 
         Supplier supplier = new Supplier();
         supplier.setSupplierPk(supplierPk);
@@ -49,12 +56,10 @@ public class SupplierService {
         supplier.setBizKnd((String)map.get("bizKnd"));
         supplier.setTelNo((String)map.get("telNo"));
         supplier.setFaxNo((String)map.get("faxNo"));
-        supplier.setCountryCd((String)map.get("countryCd"));
-        supplier.setCityCd((String)map.get("cityCd"));
         supplier.setContactNm((String)map.get("contactNm"));
         supplier.setContactTelNo((String)map.get("contactTelNo"));
         supplier.setContactEmail((String)map.get("contactEmail"));
-        supplier.setDealStartYmd((String)map.get("dealBgnYmd"));
+        supplier.setDealStartYmd((String)map.get("dealStartYmd"));
         supplier.setDealEndYmd((String)map.get("dealEndYmd"));
         supplier.setDealGbnCd((String)map.get("dealGbnCd"));
         supplier.setUserCol1((String)map.get("userCol1"));
@@ -80,15 +85,28 @@ public class SupplierService {
     /**
      * 공급처 삭제
      * */
-    public void delete(Map map) throws Exception{
+    public void deleteSupplier(Map map) throws Exception{
 
             SupplierPk supplierPk = new SupplierPk();
-            supplierPk.setBizCd((String)map.get("bizCd"));
+            supplierPk.setBizCd(Contraints.BIZ_CD);
             supplierPk.setClientCd((String)map.get("clientCd"));
             supplierPk.setSupplierCd((String)map.get("supplierCd"));
 
             Supplier supplier = supplierRepository.findById(supplierPk)
                     .orElseThrow(()->new IllegalArgumentException("해당 데이터가 없습니다. id="+supplierPk.getSupplierCd()));
             supplierRepository.delete(supplier);
+    }
+
+    /**
+     * 공급처리스트 처리
+     * */
+    public void saveSupplierList(List<Map> list) throws Exception{
+        for(Map map : list){
+            if("I".equals(map.get("flag")) || "U".equals(map.get("flag"))){
+                saveSupplier(map);
+            }else if("D".equals(map.get("flag"))) {
+                deleteSupplier(map);
+            }
+        }
     }
 }

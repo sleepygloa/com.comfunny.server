@@ -31,27 +31,27 @@ public class DcController {
 	/**
 	 * 물류센터 그리드 조회
 	 * */
-	@RequestMapping("/selectList")
-	public ResponseEntity selectList(@RequestBody Map map) {
-		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(dcDao.selectList(map));
+	@RequestMapping("/selectDcList")
+	public ResponseEntity selectDcList(@RequestBody Map map) {
+		List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(dcDao.selectDcList(map));
 		return ResponseEntity.ok().body(list);
 	}
 
 	/**
 	 * 물류센터 저장
 	 * */
-	@RequestMapping("/save")
-	public ResponseEntity save(@RequestBody Map map)  throws Exception {
-		dcService.save(map);
+	@RequestMapping("/saveDc")
+	public ResponseEntity saveDc(@RequestBody Map map)  throws Exception {
+		dcService.saveDc(map);
 		return ResponseEntity.ok().build();
 	}
 
 	/**
 	 * 물류센터 삭제
 	 * */
-	@PostMapping("/delete")
-	public ResponseEntity delete(@RequestBody Map map)  throws Exception {
-		dcService.delete(map);
+	@PostMapping("/deleteDc")
+	public ResponseEntity deleteDc(@RequestBody Map map)  throws Exception {
+		dcService.deleteDc(map);
 		return ResponseEntity.ok().build();
 	}
 }

@@ -3,6 +3,8 @@ package com.comfunny.server.proj.sd.service;
 import com.comfunny.server.proj.sd.domain.Store;
 import com.comfunny.server.proj.sd.domain.StorePk;
 import com.comfunny.server.proj.sd.repository.StoreRepository;
+import com.comfunny.server.proj.sys.service.CommonService;
+import com.comfunny.server.sys.config.Contraints;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -12,31 +14,32 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class StoreService {
+public class StoreService extends CommonService {
 
     @Resource
     StoreRepository storeRepository;
     /**
      * 배송처 저장
      * */
-    public void save(Map map) throws Exception{
-            if(ObjectUtils.isEmpty(map.get("bizCd"))){
-                    throw new IllegalArgumentException("사업자코드 는 필수 입력입니다.");
-            }
+    public void saveStore(Map map) throws Exception{
             if(ObjectUtils.isEmpty(map.get("clientCd"))){
                     throw new IllegalArgumentException("고객사코드 는 필수 입력입니다.");
-            }
-            if(ObjectUtils.isEmpty(map.get("storeCd"))){
-                    throw new IllegalArgumentException("배송처코드 는 필수 입력입니다.");
             }
             if(ObjectUtils.isEmpty(map.get("storeNm"))){
                     throw new IllegalArgumentException("배송처명 는 필수 입력입니다.");
             }
 
             StorePk storePk = new StorePk();
-            storePk.setBizCd((String)map.get("bizCd"));
+            storePk.setBizCd(Contraints.BIZ_CD);
             storePk.setClientCd((String)map.get("clientCd"));
             storePk.setStoreCd((String)map.get("storeCd"));
+
+            //코드 채번
+            if(ObjectUtils.isEmpty(map.get("storeCd"))) {
+                    storePk.setStoreCd(getMaxSeq(Contraints.STORE_CD, map));
+            }else{
+                    storePk.setStoreCd((String)map.get("storeCd"));
+            }
 
             Store store = new Store();
             store.setStorePk(storePk);
@@ -49,12 +52,10 @@ public class StoreService {
             store.setBizKnd((String)map.get("bizKnd"));
             store.setTelNo((String)map.get("telNo"));
             store.setFaxNo((String)map.get("faxNo"));
-            store.setCountryCd((String)map.get("countryCd"));
-            store.setCityCd((String)map.get("cityCd"));
             store.setContactNm((String)map.get("contactNm"));
             store.setContactTelNo((String)map.get("contactTelNo"));
             store.setContactEmail((String)map.get("contactEmail"));
-            store.setDealStartYmd((String)map.get("dealBgnYmd"));
+            store.setDealStartYmd((String)map.get("dealStartYmd"));
             store.setDealEndYmd((String)map.get("dealEndYmd"));
             store.setDealGbnCd((String)map.get("dealGbnCd"));
 
@@ -86,10 +87,10 @@ public class StoreService {
     /**
      * 배송처 삭제
      * */
-    public void delete(Map map) throws Exception{
+    public void deleteStore(Map map) throws Exception{
 
             StorePk storePk = new StorePk();
-            storePk.setBizCd((String)map.get("bizCd"));
+            storePk.setBizCd(Contraints.BIZ_CD);
             storePk.setClientCd((String)map.get("clientCd"));
             storePk.setStoreCd((String)map.get("storeCd"));
 
