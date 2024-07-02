@@ -1,0 +1,52 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.comfunny.server.proj.st.repository.StockInoutHistDao">
+
+<insert id="insertStockInoutHist" parameterType="HMap">
+    INSERT INTO tb_st_inout_hist /*[StockInoutHistDao.xml][insertStockInoutHist] 재고입출고이력 데이터를 등록 */
+    (
+        BIZ_CD
+        , INOUT_HIST_NO
+        , DC_CD
+        , CLIENT_CD
+        , INOUT_YMD
+        , ITEM_CD
+        , ITEM_ST_CD
+        , IOB_GBN_CD
+        , INOUT_GBN_CD
+        , INOUT_QTY
+        , REMARK
+        , USE_YN
+        , IN_USER_ID
+        , IN_DT
+        , UP_USER_ID
+        , UP_DT
+    )
+    VALUES
+    (
+        #{bizCd}
+        , #{inoutHistNo}
+        , #{dcCd}
+        , #{clientCd}
+        , #{inoutYmd}
+        , #{itemCd}
+        , #{itemStCd}
+        , #{iobGbnCd}
+        , #{inoutGbnCd}
+        , #{inoutQty}
+        , #{remark}
+        , #{useYn}
+        , #{inUserId}
+        , NOW()
+        , #{upUserId}
+        , NOW()
+    )
+</insert>
+
+<delete id="deleteStockInoutHist" parameterType="HMap">
+    DELETE FROM tb_st_inout_hist /*[StockInoutHistDao.xml][deleteStockInoutHist] 재고입출고이력 데이터를 삭제 */
+    WHERE BIZ_CD = #{bizCd}
+    AND INOUT_HIST_NO = #{inoutHistNo}
+</delete>
+
+</mapper>

@@ -38,5 +38,18 @@ public interface CommonDao {
     //고객사 MAX 조회
     public String findMaxClientCd(String bizCd);
 
+    //입고번호 MAX 조회
+    public String findMaxIbNo(String bizCd, String ibPlanYmd);
+    //입고상세순번 MAX 조회
+    public String findMaxIbDetailSeq(String bizCd, String ibNo);
+    //재고번호 MAX 조회
+    public String findMaxStockNo(String bizCd, String ibPlanYmd);
+
+    //LOT_ID MAX 조회
+    public String findMaxLotId(String bizCd, String dcCd, String clientCd, String itemCd, String ibNo, String ibPlanYmd);
+
+    //INOUT_HIST_NO MAX 조회
+    public String findMaxInoutHistNo(String bizCd, String ibPlanYmd);
+
 
 }

@@ -62,4 +62,43 @@
         FROM tb_ms_client
         WHERE BIZ_CD = #{bizCd}
     </select>
+    <select id="findMaxIbNo" resultType="String" parameterType="HMap">
+        SELECT /*[CommonDao.xml][findMaxIbNo] [공통] 입고번호 신규채번 */
+        max(IB_NO)
+        FROM tb_ib_m
+        WHERE BIZ_CD = #{bizCd}
+        AND IB_PLAN_YMD = #{ibPlanYmd}
+    </select>
+    <select id="findMaxIbDetailSeq" resultType="String" parameterType="HMap">
+        SELECT /*[CommonDao.xml][findMaxIbDetailSeq] [공통] 입고상세순번 신규채번 */
+        max(IB_DETAIL_SEQ)
+        FROM tb_ib_d
+        WHERE BIZ_CD = #{bizCd}
+        AND IB_NO = #{ibNo}
+    </select>
+
+    <select id="findMaxStockNo" resultType="String" parameterType="HMap">
+        SELECT /*[CommonDao.xml][findMaxStockNo] [공통] 재고번호 신규채번 */
+        max(STOCK_NO)
+        FROM tb_st_stock
+        WHERE BIZ_CD = #{bizCd}
+    </select>
+    <select id="findMaxLotId" resultType="String" parameterType="HMap">
+        SELECT /*[CommonDao.xml][findMaxLotId] [공통] LOT_ID 신규채번 */
+        max(LOT_ID)
+        FROM tb_st_lot_id
+        WHERE BIZ_CD = #{bizCd}
+        AND DC_CD = #{dcCd}
+        AND CLIENT_CD = #{clientCd}
+        AND ITEM_CD = #{itemCd}
+        AND IB_NO = #{ibNo}
+        AND IB_YMD = #{ibPlanYmd}
+    </select>
+    <select id="findMaxInoutHistNo" resultType="String" parameterType="HMap">
+        SELECT /*[CommonDao.xml][findMaxInoutHistNo] [공통] 입출고이력번호 신규채번 */
+        max(INOUT_HIST_NO)
+        FROM tb_st_inout_hist
+        WHERE BIZ_CD = #{bizCd}
+        AND INOUT_YMD = #{ibPlanYmd}
+    </select>
 </mapper>

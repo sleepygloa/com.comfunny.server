@@ -48,6 +48,15 @@ public class StringUtils {
     }
 
     /**
+     * 현재 시간을 yyyyMMdd 형태의 문자열로 반환합니다.
+     * @return 형식화된 시간 문자열
+     */
+    public static String getToday() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+        return sdf.format(System.currentTimeMillis());
+    }
+
+    /**
      * 현재 시간을 yyyyMMddhhmmssSSS 형태의 문자열로 반환합니다.
      * @return 형식화된 시간 문자열
      */

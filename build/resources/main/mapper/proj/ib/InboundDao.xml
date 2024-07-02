@@ -35,8 +35,83 @@
     </if>
 </select>
 
-    <select id="selectInboundOrderDetailList" resultType="HMap" >
-        SELECT /*[InboundDao.xml][selectInboundOrderDetailList] 입고관리의 입고전표상세 데이터들을 조회 */
+<select id="selectInboundOrderDetailList" resultType="HMap" >
+    SELECT /*[InboundDao.xml][selectInboundOrderDetailList] 입고관리의 입고전표상세 데이터들을 조회 */
+    BIZ_CD
+    , IB_NO
+    , IB_DETAIL_SEQ
+    , PO_DETAIL_SEQ
+    , IB_PROG_ST_CD
+    , ITEM_CD
+    , ITEM_NM
+    , ITEM_ST_CD
+    , PO_UOM_CD
+    , PO_QTY
+    , PLAN_QTY
+    , CONF_QTY
+    , APPR_QTY
+    , EXAM_QTY
+    , INST_QTY
+    , PUTW_QTY
+    , NO_IB_RSN_CD
+    , IB_COST
+    , IB_VAT
+    , IB_AMT
+    , MAKE_LOT
+    , MAKE_YMD
+    , DIST_EXPIRY_YMD
+    , LOT_ID
+    , LOT_ATTR1
+    , LOT_ATTR2
+    , LOT_ATTR3
+    , LOT_ATTR4
+    , LOT_ATTR5
+    , TC_OB_DETAIL_SEQ
+    , USER_COL1
+    , USER_COL2
+    , USER_COL3
+    , USER_COL4
+    , USER_COL5
+    , APPR_DT
+    , APPR_USER_ID
+    , REMARK
+    , USE_YN
+    FROM tb_ib_d
+    WHERE 1=1
+    AND IB_NO = #{IB_NO}
+</select>
+
+
+    <select id="selectInbound" resultType="HMap" >
+        SELECT /*[InboundDao.xml][selectInbound] 입고관리의 입고전표 데이터를 조회 */
+        BIZ_CD
+        , IB_NO
+        , DC_CD
+        , CLIENT_CD
+        , IB_GBN_CD
+        , IB_PROG_ST_CD
+        , IB_PLAN_YMD
+        , IB_YMD
+        , PO_NO
+        , PO_YMD
+        , SUPPLIER_CD
+        , CAR_NO
+        , TC_OB_NO
+        , USER_COL1
+        , USER_COL2
+        , USER_COL3
+        , USER_COL4
+        , USER_COL5
+        , REMARK
+        , USE_YN
+        FROM tb_ib_m
+        WHERE 1=1
+            AND IB_NO = #{ibNo}
+    </select>
+
+
+    <select id="selectInboundDetail" resultType="HMap" >
+        SELECT /*[InboundDao.xml][selectInboundDetail] 입고관리의 입고전표상세 데이터를 조회 */
         BIZ_CD
         , IB_NO
         , IB_DETAIL_SEQ
@@ -78,7 +153,65 @@
         , USE_YN
         FROM tb_ib_d
         WHERE 1=1
-        AND IB_NO = #{IB_NO}
+        AND IB_NO = #{ibNo}
+        AND IB_DETAIL_SEQ = #{ibDetailSeq}
+    </select>
+
+    <select id="selectInboundDetailCnt" resultType="int" >
+        SELECT /*[InboundDao.xml][selectInboundDetailCnt] 입고관리의 입고전표상세 갯수 조회 */
+        count(*) AS CNT
+        FROM tb_ib_d
+        WHERE 1=1
+        AND IB_NO = #{ibNo}
+    </select>
+
+
+
+    <select id="selectInboundDetailTargetStatus" resultType="HMap" >
+        SELECT /*[InboundDao.xml][selectInboundDetailTargetStatus] 입고관리의 입고전표상세 처리가능상태 조회 */
+        BIZ_CD
+        , IB_NO
+        , IB_DETAIL_SEQ
+        , PO_DETAIL_SEQ
+        , IB_PROG_ST_CD
+        , ITEM_CD
+        , ITEM_NM
+        , ITEM_ST_CD
+        , PO_UOM_CD
+        , PO_QTY
+        , PLAN_QTY
+        , CONF_QTY
+        , APPR_QTY
+        , EXAM_QTY
+        , INST_QTY
+        , PUTW_QTY
+        , NO_IB_RSN_CD
+        , IB_COST
+        , IB_VAT
+        , IB_AMT
+        , MAKE_LOT
+        , MAKE_YMD
+        , DIST_EXPIRY_YMD
+        , LOT_ID
+        , LOT_ATTR1
+        , LOT_ATTR2
+        , LOT_ATTR3
+        , LOT_ATTR4
+        , LOT_ATTR5
+        , TC_OB_DETAIL_SEQ
+        , USER_COL1
+        , USER_COL2
+        , USER_COL3
+        , USER_COL4
+        , USER_COL5
+        , APPR_DT
+        , APPR_USER_ID
+        , REMARK
+        , USE_YN
+        FROM tb_ib_d
+        WHERE 1=1
+        AND IB_NO = #{ibNo}
+        AND IB_PROG_ST_CD = #{ibProgStCd}
     </select>
 
 </mapper>

@@ -1,0 +1,68 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.comfunny.server.proj.st.repository.StockLotIdDao">
+
+<insert id="insertStockLotId" parameterType="HMap">
+    INSERT INTO tb_st_lot_id /*[StockLotIdDao.xml][insertStockLotId] 재고관리의 LOT ID 데이터를 등록 */
+    (
+        BIZ_CD
+        , LOT_ID
+        , DC_CD
+        , CLIENT_CD
+        , ITEM_CD
+        , ITEM_ST_CD
+        , IB_NO
+        , IB_YMD
+        , MAKE_LOT
+        , DIST_EXPIRY_YMD
+        , MAKE_YMD
+        , LOT_ATTR1
+        , LOT_ATTR2
+        , LOT_ATTR3
+        , LOT_ATTR4
+        , LOT_ATTR5
+        , SRC_LOT_ID
+        , REMARK
+        , USE_YN
+        , IN_USER_ID
+        , IN_DT
+        , UP_USER_ID
+        , UP_DT
+    )
+    VALUES
+    (
+          #{bizCd}
+        , #{lotId}
+        , #{dcCd}
+        , #{clientCd}
+        , #{itemCd}
+        , #{itemStCd}
+        , #{ibNo}
+        , #{ibYmd}
+        , #{makeLot}
+        , #{distExpiryYmd}
+        , #{makeYmd}
+        , #{lotAttr1}
+        , #{lotAttr2}
+        , #{lotAttr3}
+        , #{lotAttr4}
+        , #{lotAttr5}
+        , #{lotId}
+        , #{remark}
+        , #{useYn}
+        , #{inUserId}
+        , NOW()
+        , #{upUserId}
+        , NOW()
+    )
+</insert>
+
+
+<delete id="deleteStockLotId" parameterType="HMap">
+    DELETE FROM tb_st_lot_id /*[StockLotIdDao.xml][deleteStockLotId] 재고관리의 LOT ID 데이터를 삭제 */
+    WHERE
+        BIZ_CD = #{bizCd}
+    AND LOT_ID = #{lotId}
+</delete>
+
+</mapper>

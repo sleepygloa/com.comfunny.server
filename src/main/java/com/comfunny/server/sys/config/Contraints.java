@@ -102,4 +102,9 @@ public class Contraints {
     public static final String STORE_CD = "storeCd";
     public static final String DC_CD = "dcCd";
     public static final String CLIENT_CD = "clientCd";
+    public static final String IB_NO = "ibNo";
+    public static final String IB_DETAIL_SEQ = "ibDetailSeq";
+    public static final String STOCK_NO = "stockNo";
+    public static final String INOUT_HIST_NO = "inoutHistNo";
+    public static final String LOT_ID = "lotId";
 }

@@ -3,82 +3,120 @@
 <mapper namespace="com.comfunny.server.proj.ib.repository.InboundPlanDao">
 
 
-<select id="selectInboundList" resultType="HMap" >
-   SELECT /*[InboundDao.xml][sele      BIZ_CD
-    , IB_NO
-    , DC_CD
-    , CLIENT_CD
-    , IB_GBN_CD
-    , IB_PROG_ST_CD
-    , IB_PLAN_YMD
-    , IB_YMD
-    , PO_NO
-    , PO_YMD
-    , SUPPLIER_CD
-    , CAR_NO
-    , TC_OB_NO
-    , USER_COL1
-    , USER_COL2
-    , USER_COL3
-    , USER_COL4
-    , USER_COL5
-    , REMARK
-    , USE_YNctInboundList] 입고관리의 입고전표 데이터들을 조회 */
+<select id="selectInboundPlanList" resultType="HMap" >
+   SELECT /*[InboundDao.xml][selectInboundPlanList] 입고관리의 입고전표 데이터들을 조회 */
+      IBM.BIZ_CD
+    , IBM.IB_NO
+    , IBM.DC_CD
+    , DC.DC_NM
+    , IBM.CLIENT_CD
+    , CLI.CLIENT_NM
+    , IBM.IB_GBN_CD
+    , CONCAT(CC2.CODE_NM, '[', IBM.IB_GBN_CD, ']') AS IB_GBN_NM
+    , IBM.IB_PROG_ST_CD
+    , CONCAT(CC.CODE_NM, '[', IBM.IB_PROG_ST_CD, ']') AS IB_PROG_ST_NM
+    , IBM.IB_PLAN_YMD
+    , IBM.IB_YMD
+    , IBM.PO_NO
+    , IBM.PO_YMD
+    , IBM.SUPPLIER_CD
+    , SUP.SUPPLIER_NM
+    , IBM.CAR_NO
+    , IBM.TC_OB_NO
+    , IBM.USER_COL1
+    , IBM.USER_COL2
+    , IBM.USER_COL3
+    , IBM.USER_COL4
+    , IBM.USER_COL5
+    , IBM.REMARK
+    , IBM.USE_YN
+    , CONCAT(CC3.CODE_NM, '[', IBM.USE_YN, ']') AS USE_YN_NM
 
-     FROM tb_ib_m
+     FROM tb_ib_m AS IBM
+LEFT JOIN tb_ms_dc AS DC
+       ON IBM.DC_CD = DC.DC_CD
+LEFT JOIN tb_ms_client AS CLI
+       ON IBM.CLIENT_CD = CLI.CLIENT_CD
+LEFT JOIN tb_ms_supplier AS SUP
+       ON IBM.CLIENT_CD = SUP.CLIENT_CD
+      AND IBM.SUPPLIER_CD = SUP.SUPPLIER_CD
+LEFT JOIN tb_sy_code AS CC
+    ON CC.CODE_GRP_CD = 'IB_PROG_ST_CD'
+    AND IBM.IB_PROG_ST_CD = CC.CODE_CD
+LEFT JOIN tb_sy_code AS CC2
+    ON CC2.CODE_GRP_CD = 'IB_GBN_CD'
+    AND IBM.IB_GBN_CD = CC2.CODE_CD
+LEFT JOIN tb_sy_code AS CC3
+    ON CC3.CODE_GRP_CD = 'USE_YN'
+    AND IBM.USE_YN = CC3.CODE_CD
+
     WHERE 1=1
+    AND IB_PLAN_YMD = #{ibPlanYmd}
     <if test="ibNo != null and ibNo != ''">
         AND IB_NO LIKE '%'#{ibNo}'%'
     </if>
-    <if test="ibPlanYmd != null and ibPlanYmd != ''">
-        AND IB_PLAN_YMD = #{ibPlanYmd}
-    </if>
 </select>
 
-    <select id="selectInboundDetailList" resultType="HMap" >
-        SELECT /*[InboundDao.xml][selectInboundDetailList] 입고관리의 입고전표상세 데이터들을 조회 */
-        BIZ_CD
-        , IB_NO
-        , IB_DETAIL_SEQ
-        , PO_DETAIL_SEQ
-        , IB_PROG_ST_CD
-        , ITEM_CD
-        , ITEM_NM
-        , ITEM_ST_CD
-        , PO_UOM_CD
-        , PO_QTY
-        , PLAN_QTY
-        , CONF_QTY
-        , APPR_QTY
-        , EXAM_QTY
-        , INST_QTY
-        , PUTW_QTY
-        , NO_IB_RSN_CD
-        , IB_COST
-        , IB_VAT
-        , IB_AMT
-        , MAKE_LOT
-        , MAKE_YMD
-        , DIST_EXPIRY_YMD
-        , LOT_ID
-        , LOT_ATTR1
-        , LOT_ATTR2
-        , LOT_ATTR3
-        , LOT_ATTR4
-        , LOT_ATTR5
-        , TC_OB_DETAIL_SEQ
-        , USER_COL1
-        , USER_COL2
-        , USER_COL3
-        , USER_COL4
-        , USER_COL5
-        , APPR_DT
-        , APPR_USER_ID
-        , REMARK
-        , USE_YN
-        FROM tb_ib_d
-        WHERE 1=1
-        AND IB_NO = #{IB_NO}
+    <select id="selectInboundPlanDetailList" resultType="HMap" >
+   SELECT /*[InboundDao.xml][selectInboundPlanDetailList] 입고관리의 입고전표상세 데이터들을 조회 */
+          IBD.BIZ_CD
+        , IBD.IB_NO
+        , IBD.IB_DETAIL_SEQ
+        , IBD.PO_DETAIL_SEQ
+        , IBD.IB_PROG_ST_CD
+        , CONCAT(CC.CODE_NM, '[', IBD.IB_PROG_ST_CD, ']') AS IB_PROG_ST_NM
+        , IBD.ITEM_CD
+        , IBD.ITEM_NM
+        , IBD.ITEM_ST_CD
+        , CONCAT(CC2.CODE_NM, '[', IBD.ITEM_ST_CD, ']') AS ITEM_ST_NM
+        , IBD.PO_UOM_CD
+        , IBD.PO_QTY
+        , IBD.PLAN_QTY
+        , IBD.CONF_QTY
+        , IBD.APPR_QTY
+        , IBD.EXAM_QTY
+        , IBD.INST_QTY
+        , IBD.PUTW_QTY
+        , IBD.NO_IB_RSN_CD
+        , CONCAT(CC4.CODE_NM, '[', IBD.NO_IB_RSN_CD, ']') AS NO_IB_RSN_NM
+        , IBD.IB_COST
+        , IBD.IB_VAT
+        , IBD.IB_AMT
+        , IBD.MAKE_LOT
+        , IBD.MAKE_YMD
+        , IBD.DIST_EXPIRY_YMD
+        , IBD.LOT_ID
+        , IBD.LOT_ATTR1
+        , IBD.LOT_ATTR2
+        , IBD.LOT_ATTR3
+        , IBD.LOT_ATTR4
+        , IBD.LOT_ATTR5
+        , IBD.TC_OB_DETAIL_SEQ
+        , IBD.USER_COL1
+        , IBD.USER_COL2
+        , IBD.USER_COL3
+        , IBD.USER_COL4
+        , IBD.USER_COL5
+        , IBD.APPR_DT
+        , IBD.APPR_USER_ID
+        , IBD.REMARK
+        , IBD.USE_YN
+        , CONCAT(CC3.CODE_NM, '[', IBD.USE_YN, ']') AS USE_YN_NM
+    FROM tb_ib_d AS IBD
+LEFT JOIN tb_sy_code AS CC
+        ON CC.CODE_GRP_CD = 'IB_PROG_ST_CD'
+        AND IBD.IB_PROG_ST_CD = CC.CODE_CD
+LEFT JOIN tb_sy_code AS CC2
+        ON CC2.CODE_GRP_CD = 'ITEM_ST_CD'
+        AND IBD.ITEM_ST_CD = CC2.CODE_CD
+LEFT JOIN tb_sy_code AS CC3
+        ON CC3.CODE_GRP_CD = 'USE_YN'
+        AND IBD.USE_YN = CC3.CODE_CD
+LEFT JOIN tb_sy_code AS CC4
+        ON CC4.CODE_GRP_CD = 'NO_IB_RSN_CD'
+        AND IBD.NO_IB_RSN_CD = CC4.CODE_CD
+    WHERE 1=1
+      AND IB_NO = #{ibNo}
     </select>
 
 
@@ -99,6 +137,61 @@
         , CLIENT_NM AS name
         FROM tb_ms_client
         WHERE 1=1
+    </select>
+
+    <select id="selectSupplierCmbList" resultType="HMap" >
+        SELECT /*[InboundPlanDao.xml][selectSupplierCmbList] 입고관리의 공급처 데이터들을 조회 */
+        BIZ_CD
+        , SUPPLIER_CD AS code
+        , SUPPLIER_NM AS name
+        FROM tb_ms_supplier
+        WHERE 1=1
+        AND CLIENT_CD = #{clientCd}
+    </select>
+
+
+    <select id="selectInboundPlanItemPopList" resultType="HMap" >
+        SELECT /*[ItemDao.xml][selectInboundPlanItemPopList] 입고예정의 상품 조회 */
+        BIZ_CD
+        , CLIENT_CD
+        , ITEM_CD
+        , ITEM_NM
+        , ITEM_SPEC
+        , ITEM_GBN_CD
+        , LARGE_CLASS_CD
+        , MIDDLE_CLASS_CD
+        , SMALL_CLASS_CD
+        , IB_COST
+        , CASE WHEN VAT_YN = 'N' THEN 0 ELSE IB_COST*0.1 END AS IB_VAT
+        , IB_COST * (CASE WHEN VAT_YN = 'N' THEN 1 ELSE 1.1 END) AS IB_AMT
+        , OB_COST
+        , HORIZONTAL
+        , VERTICAL
+        , HEIGHT
+        , CBM
+        , WEIGHT
+        , ITEM_BARCODE
+        , BOX_BARCODE
+        , KEEP_TEMPE_GBN_CD
+        , REPLACE_ITEM_CD
+        , DIST_EXPIRY_DAYS
+        , MIN_UOM_CD
+        , SET_ITEM_YN
+        , VAT_YN
+        , USER_COL1
+        , USER_COL2
+        , USER_COL3
+        , USER_COL4
+        , USER_COL5
+        , REMARK
+        , USE_YN
+        , IN_USER_ID
+        , UP_USER_ID
+        , IN_DT
+        , UP_DT
+        FROM tb_ms_item
+        WHERE 1=1
+          AND CLIENT_CD = #{clientCd}
     </select>
 
 </mapper>

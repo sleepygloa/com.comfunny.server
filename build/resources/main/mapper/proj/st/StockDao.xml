@@ -1,0 +1,52 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.comfunny.server.proj.st.repository.StockDao">
+
+<insert id="insertStock">
+    INSERT INTO tb_st_stock /*[StockDao.xml][insertStock] 재고관리의 재고전표 데이터들을 등록 */
+    (
+        BIZ_CD
+        , STOCK_NO
+        , DC_CD
+        , CLIENT_CD
+        , ITEM_CD
+        , ITEM_ST_CD
+        , LOC_CD
+        , LOT_ID
+        , PLT_ID
+        , STOCK_QTY
+        , IB_PLAN_QTY
+        , OB_PLAN_QTY
+        , HOLD_QTY
+        , REMARK
+        , USE_YN
+    )
+    VALUES
+    (
+        #{bizCd}
+        , #{stockNo}
+        , #{dcCd}
+        , #{clientCd}
+        , #{itemCd}
+        , #{itemStCd}
+        , #{locCd}
+        , #{lotId}
+        , #{pltId}
+        , #{stockQty}
+        , #{ibPlanQty}
+        , #{obPlanQty}
+        , #{holdQty}
+        , #{remark}
+        , #{useYn}
+    )
+</insert>
+
+
+<delete id="deleteStock">
+    DELETE FROM tb_st_stock /*[StockDao.xml][deleteStock] 재고관리의 재고전표 데이터들을 삭제 */
+    WHERE
+        BIZ_CD = #{bizCd}
+    AND STOCK_NO = #{stockNo}
+</delete>
+
+</mapper>

@@ -31,7 +31,7 @@ public class InboundDetailPk implements Serializable {
 
     /* 입고상세순번 */
     @Column(length = 11)
-    private String ibDetailSeq;
+    private int ibDetailSeq;
 
     @Override
     public boolean equals(Object o) {

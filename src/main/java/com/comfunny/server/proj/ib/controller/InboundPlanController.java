@@ -2,6 +2,7 @@ package com.comfunny.server.proj.ib.controller;
 
 
 import com.comfunny.server.proj.ib.repository.InboundPlanDao;
+import com.comfunny.server.proj.ib.service.InboundPlanService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,26 +22,31 @@ import static com.comfunny.server.sys.util.Utils.convertSnakeCaseKeysToCamelCase
 public class InboundPlanController {
 
     /**
-     * 입고지시서 Dao
+     * 입고예정 Dao
      */
     @Resource
     private InboundPlanDao inboundPlanDao;
+    /**
+     * 입고예정 Service
+     */
+    @Resource
+    private InboundPlanService inboundPlanService;
 
     /**
-     * 입고지시서 조회
+     * 입고예정 조회
      * */
-    @RequestMapping("/selectInboundOrderList")
-    public ResponseEntity selectInboundOrderList(@RequestBody Map map) {
-        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(inboundPlanDao.selectInboundList(map));
+    @RequestMapping("/selectInboundPlanList")
+    public ResponseEntity selectInboundPlanList(@RequestBody Map map) {
+        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(inboundPlanDao.selectInboundPlanList(map));
         return ResponseEntity.ok().body(list);
     }
 
     /**
-     * 입고지시서 상세 조회
+     * 입고예정 상세 조회
      * */
-    @RequestMapping("/selectInboundOrderDetailList")
-    public ResponseEntity selectInboundOrderDetailList(@RequestBody Map map) {
-        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(inboundPlanDao.selectInboundDetailList(map));
+    @RequestMapping("/selectInboundPlanDetailList")
+    public ResponseEntity selectInboundPlanDetailList(@RequestBody Map map) {
+        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(inboundPlanDao.selectInboundPlanDetailList(map));
         return ResponseEntity.ok().body(list);
     }
 
@@ -60,6 +66,32 @@ public class InboundPlanController {
     public ResponseEntity selectClientCmbList() {
         List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(inboundPlanDao.selectClientCmbList());
         return ResponseEntity.ok().body(list);
+    }
+    /**
+     * 고객사 조회
+     * */
+    @RequestMapping("/selectSupplierCmbList")
+    public ResponseEntity selectSupplierCmbList(@RequestBody Map map) {
+        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(inboundPlanDao.selectSupplierCmbList(map));
+        return ResponseEntity.ok().body(list);
+    }
+
+
+    /**
+     * 입고예정의 상품 조회
+     * */
+    @RequestMapping("/selectInboundPlanItemPopList")
+    public ResponseEntity selectInboundPlanItemPopList(@RequestBody Map map) {
+        List<Map<String, Object>> list =  convertSnakeCaseKeysToCamelCase(inboundPlanDao.selectInboundPlanItemPopList(map));
+        return ResponseEntity.ok().body(list);
+    }
+    /**
+     * 입고예정팝업 저장 조회
+     * */
+    @RequestMapping("/saveInboundPlan")
+    public ResponseEntity saveInboundPlan(@RequestBody Map map) {
+        inboundPlanService.saveInboundPlan(map);
+        return ResponseEntity.ok().build();
     }
 
 }

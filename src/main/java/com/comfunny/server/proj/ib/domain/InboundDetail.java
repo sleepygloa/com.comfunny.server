@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -26,7 +27,7 @@ public class InboundDetail extends BaseTimeEntity {
 
     /* 발주상세순번 */
     @Column(length = 10)
-    private String poDetailSeq;
+    private long poDetailSeq;
 
     /* 입고진행상태코드 */
     @Column(length = 20)
@@ -50,31 +51,31 @@ public class InboundDetail extends BaseTimeEntity {
 
     /* 발주수량 */
     @Column(length = 11)
-    private String poQty;
+    private long poQty;
 
     /* 예정수량 */
     @Column(length = 11)
-    private String planQty;
+    private long planQty;
 
     /* 확정수량 */
     @Column(length = 11)
-    private String confQty;
+    private long confQty;
 
     /* 승인수량 */
     @Column(length = 11)
-    private String apprQty;
+    private long apprQty;
 
     /* 검수수량 */
     @Column(length = 11)
-    private String examQty;
+    private long examQty;
 
     /* 지시수량 */
     @Column(length = 11)
-    private String instQty;
+    private long instQty;
 
     /* 적치수량 */
     @Column(length = 11)
-    private String putwQty;
+    private long putwQty;
 
     /* 미입고사유코드 */
     @Column(length = 20)
@@ -82,15 +83,15 @@ public class InboundDetail extends BaseTimeEntity {
 
     /* 입고단가 */
     @Column(length = 11)
-    private String ibCost;
+    private long ibCost;
 
     /* 입고부가세 */
     @Column(length = 11)
-    private String ibVat;
+    private long ibVat;
 
     /* 입고금액 */
     @Column(length = 11)
-    private String ibAmt;
+    private long ibAmt;
 
     /* 제조LOT */
     @Column(length = 20)
